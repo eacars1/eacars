@@ -1,0 +1,52 @@
+name: Update NBK Exchange Rate
+
+on:
+  schedule:
+    # Каждый час с 4:00 до 18:00 UTC (10:00–00:00 Астана)
+    - cron: '0 4-18 * * *'
+  workflow_dispatch: # Ручной запуск
+
+permissions:
+  contents: write
+
+jobs:
+  update-rate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch NBK rate
+        run: |
+          FDATE=$(date +%d.%m.%Y)
+          echo "Fetching rate for $FDATE"
+          
+          XML=$(curl -s "https://nationalbank.kz/rss/get_rates.cfm?fdate=$FDATE")
+          
+          RATE=$(echo "$XML" | grep -A2 '<title>USD</title>' | grep '<description>' | sed 's/.*<description>\(.*\)<\/description>.*/\1/' | tr -d ' ')
+          DATE=$(echo "$XML" | grep '<date>' | head -1 | sed 's/.*<date>\(.*\)<\/date>.*/\1/' | tr -d ' ')
+          
+          if [ -z "$RATE" ] || [ "$RATE" = "0" ]; then
+            echo "Failed to fetch rate, skipping"
+            exit 0
+          fi
+          
+          echo "USD rate: $RATE ($DATE)"
+          
+          cat > rate.json << EOF
+          {
+            "rate": $RATE,
+            "date": "$DATE",
+            "source": "nationalbank.kz",
+            "updated": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          }
+          EOF
+          
+          # Убираем лишние пробелы
+          sed -i 's/^          //' rate.json
+
+      - name: Commit rate.json
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add rate.json
+          git diff --cached --quiet && echo "No changes" || (git commit -m "Update NBK rate $(date +%Y-%m-%d)" && git push)
