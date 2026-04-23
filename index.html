@@ -2411,8 +2411,6 @@ function onFileSelect(input, areaId) {
   }
 }
 
-var TG_TOKEN = '8635905732:AAFdqQ1ndGMU79qkR0HnOpzXA9LxsM47MGs';
-var TG_CHAT = -5140403696;
 
 function fileToBase64(file) {
   return new Promise(function(resolve, reject) {
@@ -2558,7 +2556,7 @@ function handleBooking(e) {
   var processingTexts = { en: 'AI is reading documents...', ru: 'ИИ распознаёт документы...', kz: 'ЖИ құжаттарды оқуда...' };
   btn.textContent = processingTexts[currentLang] || processingTexts.ru;
 
-  var base = 'https://api.telegram.org/bot' + TG_TOKEN;
+  var base = '/telegram';
 
   // Запускаем распознавание через Claude AI
   recognizeWithClaude(fileId, fileLic)
@@ -2584,18 +2582,16 @@ function handleBooking(e) {
     return fetch(base + '/sendMessage', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ chat_id: TG_CHAT, text: text })
+      body: JSON.stringify({ text: text })
     })
     .then(function() {
       var fd1 = new FormData();
-      fd1.append('chat_id', TG_CHAT);
       fd1.append('document', fileId);
       fd1.append('caption', 'Удостоверение личности — ' + phone);
       return fetch(base + '/sendDocument', { method: 'POST', body: fd1 });
     })
     .then(function() {
       var fd2 = new FormData();
-      fd2.append('chat_id', TG_CHAT);
       fd2.append('document', fileLic);
       fd2.append('caption', 'Водительские права — ' + phone);
       return fetch(base + '/sendDocument', { method: 'POST', body: fd2 });
