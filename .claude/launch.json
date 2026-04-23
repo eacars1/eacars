@@ -4,7 +4,7 @@
     {
       "name": "ecars",
       "runtimeExecutable": "C:/Users/user/AppData/Local/Microsoft/WindowsApps/python3.exe",
-      "runtimeArgs": ["-m", "http.server", "3001", "-d", "C:/Users/user/OneDrive/Рабочий стол/e"],
+      "runtimeArgs": ["-m", "http.server", "3001", "-d", "C:/Users/user/OneDrive/Рабочий стол/eacars1/.claude/worktrees/brave-bhabha-5a8e68"],
       "port": 3001
     }
   ]

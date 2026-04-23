@@ -57,7 +57,15 @@
       "Bash(cp \"/c/Users/user/OneDrive/Рабочий стол/photos/4BMW 230i.png\" \"/c/Users/user/OneDrive/Рабочий стол/eacars/img/bmw230i4.jpg\")",
       "Bash(git check-ignore *)",
       "Bash(git add *)",
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(cp \"/c/Users/user/OneDrive/Рабочий стол/photos/i4bmw1.jpg\" \"/c/Users/user/OneDrive/Рабочий стол/eacars1/.claude/worktrees/brave-bhabha-5a8e68/img/i4bmw1.jpg\")",
+      "Bash(cp \"/c/Users/user/OneDrive/Рабочий стол/photos/i4bmw2.jpg\" \"/c/Users/user/OneDrive/Рабочий стол/eacars1/.claude/worktrees/brave-bhabha-5a8e68/img/i4bmw2.jpg\")",
+      "Bash(cp \"/c/Users/user/OneDrive/Рабочий стол/photos/i4bmw3.jpg\" \"/c/Users/user/OneDrive/Рабочий стол/eacars1/.claude/worktrees/brave-bhabha-5a8e68/img/i4bmw3.jpg\")",
+      "Bash(cp \"/c/Users/user/OneDrive/Рабочий стол/photos/i4bmw4.jpg\" \"/c/Users/user/OneDrive/Рабочий стол/eacars1/.claude/worktrees/brave-bhabha-5a8e68/img/i4bmw4.jpg\")",
+      "Bash(where python *)",
+      "Bash(where node *)",
+      "Bash(where npx *)"
     ]
   }
 }
