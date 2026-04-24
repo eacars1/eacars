@@ -1443,13 +1443,14 @@ body.intro-playing .nav { opacity: 0 !important; pointer-events: none; }
       </div>
       <div class="catalog-filters">
         <button class="filter-btn active" data-filter="all" data-i18n="cars.filterAll">Все</button>
+        <button class="filter-btn" data-filter="cabrio" data-i18n="cars.filterCabrio">Кабриолеты</button>
         <button class="filter-btn" data-filter="sport" data-i18n="cars.filterSport">Спорткупе</button>
         <button class="filter-btn" data-filter="electro" data-i18n="cars.filterElectro">Электрокары</button>
-        <button class="filter-btn" data-filter="suv" data-i18n="cars.filterSuv">Внедорожники</button>
+        <button class="filter-btn" data-filter="suv" data-i18n="cars.filterSuv">Люкс Внедорожники</button>
       </div>
     </div>
     <div class="car-grid">
-      <div class="car-card reveal" data-category="sport" style="--i:0">
+      <div class="car-card reveal" data-category="cabrio" style="--i:0">
         <div class="car-gallery" id="gallery-mustang" onclick="openLightbox(event, 'mustang')">
           <div class="gallery-track" id="track-mustang">
             <img src="img/mustang2.jpg" alt="Ford Mustang Cabriolet" loading="lazy">
@@ -1676,18 +1677,29 @@ body.intro-playing .nav { opacity: 0 !important; pointer-events: none; }
         </div>
       </div>
       <div class="car-card reveal" data-category="suv" style="--i:5">
-        <div class="car-gallery" id="gallery-kia">
-          <div class="gallery-track" id="track-kia">
-            <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=600&q=80" alt="Kia K5" loading="lazy">
+        <div class="car-gallery" id="gallery-tank" onclick="openLightbox(event, 'tank')">
+          <div class="gallery-track" id="track-tank">
+            <img src="img/tank1.jpg" alt="Tank 500" loading="lazy">
+            <img src="img/tank2.jpg" alt="Tank 500" loading="lazy">
+            <img src="img/tank3.jpg" alt="Tank 500" loading="lazy">
+            <img src="img/tank4.jpg" alt="Tank 500" loading="lazy">
           </div>
-          <span class="car-badge badge-new" data-i18n="badge.new">Новый</span>
+          <button class="gallery-btn prev" onclick="slideGallery(event,'tank',-1)">&#8249;</button>
+          <button class="gallery-btn next" onclick="slideGallery(event,'tank',1)">&#8250;</button>
+          <div class="gallery-dots" id="dots-tank">
+            <div class="gallery-dot active" onclick="goGallery(event,'tank',0)"></div>
+            <div class="gallery-dot" onclick="goGallery(event,'tank',1)"></div>
+            <div class="gallery-dot" onclick="goGallery(event,'tank',2)"></div>
+            <div class="gallery-dot" onclick="goGallery(event,'tank',3)"></div>
+          </div>
+          <div class="gallery-count" id="count-tank">1 / 4</div>
         </div>
         <div class="car-info">
-          <div class="car-name">Kia K5</div>
+          <div class="car-name">Tank 500</div>
           <div class="car-specs">
-            <div class="car-spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>2025</div>
+            <div class="car-spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>xxxx</div>
             <div class="car-spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2m0 18v2m-9-11h2m18 0h2"/></svg><span data-i18n="spec.auto">Автомат</span></div>
-            <div class="car-spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><span data-i18n="spec.seats5">5 мест</span></div>
+            <div class="car-spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><span data-i18n="spec.seats7">7 мест</span></div>
             <div class="car-spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 22V4a1 1 0 011-1h9a1 1 0 011 1v18"/><path d="M3 12h11"/><path d="M14 8h2a2 2 0 012 2v5a2 2 0 002 2h0a2 2 0 002-2V9.5L19 6"/></svg><span data-i18n="spec.petrol">Бензин</span></div>
           </div>
           <div class="car-usage">
@@ -1695,17 +1707,58 @@ body.intro-playing .nav { opacity: 0 !important; pointer-events: none; }
             <span data-i18n="car6.usage">Аренда по городу и за городом</span>
           </div>
           <div class="car-footer">
-            <div class="car-price" data-i18n="price.car6">$42 <small>/ день</small></div>
-            <button class="btn-rent" onclick="scrollToBooking('Kia K5')" data-i18n="btn.rent">Арендовать</button>
+            <div class="car-price" data-i18n="price.car6">70 000 ₸ <small>/ сутки</small></div>
+            <button class="btn-rent" onclick="scrollToBooking('Tank 500')" data-i18n="btn.rent">Арендовать</button>
           </div>
           <button class="btn-car-info" onclick="toggleCarInfo(this)">
             <span data-i18n="car6.infoBtn">Дополнительная информация</span>
             <em class="info-arrow">▾</em>
           </button>
           <div class="car-info-extra">
-            <div class="info-price-row"><span data-i18n="car6.day3">От 3-х суток</span><span>$38/сут</span></div>
-            <div class="info-price-row"><span data-i18n="car6.day10">От 10 суток</span><span>$35/сут</span></div>
-            <div class="info-price-row info-deposit"><span data-i18n="car6.deposit">Депозит</span><span>$100</span></div>
+            <div class="info-price-row"><span data-i18n="car6.day3">От 3-х суток</span><span>65 000 ₸/сут</span></div>
+            <div class="info-price-row"><span data-i18n="car6.day10">От 10 суток</span><span>60 000 ₸/сут</span></div>
+            <div class="info-price-row info-deposit"><span data-i18n="car6.deposit">Депозит</span><span>70 000 ₸</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="car-card reveal" data-category="suv" style="--i:6">
+        <div class="car-gallery" id="gallery-prado" onclick="openLightbox(event, 'prado')">
+          <div class="gallery-track" id="track-prado">
+            <img src="img/prado1.jpg" alt="Toyota Prado" loading="lazy">
+            <img src="img/prado2.jpg" alt="Toyota Prado" loading="lazy">
+          </div>
+          <button class="gallery-btn prev" onclick="slideGallery(event,'prado',-1)">&#8249;</button>
+          <button class="gallery-btn next" onclick="slideGallery(event,'prado',1)">&#8250;</button>
+          <div class="gallery-dots" id="dots-prado">
+            <div class="gallery-dot active" onclick="goGallery(event,'prado',0)"></div>
+            <div class="gallery-dot" onclick="goGallery(event,'prado',1)"></div>
+          </div>
+          <div class="gallery-count" id="count-prado">1 / 2</div>
+        </div>
+        <div class="car-info">
+          <div class="car-name">Toyota Prado</div>
+          <div class="car-specs">
+            <div class="car-spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>xxxx</div>
+            <div class="car-spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2m0 18v2m-9-11h2m18 0h2"/></svg><span data-i18n="spec.auto">Автомат</span></div>
+            <div class="car-spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><span data-i18n="spec.seats5">5 мест</span></div>
+            <div class="car-spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 22V4a1 1 0 011-1h9a1 1 0 011 1v18"/><path d="M3 12h11"/><path d="M14 8h2a2 2 0 012 2v5a2 2 0 002 2h0a2 2 0 002-2V9.5L19 6"/></svg><span data-i18n="spec.petrol">Бензин</span></div>
+          </div>
+          <div class="car-usage">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span data-i18n="car7.usage">Аренда по городу и за городом</span>
+          </div>
+          <div class="car-footer">
+            <div class="car-price" data-i18n="price.car7">70 000 ₸ <small>/ сутки</small></div>
+            <button class="btn-rent" onclick="scrollToBooking('Toyota Prado')" data-i18n="btn.rent">Арендовать</button>
+          </div>
+          <button class="btn-car-info" onclick="toggleCarInfo(this)">
+            <span data-i18n="car7.infoBtn">Дополнительная информация</span>
+            <em class="info-arrow">▾</em>
+          </button>
+          <div class="car-info-extra">
+            <div class="info-price-row"><span data-i18n="car7.day3">От 3-х суток</span><span>65 000 ₸/сут</span></div>
+            <div class="info-price-row"><span data-i18n="car7.day10">От 10 суток</span><span>60 000 ₸/сут</span></div>
+            <div class="info-price-row info-deposit"><span data-i18n="car7.deposit">Депозит</span><span>70 000 ₸</span></div>
           </div>
         </div>
       </div>
@@ -1782,7 +1835,8 @@ body.intro-playing .nav { opacity: 0 !important; pointer-events: none; }
               <option data-i18n="select.car3">BMW 230i — 60 000 ₸/день</option>
               <option data-i18n="select.car4">BMW 3 Series — 40 000 ₸/день</option>
               <option data-i18n="select.car5">BMW i4 — 60 000 ₸/день</option>
-              <option data-i18n="select.car6">Kia K5 — 20 000 ₸/день</option>
+              <option data-i18n="select.car6">Tank 500 — 70 000 ₸/день</option>
+              <option data-i18n="select.car7">Toyota Prado — 70 000 ₸/день</option>
             </select>
           </div>
           <div class="avail-tip-banner">
@@ -1929,7 +1983,7 @@ const translations = {
     "why.card1.title":"Uniqueness","why.card1.desc":"With our cars you'll stand out from the crowd and feel truly special.",
     "why.card2.title":"Affordable Prices","why.card2.desc":"Exclusive cars at everyday prices — rent a unique car for the price of an ordinary one!",
     "why.card3.title":"Quality Service","why.card3.desc":"Book a car, get it on time, and we've taken care of the rest. Clean, comfortable, quality — as it should be.",
-    "cars.label":"Our Fleet","cars.title":"Choose Your Car","cars.filterAll":"All","cars.filterSport":"Sport Coupe","cars.filterElectro":"Electrocars","cars.filterSuv":"SUV",
+    "cars.label":"Our Fleet","cars.title":"Choose Your Car","cars.filterAll":"All","cars.filterCabrio":"Cabriolets","cars.filterSport":"Sport Coupe","cars.filterElectro":"Electrocars","cars.filterSuv":"Luxury SUV",
     "badge.popular":"Popular","badge.new":"New","class.economy":"Economy Class","class.business":"Business Class","class.premiumSuv":"Premium SUV","class.economyPlus":"Economy Plus",
     "spec.auto":"Automatic","spec.seats5":"5 seats","spec.seats7":"7 seats","spec.petrol":"Petrol","spec.electro":"Electric","price.day":"/ day","btn.rent":"Rent Now",
     "price.car1":"$35 <small>/ day</small>","price.car2":"$55 <small>/ day</small>","price.car3":"60 000 ₸ <small>/ day</small>","price.car4":"$80 <small>/ day</small>","price.car5":"$120 <small>/ day</small>","price.car6":"$42 <small>/ day</small>",
@@ -1967,6 +2021,7 @@ const translations = {
     "car4.infoBtn":"Additional Information","car4.day":"Per day","car4.day3":"From 3 days","car4.day10":"From 10 days","car4.deposit":"Deposit","car4.usage":"Available for city and out-of-city trips",
     "car5.infoBtn":"Additional Information","car5.day":"Per day","car5.day3":"From 3 days","car5.day10":"From 10 days","car5.deposit":"Deposit","car5.usage":"Available for city and out-of-city trips",
     "car6.infoBtn":"Additional Information","car6.day":"Per day","car6.day3":"From 3 days","car6.day10":"From 10 days","car6.deposit":"Deposit","car6.usage":"Available for city and out-of-city trips",
+    "car7.infoBtn":"Additional Information","car7.day":"Per day","car7.day3":"From 3 days","car7.day10":"From 10 days","car7.deposit":"Deposit","car7.usage":"Available for city and out-of-city trips",
   },
   ru: {
     "nav.cars":"Автомобили","nav.availability":"Наличие","nav.why":"Преимущества","nav.how":"Как это работает","nav.reviews":"Отзывы","nav.contact":"Контакты","nav.book":"Забронировать",
@@ -1976,7 +2031,7 @@ const translations = {
     "why.card1.title":"Уникальность","why.card1.desc":"С нашими автомобилями вы выделитесь из серой массы и почувствуете себя особенным.",
     "why.card2.title":"Доступные цены","why.card2.desc":"Эксклюзивные авто по цене повседневных — арендуйте уникальное авто по цене обычного!",
     "why.card3.title":"Качественный сервис","why.card3.desc":"Забронируйте машину, получите её вовремя, а остальное мы уже предусмотрели. Чисто, удобно, качественно — как и должно быть.",
-    "cars.label":"Наш автопарк","cars.title":"Выберите автомобиль","cars.filterAll":"Все","cars.filterSport":"Спорткупе","cars.filterElectro":"Электрокары","cars.filterSuv":"Внедорожники",
+    "cars.label":"Наш автопарк","cars.title":"Выберите автомобиль","cars.filterAll":"Все","cars.filterCabrio":"Кабриолеты","cars.filterSport":"Спорткупе","cars.filterElectro":"Электрокары","cars.filterSuv":"Люкс Внедорожники",
     "badge.popular":"Популярный","badge.new":"Новый","class.economy":"Эконом класс","class.business":"Бизнес класс","class.premiumSuv":"Премиум внедорожник","class.economyPlus":"Эконом плюс",
     "spec.auto":"Автомат","spec.seats5":"5 мест","spec.seats7":"7 мест","spec.petrol":"Бензин","spec.electro":"Электро","price.day":"/ день","btn.rent":"Арендовать",
     "price.car1":"15 000 ₸ <small>/ день</small>","price.car2":"25 000 ₸ <small>/ день</small>","price.car3":"60 000 ₸ <small>/ день</small>","price.car4":"40 000 ₸ <small>/ день</small>","price.car5":"60 000 ₸ <small>/ день</small>","price.car6":"20 000 ₸ <small>/ день</small>",
@@ -2014,6 +2069,7 @@ const translations = {
     "car4.infoBtn":"Дополнительная информация","car4.day":"Сутки","car4.day3":"От 3-х суток","car4.day10":"От 10 суток","car4.deposit":"Депозит","car4.usage":"Аренда по городу и за городом",
     "car5.infoBtn":"Дополнительная информация","car5.day":"Сутки","car5.day3":"От 3-х суток","car5.day10":"От 10 суток","car5.deposit":"Депозит","car5.usage":"Аренда по городу и за городом",
     "car6.infoBtn":"Дополнительная информация","car6.day":"Сутки","car6.day3":"От 3-х суток","car6.day10":"От 10 суток","car6.deposit":"Депозит","car6.usage":"Аренда по городу и за городом",
+    "car7.infoBtn":"Дополнительная информация","car7.day":"Сутки","car7.day3":"От 3-х суток","car7.day10":"От 10 суток","car7.deposit":"Депозит","car7.usage":"Аренда по городу и за городом",
   },
   kz: {
     "nav.cars":"Көліктер","nav.availability":"Қолжетімділік","nav.why":"Артықшылықтар","nav.how":"Қалай жұмыс істейді","nav.reviews":"Пікірлер","nav.contact":"Байланыс","nav.book":"Брондау",
@@ -2023,7 +2079,7 @@ const translations = {
     "why.card1.title":"Ерекшелік","why.card1.desc":"Біздің көліктермен сіз көпшіліктен ерекшеленіп, өзіңізді ерекше сезінесіз.",
     "why.card2.title":"Қолжетімді баға","why.card2.desc":"Эксклюзивті көліктер күнделікті бағамен — ерекше көлікті қарапайым бағамен жалдаңыз!",
     "why.card3.title":"Сапалы қызмет","why.card3.desc":"Көлікті брондаңыз, уақытында алыңыз, қалғанын біз ойластырдық. Таза, ыңғайлы, сапалы — болуға тиіс.",
-    "cars.label":"Біздің автопарк","cars.title":"Көлігіңізді таңдаңыз","cars.filterAll":"Барлығы","cars.filterSport":"Спорткупе","cars.filterElectro":"Электрокөліктер","cars.filterSuv":"Жол талғамайтын",
+    "cars.label":"Біздің автопарк","cars.title":"Көлігіңізді таңдаңыз","cars.filterAll":"Барлығы","cars.filterCabrio":"Кабриолеттер","cars.filterSport":"Спорткупе","cars.filterElectro":"Электрокөліктер","cars.filterSuv":"Люкс жол талғамайтын",
     "badge.popular":"Танымал","badge.new":"Жаңа","class.economy":"Эконом класс","class.business":"Бизнес класс","class.premiumSuv":"Премиум жол талғамайтын","class.economyPlus":"Эконом плюс",
     "spec.auto":"Автомат","spec.seats5":"5 орын","spec.seats7":"7 орын","spec.petrol":"Бензин","spec.electro":"Электр","price.day":"/ күн","btn.rent":"Жалдау",
     "price.car1":"15 000 ₸ <small>/ күн</small>","price.car2":"25 000 ₸ <small>/ күн</small>","price.car3":"60 000 ₸ <small>/ күн</small>","price.car4":"40 000 ₸ <small>/ күн</small>","price.car5":"60 000 ₸ <small>/ күн</small>","price.car6":"20 000 ₸ <small>/ күн</small>",
@@ -2061,14 +2117,15 @@ const translations = {
     "car4.infoBtn":"Қосымша ақпарат","car4.day":"Тәулік","car4.day3":"3 тәуліктен бастап","car4.day10":"10 тәуліктен бастап","car4.deposit":"Депозит","car4.usage":"Қала бойынша және қаладан тыс жалдау",
     "car5.infoBtn":"Қосымша ақпарат","car5.day":"Тәулік","car5.day3":"3 тәуліктен бастап","car5.day10":"10 тәуліктен бастап","car5.deposit":"Депозит","car5.usage":"Қала бойынша және қаладан тыс жалдау",
     "car6.infoBtn":"Қосымша ақпарат","car6.day":"Тәулік","car6.day3":"3 тәуліктен бастап","car6.day10":"10 тәуліктен бастап","car6.deposit":"Депозит","car6.usage":"Қала бойынша және қаладан тыс жалдау",
+    "car7.infoBtn":"Қосымша ақпарат","car7.day":"Тәулік","car7.day3":"3 тәуліктен бастап","car7.day10":"10 тәуліктен бастап","car7.deposit":"Депозит","car7.usage":"Қала бойынша және қаладан тыс жалдау",
   }
 };
 
 // ============================================
 // EXCHANGE RATE FROM NATIONAL BANK OF KAZAKHSTAN
 // ============================================
-const BASE_PRICES_KZT = [60000, 60000, 60000, 40000, 60000, 20000];
-const CAR_NAMES_EN = ['Ford Mustang Cabriolet','Ford Mustang','BMW 230i','Dodge Challenger','BMW i4','Kia K5'];
+const BASE_PRICES_KZT = [60000, 60000, 60000, 40000, 60000, 70000, 70000];
+const CAR_NAMES_EN = ['Ford Mustang Cabriolet','Ford Mustang','BMW 230i','Dodge Challenger','BMW i4','Tank 500','Toyota Prado'];
 let nbkRate = 473; // Начальный курс (обновится из rate.json / НБ РК)
 let nbkRateDate = '';
 let nbkRateSource = '';
@@ -2504,7 +2561,8 @@ const CARS = [
   { id: 'CAR003', name: 'Toyota RAV4' },
   { id: 'CAR004', name: 'BMW 3 Series' },
   { id: 'CAR005', name: 'BMW i4' },
-  { id: 'CAR006', name: 'Kia K5' },
+  { id: 'CAR006', name: 'Tank 500' },
+  { id: 'CAR007', name: 'Toyota Prado' },
 ];
 
 // Демо-данные (показываются если таблица недоступна)

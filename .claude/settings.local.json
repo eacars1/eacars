@@ -65,7 +65,16 @@
       "Bash(cp \"/c/Users/user/OneDrive/Рабочий стол/photos/i4bmw4.jpg\" \"/c/Users/user/OneDrive/Рабочий стол/eacars1/.claude/worktrees/brave-bhabha-5a8e68/img/i4bmw4.jpg\")",
       "Bash(where python *)",
       "Bash(where node *)",
-      "Bash(where npx *)"
+      "Bash(where npx *)",
+      "Bash(git commit *)",
+      "Bash(cp \"/c/Users/user/OneDrive/Рабочий стол/photos/tank1.jpg\" \"/c/Users/user/OneDrive/Рабочий стол/eacars1/.claude/worktrees/brave-bhabha-5a8e68/img/tank1.jpg\")",
+      "Bash(cp \"/c/Users/user/OneDrive/Рабочий стол/photos/tank2.jpg\" \"/c/Users/user/OneDrive/Рабочий стол/eacars1/.claude/worktrees/brave-bhabha-5a8e68/img/tank2.jpg\")",
+      "Bash(cp \"/c/Users/user/OneDrive/Рабочий стол/photos/tank3.jpg\" \"/c/Users/user/OneDrive/Рабочий стол/eacars1/.claude/worktrees/brave-bhabha-5a8e68/img/tank3.jpg\")",
+      "Bash(cp \"/c/Users/user/OneDrive/Рабочий стол/photos/tank4.jpg\" \"/c/Users/user/OneDrive/Рабочий стол/eacars1/.claude/worktrees/brave-bhabha-5a8e68/img/tank4.jpg\")",
+      "Bash(cp \"/c/Users/user/OneDrive/Рабочий стол/photos/prado1.jpg\" \"/c/Users/user/OneDrive/Рабочий стол/eacars1/.claude/worktrees/brave-bhabha-5a8e68/img/prado1.jpg\")",
+      "Bash(cp \"/c/Users/user/OneDrive/Рабочий стол/photos/prado2.jpg\" \"/c/Users/user/OneDrive/Рабочий стол/eacars1/.claude/worktrees/brave-bhabha-5a8e68/img/prado2.jpg\")",
+      "Bash(cp \"/c/Users/user/OneDrive/Рабочий стол/photos/prado1.png\" \"/c/Users/user/OneDrive/Рабочий стол/eacars1/.claude/worktrees/brave-bhabha-5a8e68/img/prado1.jpg\")",
+      "Bash(cp \"/c/Users/user/OneDrive/Рабочий стол/photos/prado2.png\" \"/c/Users/user/OneDrive/Рабочий стол/eacars1/.claude/worktrees/brave-bhabha-5a8e68/img/prado2.jpg\")"
     ]
   }
 }
