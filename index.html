@@ -424,6 +424,11 @@ body::before {
 .car-badge { position: absolute; top: 14px; left: 14px; padding: 5px 14px; border-radius: 100px; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; z-index: 2; }
 .badge-popular { background: var(--accent); color: #FDFCFA; box-shadow: 0 4px 12px rgba(184,150,15,0.3); }
 .badge-new { background: rgba(80,200,120,0.15); color: #50C878; backdrop-filter: blur(8px); }
+.badge-deal { background: linear-gradient(135deg, #16a34a 0%, #22c55e 50%, #4ade80 100%); color: #fff; box-shadow: 0 4px 16px rgba(34,197,94,0.45), inset 0 1px 0 rgba(255,255,255,0.3); position: relative; overflow: hidden; }
+.badge-deal::before { content:''; position:absolute; top:0; left:-100%; width:60%; height:100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.45), transparent); animation: deal-shine 2.6s ease-in-out infinite; }
+@keyframes deal-shine { 0% { left:-100%; } 60% { left:140%; } 100% { left:140%; } }
+.badge-fresh { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 60%, #60a5fa 100%); color: #fff; box-shadow: 0 4px 14px rgba(59,130,246,0.4), inset 0 1px 0 rgba(255,255,255,0.3); border: 1px solid rgba(255,255,255,0.18); letter-spacing: 1.2px; }
+.badge-fresh::after { content:'★'; margin-left:6px; font-size:0.65rem; opacity:0.9; }
 .car-info { padding: 24px; }
 .car-name { font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; color: var(--text-primary); margin-bottom: 6px; }
 .car-class { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 18px; }
@@ -1525,7 +1530,7 @@ body.intro-playing .nav { opacity: 0 !important; pointer-events: none; }
             <div class="gallery-dot" onclick="goGallery(event,'mustangblue',3)"></div>
           </div>
           <div class="gallery-count" id="count-mustangblue">1 / 4</div>
-          <span class="car-badge badge-popular" data-i18n="badge.popular">Популярный</span>
+          <span class="car-badge badge-deal" data-i18n="badge.deal">Выгодно</span>
         </div>
         <div class="car-info">
           <div class="car-name">Ford Mustang</div>
@@ -1571,7 +1576,7 @@ body.intro-playing .nav { opacity: 0 !important; pointer-events: none; }
             <div class="gallery-dot" onclick="goGallery(event,'bmw230i',3)"></div>
           </div>
           <div class="gallery-count" id="count-bmw230i">1 / 4</div>
-          <span class="car-badge badge-popular" data-i18n="badge.popular">Популярный</span>
+          <span class="car-badge badge-fresh" data-i18n="badge.fresh">Новый</span>
         </div>
         <div class="car-info">
           <div class="car-name">BMW 230i</div>
@@ -2051,7 +2056,7 @@ const translations = {
     "why.card2.title":"Affordable Prices","why.card2.desc":"Exclusive cars at everyday prices — rent a unique car for the price of an ordinary one!",
     "why.card3.title":"Quality Service","why.card3.desc":"Book a car, get it on time, and we've taken care of the rest. Clean, comfortable, quality — as it should be.",
     "cars.label":"Our Fleet","cars.title":"Choose Your Car","cars.filterAll":"All","cars.filterCabrio":"Cabriolets","cars.filterSport":"Sport Coupe","cars.filterElectro":"Electrocars","cars.filterSuv":"Luxury SUV",
-    "badge.popular":"Popular","badge.new":"New","class.economy":"Economy Class","class.business":"Business Class","class.premiumSuv":"Premium SUV","class.economyPlus":"Economy Plus",
+    "badge.popular":"Popular","badge.new":"New","badge.deal":"Deal","badge.fresh":"New","class.economy":"Economy Class","class.business":"Business Class","class.premiumSuv":"Premium SUV","class.economyPlus":"Economy Plus",
     "spec.auto":"Automatic","spec.seats5":"5 seats","spec.seats6":"6 seats","spec.seats7":"7 seats","spec.petrol":"Petrol","spec.electro":"Electric","price.day":"/ day","btn.rent":"Rent Now",
     "price.car1":"$35 <small>/ day</small>","price.car2":"$55 <small>/ day</small>","price.car3":"60 000 ₸ <small>/ day</small>","price.car4":"$80 <small>/ day</small>","price.car5":"$120 <small>/ day</small>","price.car6":"$42 <small>/ day</small>",
     "select.car1":"Ford Mustang Cabriolet — $120/day","select.car2":"Ford Mustang — $120/day","select.car3":"BMW 230i — $120/day","select.car4":"Dodge Challenger — $120/day","select.car5":"BMW i4 — $120/day","select.car6":"Tank 500 — $140/day","select.car7":"Toyota Prado — $140/day",
@@ -2104,7 +2109,7 @@ const translations = {
     "why.card2.title":"Доступные цены","why.card2.desc":"Эксклюзивные авто по цене повседневных — арендуйте уникальное авто по цене обычного!",
     "why.card3.title":"Качественный сервис","why.card3.desc":"Забронируйте машину, получите её вовремя, а остальное мы уже предусмотрели. Чисто, удобно, качественно — как и должно быть.",
     "cars.label":"Наш автопарк","cars.title":"Выберите автомобиль","cars.filterAll":"Все","cars.filterCabrio":"Кабриолеты","cars.filterSport":"Спорткупе","cars.filterElectro":"Электрокары","cars.filterSuv":"Люкс Внедорожники",
-    "badge.popular":"Популярный","badge.new":"Новый","class.economy":"Эконом класс","class.business":"Бизнес класс","class.premiumSuv":"Премиум внедорожник","class.economyPlus":"Эконом плюс",
+    "badge.popular":"Популярный","badge.new":"Новый","badge.deal":"Выгодно","badge.fresh":"Новый","class.economy":"Эконом класс","class.business":"Бизнес класс","class.premiumSuv":"Премиум внедорожник","class.economyPlus":"Эконом плюс",
     "spec.auto":"Автомат","spec.seats5":"5 мест","spec.seats6":"6 мест","spec.seats7":"7 мест","spec.petrol":"Бензин","spec.electro":"Электро","price.day":"/ день","btn.rent":"Арендовать",
     "price.car1":"15 000 ₸ <small>/ день</small>","price.car2":"25 000 ₸ <small>/ день</small>","price.car3":"60 000 ₸ <small>/ день</small>","price.car4":"60 000 ₸ <small>/ день</small>","price.car5":"60 000 ₸ <small>/ день</small>","price.car6":"20 000 ₸ <small>/ день</small>",
     "select.car1":"Ford Mustang Cabriolet — 60 000 ₸/день","select.car2":"Ford Mustang — 60 000 ₸/день","select.car3":"BMW 230i — 60 000 ₸/день","select.car4":"Dodge Challenger — 60 000 ₸/день","select.car5":"BMW i4 — 60 000 ₸/день","select.car6":"Tank 500 — 70 000 ₸/день","select.car7":"Toyota Prado — 70 000 ₸/день",
@@ -2157,7 +2162,7 @@ const translations = {
     "why.card2.title":"Қолжетімді баға","why.card2.desc":"Эксклюзивті көліктер күнделікті бағамен — ерекше көлікті қарапайым бағамен жалдаңыз!",
     "why.card3.title":"Сапалы қызмет","why.card3.desc":"Көлікті брондаңыз, уақытында алыңыз, қалғанын біз ойластырдық. Таза, ыңғайлы, сапалы — болуға тиіс.",
     "cars.label":"Біздің автопарк","cars.title":"Көлігіңізді таңдаңыз","cars.filterAll":"Барлығы","cars.filterCabrio":"Кабриолеттер","cars.filterSport":"Спорткупе","cars.filterElectro":"Электрокөліктер","cars.filterSuv":"Люкс жол талғамайтын",
-    "badge.popular":"Танымал","badge.new":"Жаңа","class.economy":"Эконом класс","class.business":"Бизнес класс","class.premiumSuv":"Премиум жол талғамайтын","class.economyPlus":"Эконом плюс",
+    "badge.popular":"Танымал","badge.new":"Жаңа","badge.deal":"Тиімді","badge.fresh":"Жаңа","class.economy":"Эконом класс","class.business":"Бизнес класс","class.premiumSuv":"Премиум жол талғамайтын","class.economyPlus":"Эконом плюс",
     "spec.auto":"Автомат","spec.seats5":"5 орын","spec.seats6":"6 орын","spec.seats7":"7 орын","spec.petrol":"Бензин","spec.electro":"Электр","price.day":"/ күн","btn.rent":"Жалдау",
     "price.car1":"15 000 ₸ <small>/ күн</small>","price.car2":"25 000 ₸ <small>/ күн</small>","price.car3":"60 000 ₸ <small>/ күн</small>","price.car4":"60 000 ₸ <small>/ күн</small>","price.car5":"60 000 ₸ <small>/ күн</small>","price.car6":"20 000 ₸ <small>/ күн</small>",
     "select.car1":"Ford Mustang Cabriolet — 60 000 ₸/күн","select.car2":"Ford Mustang — 60 000 ₸/күн","select.car3":"BMW 230i — 60 000 ₸/күн","select.car4":"Dodge Challenger — 60 000 ₸/күн","select.car5":"BMW i4 — 60 000 ₸/күн","select.car6":"Tank 500 — 70 000 ₸/күн","select.car7":"Toyota Prado — 70 000 ₸/күн",
