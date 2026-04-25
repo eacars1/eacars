@@ -76,7 +76,10 @@
       "Bash(cp \"/c/Users/user/OneDrive/Рабочий стол/photos/prado1.png\" \"/c/Users/user/OneDrive/Рабочий стол/eacars1/.claude/worktrees/brave-bhabha-5a8e68/img/prado1.jpg\")",
       "Bash(cp \"/c/Users/user/OneDrive/Рабочий стол/photos/prado2.png\" \"/c/Users/user/OneDrive/Рабочий стол/eacars1/.claude/worktrees/brave-bhabha-5a8e68/img/prado2.jpg\")",
       "Bash(powershell -NoProfile -ExecutionPolicy Bypass -File 'C:\\\\tmp\\\\fix_translations_bom.ps1')",
-      "Bash(awk 'NR==1612 || NR==1613 {print NR\": \"substr\\($0,1,300\\)}' \"/c/Users/user/OneDrive/Рабочий стол/eacars1/.claude/worktrees/brave-bhabha-5a8e68/index.html\")"
+      "Bash(awk 'NR==1612 || NR==1613 {print NR\": \"substr\\($0,1,300\\)}' \"/c/Users/user/OneDrive/Рабочий стол/eacars1/.claude/worktrees/brave-bhabha-5a8e68/index.html\")",
+      "Bash(awk 'NR==2114 || NR==2167 {print NR\": \"substr\\($0,1,400\\)}' \"/c/Users/user/OneDrive/Рабочий стол/eacars1/.claude/worktrees/brave-bhabha-5a8e68/index.html\")",
+      "Bash(awk 'NR>=1033 && NR<=1100' \"/c/Users/user/OneDrive/Рабочий стол/eacars1/.claude/worktrees/brave-bhabha-5a8e68/index.html\")",
+      "Bash(awk 'NR>=1465 && NR<=1480' \"/c/Users/user/OneDrive/Рабочий стол/eacars1/.claude/worktrees/brave-bhabha-5a8e68/index.html\")"
     ]
   }
 }
