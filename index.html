@@ -2663,7 +2663,7 @@ const DEMO_DATA = {
 let BOOKED_DATA = DEMO_DATA;
 window.selectedCar = CARS[0].id;
 window.calendarOffset = 0;
-window.calendarSelectionMode = false;
+window.calendarSelectionMode = true;
 window.calendarPickStart = null;
 window.calendarPickEnd = null;
 
@@ -2699,7 +2699,6 @@ function selectCalendarDate(dateKey) {
       var ret = document.getElementById('bookReturn');
       if (pickup) pickup.value = window.calendarPickStart;
       if (ret) ret.value = window.calendarPickEnd;
-      window.calendarSelectionMode = false;
       window.calendarPickStart = null;
       window.calendarPickEnd = null;
       document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
