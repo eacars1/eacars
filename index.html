@@ -548,6 +548,10 @@ body::before {
 .car-price-dual.full .price-row-text { display: flex; align-items: baseline; gap: 8px; min-width: 0; flex-wrap: wrap; }
 .btn-rent-mini { padding: 6px 14px; font-size: 0.76rem; flex-shrink: 0; }
 @media (max-width: 480px) { .car-price-dual.full .price-row { flex-direction: column; align-items: flex-start; gap: 8px; } .car-price-dual.full .btn-rent-mini { width: 100%; } }
+.car-card.compact .car-info { padding: 18px 24px 22px; }
+.car-card.compact .car-name { margin-bottom: 4px; }
+.car-card.compact .car-specs { margin-bottom: 12px; padding-bottom: 12px; }
+.car-card.compact .car-usage { margin-bottom: 14px; }
 .info-block-title { font-size: 0.8rem; font-weight: 600; color: var(--accent); margin-top: 10px; margin-bottom: 4px; letter-spacing: 0.02em; }
 .info-block-title:first-child { margin-top: 0; }
 .info-note { font-size: 0.76rem; color: var(--text-secondary); line-height: 1.55; padding: 4px 0; }
@@ -1736,7 +1740,7 @@ body.intro-playing .nav { opacity: 0 !important; pointer-events: none; }
           </div>
         </div>
       </div>
-      <div class="car-card reveal" data-category="electro" style="--i:5">
+      <div class="car-card reveal compact" data-category="electro" style="--i:5">
         <div class="car-gallery" id="gallery-zeekr" onclick="openLightbox(event, 'zeekr')">
           <div class="gallery-track" id="track-zeekr">
             <img src="img/zeekr1.jpg" alt="Zeekr 009" loading="lazy">
