@@ -776,7 +776,8 @@ body::before {
 .form-group { margin-bottom: 22px; }
 .form-group label { display: block; font-size: 0.85rem; font-weight: 500; color: var(--text-secondary); margin-bottom: 8px; }
 .form-group input, .form-group select { width: 100%; padding: 14px 18px; background: var(--bg-primary); border: 1px solid var(--border); border-radius: 10px; color: var(--text-primary); font-family: var(--font-body); font-size: 0.92rem; transition: border 0.3s; outline: none; }
-.form-group input[type="date"] { cursor: pointer; position: relative; }
+.form-group input[type="date"] { cursor: pointer; position: relative; text-align: left; -webkit-appearance: none; appearance: none; min-height: 50px; font-size: 16px; line-height: 1.2; display: block; }
+.form-group input[type="date"]::-webkit-date-and-time-value { text-align: left; }
 .form-group input[type="date"]::-webkit-calendar-picker-indicator { position: absolute; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
 .form-group input::placeholder { color: var(--text-muted); }
 .form-group input:focus, .form-group select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
