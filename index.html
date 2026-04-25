@@ -540,6 +540,13 @@ body::before {
 .car-price-dual .price-row .meta { font-size: 0.66rem; color: var(--text-muted); font-weight: 400; text-transform: uppercase; letter-spacing: 0.04em; }
 .car-price-dual .price-row.with-driver .amt { color: #d4b23a; }
 .car-price-dual .price-row.with-driver::before { content: '+ '; color: var(--text-muted); font-weight: 400; font-size: 0.85rem; margin-right: -4px; }
+.car-footer-dual { align-items: stretch; }
+.car-price-dual.full { width: 100%; gap: 10px; }
+.car-price-dual.full .price-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 0; border-top: 1px dashed var(--border); }
+.car-price-dual.full .price-row:first-child { border-top: none; padding-top: 0; }
+.car-price-dual.full .price-row-text { display: flex; align-items: baseline; gap: 8px; min-width: 0; flex-wrap: wrap; }
+.btn-rent-mini { padding: 8px 16px; font-size: 0.78rem; flex-shrink: 0; }
+@media (max-width: 480px) { .car-price-dual.full .price-row { flex-direction: column; align-items: flex-start; gap: 10px; } .car-price-dual.full .btn-rent-mini { width: 100%; } }
 .info-block-title { font-size: 0.8rem; font-weight: 600; color: var(--accent); margin-top: 10px; margin-bottom: 4px; letter-spacing: 0.02em; }
 .info-block-title:first-child { margin-top: 0; }
 .info-note { font-size: 0.76rem; color: var(--text-secondary); line-height: 1.55; padding: 4px 0; }
@@ -1758,12 +1765,17 @@ body.intro-playing .nav { opacity: 0 !important; pointer-events: none; }
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
             <span data-i18n="car8.usage">Аренда по городу и за городом</span>
           </div>
-          <div class="car-footer">
-            <div class="car-price-dual">
-              <div class="price-row"><span class="amt" data-i18n="car8.noDriverAmt">80 000 ₸</span><span class="meta" data-i18n="car8.priceNoDriver">/ 10ч · без водителя</span></div>
-              <div class="price-row with-driver"><span class="amt" data-i18n="car8.withDriverAmt">110 000 ₸</span><span class="meta" data-i18n="car8.priceWithDriver">/ 10ч · с водителем</span></div>
+          <div class="car-footer car-footer-dual">
+            <div class="car-price-dual full">
+              <div class="price-row">
+                <div class="price-row-text"><span class="amt" data-i18n="car8.noDriverAmt">80 000 ₸</span><span class="meta" data-i18n="car8.priceNoDriver">/ 10ч · без водителя</span></div>
+                <button class="btn-rent btn-rent-mini" onclick="scrollToBooking('zeekr-nd')" data-i18n="btn.rent">Арендовать</button>
+              </div>
+              <div class="price-row with-driver">
+                <div class="price-row-text"><span class="amt" data-i18n="car8.withDriverAmt">110 000 ₸</span><span class="meta" data-i18n="car8.priceWithDriver">/ 10ч · с водителем</span></div>
+                <button class="btn-rent btn-rent-mini" onclick="scrollToBooking('zeekr-wd')" data-i18n="btn.rent">Арендовать</button>
+              </div>
             </div>
-            <button class="btn-rent" onclick="scrollToBooking('Zeekr 009')" data-i18n="btn.rent">Арендовать</button>
           </div>
           <button class="btn-car-info" onclick="toggleCarInfo(this)">
             <span data-i18n="car8.infoBtn">Дополнительная информация</span>
@@ -1956,7 +1968,8 @@ body.intro-playing .nav { opacity: 0 !important; pointer-events: none; }
               <option data-i18n="select.car5">BMW i4 — 60 000 ₸/день</option>
               <option data-i18n="select.car6">Tank 500 — 70 000 ₸/день</option>
               <option data-i18n="select.car7">Toyota Prado — 70 000 ₸/день</option>
-              <option data-i18n="select.car8">Zeekr 009 — от 80 000 ₸ / 10ч</option>
+              <option value="zeekr-nd" data-i18n="select.car8nd">Zeekr 009 — 80 000 ₸ / 10ч (без водителя)</option>
+              <option value="zeekr-wd" data-i18n="select.car8wd">Zeekr 009 — 110 000 ₸ / 10ч (с водителем)</option>
             </select>
           </div>
           <div class="avail-tip-banner">
@@ -2143,7 +2156,7 @@ const translations = {
     "car8.titleWorkDay":"Working Day","car8.workDay":"10 working hours, 6 seats (including driver). All related costs are included: water, tissues, parking, driver's services. Working-day rate — <strong>110 000 ₸</strong>. Exceeding the 10-hour limit — <strong>10 000 ₸ per extra hour</strong>.",
     "car8.titleHourly":"Hourly Rental","car8.hourly":"<strong>25 000 ₸ / hour</strong>. Minimum booking — 2 hours.",
     "car8.titleOther":"Other Services","car8.transfer":"Transfer","car8.noDriver":"Rental without driver","car8.deposit":"Refundable deposit","car8.depositNote":"The deposit is returned 7 days after the traffic-fines check.",
-    "select.car8":"Zeekr 009 — from 80 000 ₸ / 10h",
+    "select.car8":"Zeekr 009 — from 80 000 ₸ / 10h","select.car8nd":"Zeekr 009 — 80 000 ₸ / 10h (no driver)","select.car8wd":"Zeekr 009 — 110 000 ₸ / 10h (with driver)",
   },
   ru: {
     "nav.cars":"Автомобили","nav.availability":"Наличие","nav.why":"Преимущества","nav.how":"Как это работает","nav.reviews":"Отзывы","nav.contact":"Контакты","nav.book":"Забронировать",
@@ -2196,7 +2209,7 @@ const translations = {
     "car8.titleWorkDay":"Рабочий день","car8.workDay":"10 часов работы, 6 посадочных мест (с учётом водителя). В стоимость входят все сопутствующие расходы: вода, салфетки, парковка, услуги водителя. Стоимость рабочего дня — <strong>110 000 ₸</strong>. Превышение 10-часового лимита — <strong>10 000 ₸ за каждый час</strong>.",
     "car8.titleHourly":"Почасовая аренда","car8.hourly":"<strong>25 000 ₸ / час</strong>. Минимальный выезд по часовому тарифу — 2 часа.",
     "car8.titleOther":"Другие услуги","car8.transfer":"Трансфер","car8.noDriver":"Аренда без водителя","car8.deposit":"Депозит (возвратный)","car8.depositNote":"Депозит возвращается через 7 дней после проверки на штрафы.",
-    "select.car8":"Zeekr 009 — от 80 000 ₸ / 10ч",
+    "select.car8":"Zeekr 009 — от 80 000 ₸ / 10ч","select.car8nd":"Zeekr 009 — 80 000 ₸ / 10ч (без водителя)","select.car8wd":"Zeekr 009 — 110 000 ₸ / 10ч (с водителем)",
   },
   kz: {
     "nav.cars":"Көліктер","nav.availability":"Қолжетімділік","nav.why":"Артықшылықтар","nav.how":"Қалай жұмыс істейді","nav.reviews":"Пікірлер","nav.contact":"Байланыс","nav.book":"Брондау",
@@ -2249,7 +2262,7 @@ const translations = {
     "car8.titleWorkDay":"Жұмыс күні","car8.workDay":"10 сағат жұмыс, 6 отыратын орын (жүргізушіні қосқанда). Құнына бәрі кіреді: су, майлық, тұрақ, жүргізуші қызметі. Жұмыс күнінің құны — <strong>110 000 ₸</strong>. 10 сағаттық лимиттен асқанда — <strong>әр қосымша сағатқа 10 000 ₸</strong>.",
     "car8.titleHourly":"Сағаттық жалдау","car8.hourly":"<strong>25 000 ₸ / сағат</strong>. Сағаттық тарифпен ең аз шығу — 2 сағат.",
     "car8.titleOther":"Басқа қызметтер","car8.transfer":"Трансфер","car8.noDriver":"Жүргізушісіз жалдау","car8.deposit":"Қайтарымды кепілдік","car8.depositNote":"Кепілдік айыппұлдарды тексергеннен кейін 7 күн ішінде қайтарылады.",
-    "select.car8":"Zeekr 009 — 80 000 ₸-дан / 10сағ",
+    "select.car8":"Zeekr 009 — 80 000 ₸-дан / 10сағ","select.car8nd":"Zeekr 009 — 80 000 ₸ / 10сағ (жүргізушісіз)","select.car8wd":"Zeekr 009 — 110 000 ₸ / 10сағ (жүргізушімен)",
   }
 };
 
@@ -2309,6 +2322,8 @@ function updatePriceTranslations() {
   translations.en['car8.workDay'] = '10 working hours, 6 seats (including driver). All related costs are included: water, tissues, parking, driver\u2019s services. Working-day rate \u2014 <strong>' + usd(Z_WITH) + '</strong>. Exceeding the 10-hour limit \u2014 <strong>' + usd(Z_OVER) + ' per extra hour</strong>.';
   translations.en['car8.hourly'] = '<strong>' + usd(Z_HOUR) + ' / hour</strong>. Minimum booking \u2014 2 hours.';
   translations.en['select.car8'] = 'Zeekr 009 \u2014 from ' + usd(Z_NO) + ' / 10h';
+  translations.en['select.car8nd'] = 'Zeekr 009 \u2014 ' + usd(Z_NO) + ' / 10h (no driver)';
+  translations.en['select.car8wd'] = 'Zeekr 009 \u2014 ' + usd(Z_WITH) + ' / 10h (with driver)';
   // RU
   translations.ru['car8.noDriverAmt'] = kzt(Z_NO);
   translations.ru['car8.withDriverAmt'] = kzt(Z_WITH);
@@ -2318,6 +2333,8 @@ function updatePriceTranslations() {
   translations.ru['car8.workDay'] = '10 рабочих часов, 6 посадочных мест (включая водителя). В стоимость входит всё: вода, салфетки, парковка, услуги водителя. Стоимость рабочего дня — <strong>' + kzt(Z_WITH) + '</strong>. При превышении 10-часового лимита — <strong>' + kzt(Z_OVER) + ' за каждый дополнительный час</strong>.';
   translations.ru['car8.hourly'] = '<strong>' + kzt(Z_HOUR) + ' / час</strong>. Минимальный выезд по часовому тарифу — 2 часа.';
   translations.ru['select.car8'] = 'Zeekr 009 — от ' + kzt(Z_NO) + ' / 10ч';
+  translations.ru['select.car8nd'] = 'Zeekr 009 — ' + kzt(Z_NO) + ' / 10ч (без водителя)';
+  translations.ru['select.car8wd'] = 'Zeekr 009 — ' + kzt(Z_WITH) + ' / 10ч (с водителем)';
   // KZ
   translations.kz['car8.noDriverAmt'] = kzt(Z_NO);
   translations.kz['car8.withDriverAmt'] = kzt(Z_WITH);
@@ -2327,6 +2344,8 @@ function updatePriceTranslations() {
   translations.kz['car8.workDay'] = '10 сағат жұмыс, 6 отыратын орын (жүргізушіні қосқанда). Құнына бәрі кіреді: су, майлық, тұрақ, жүргізуші қызметі. Жұмыс күнінің құны — <strong>' + kzt(Z_WITH) + '</strong>. 10 сағаттық лимиттен асқанда — <strong>әр қосымша сағатқа ' + kzt(Z_OVER) + '</strong>.';
   translations.kz['car8.hourly'] = '<strong>' + kzt(Z_HOUR) + ' / сағат</strong>. Сағаттық тарифпен ең аз шығу — 2 сағат.';
   translations.kz['select.car8'] = 'Zeekr 009 — ' + kzt(Z_NO) + '-дан / 10сағ';
+  translations.kz['select.car8nd'] = 'Zeekr 009 — ' + kzt(Z_NO) + ' / 10сағ (жүргізушісіз)';
+  translations.kz['select.car8wd'] = 'Zeekr 009 — ' + kzt(Z_WITH) + ' / 10сағ (жүргізушімен)';
 }
 
 function parseNBKXml(text) {
@@ -2498,7 +2517,9 @@ function scrollReviews(dir) {
 }
 function scrollToBooking(carName) {
   const select = document.getElementById('carSelect');
-  for (let opt of select.options) { if (opt.text.includes(carName)) { opt.selected = true; break; } }
+  let matched = false;
+  for (let opt of select.options) { if (opt.value && opt.value === carName) { opt.selected = true; matched = true; break; } }
+  if (!matched) { for (let opt of select.options) { if (opt.text.includes(carName)) { opt.selected = true; break; } } }
   document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
   showExpModal();
 }
