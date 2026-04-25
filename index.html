@@ -508,18 +508,13 @@ body::before {
   padding-top: 8px;
 }
 
-/* Animated price — Zeekr */
-.car-price-anim { position: relative; flex: 1; min-height: 42px; overflow: hidden; font-family: var(--font-display); line-height: 1.1; }
-.car-price-anim .price-slide { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; gap: 3px; opacity: 0; transform: translateY(12px); animation: zeekrPriceCycle 6s ease-in-out infinite; }
-.car-price-anim .price-slide .amt { font-weight: 700; font-size: 1.15rem; color: var(--accent); white-space: nowrap; }
-.car-price-anim .price-slide.with-driver .amt { color: #e6c24a; text-shadow: 0 0 18px rgba(230,194,74,0.35); }
-.car-price-anim .price-slide .meta { font-size: 0.7rem; color: var(--text-muted); font-weight: 500; letter-spacing: 0.02em; }
-.car-price-anim .price-slide.with-driver { animation-delay: 3s; }
-@keyframes zeekrPriceCycle {
-  0%, 45% { opacity: 1; transform: translateY(0); }
-  50%, 95% { opacity: 0; transform: translateY(-12px); }
-  100% { opacity: 0; transform: translateY(12px); }
-}
+/* Dual price — Zeekr */
+.car-price-dual { display: flex; flex-direction: column; gap: 4px; flex: 1; }
+.car-price-dual .price-row { display: flex; align-items: baseline; gap: 8px; font-family: var(--font-display); line-height: 1.1; }
+.car-price-dual .price-row .amt { font-weight: 700; font-size: 1.05rem; color: var(--accent); white-space: nowrap; }
+.car-price-dual .price-row .meta { font-size: 0.66rem; color: var(--text-muted); font-weight: 400; text-transform: uppercase; letter-spacing: 0.04em; }
+.car-price-dual .price-row.with-driver .amt { color: #d4b23a; }
+.car-price-dual .price-row.with-driver::before { content: '+ '; color: var(--text-muted); font-weight: 400; font-size: 0.85rem; margin-right: -4px; }
 .info-block-title { font-size: 0.8rem; font-weight: 600; color: var(--accent); margin-top: 10px; margin-bottom: 4px; letter-spacing: 0.02em; }
 .info-block-title:first-child { margin-top: 0; }
 .info-note { font-size: 0.76rem; color: var(--text-secondary); line-height: 1.55; padding: 4px 0; }
@@ -1724,9 +1719,9 @@ body.intro-playing .nav { opacity: 0 !important; pointer-events: none; }
             <span data-i18n="car8.usage">Аренда по городу и за городом</span>
           </div>
           <div class="car-footer">
-            <div class="car-price-anim">
-              <div class="price-slide"><span class="amt">80 000 ₸ / 10ч в день</span><span class="meta" data-i18n="car8.priceNoDriver">без водителя</span></div>
-              <div class="price-slide with-driver"><span class="amt">110 000 ₸ / 10ч в день</span><span class="meta" data-i18n="car8.priceWithDriver">с водителем</span></div>
+            <div class="car-price-dual">
+              <div class="price-row"><span class="amt">80 000 ₸</span><span class="meta" data-i18n="car8.priceNoDriver">/ 10ч · без водителя</span></div>
+              <div class="price-row with-driver"><span class="amt">110 000 ₸</span><span class="meta" data-i18n="car8.priceWithDriver">/ 10ч · с водителем</span></div>
             </div>
             <button class="btn-rent" onclick="scrollToBooking('Zeekr 009')" data-i18n="btn.rent">Арендовать</button>
           </div>
@@ -1904,7 +1899,7 @@ body.intro-playing .nav { opacity: 0 !important; pointer-events: none; }
               <option data-i18n="select.car1">Ford Mustang Cabriolet — 60 000 ₸/день</option>
               <option data-i18n="select.car2">Ford Mustang — 60 000 ₸/день</option>
               <option data-i18n="select.car3">BMW 230i — 60 000 ₸/день</option>
-              <option data-i18n="select.car4">BMW 3 Series — 40 000 ₸/день</option>
+              <option data-i18n="select.car4">Dodge Challenger — 60 000 ₸/день</option>
               <option data-i18n="select.car5">BMW i4 — 60 000 ₸/день</option>
               <option data-i18n="select.car6">Tank 500 — 70 000 ₸/день</option>
               <option data-i18n="select.car7">Toyota Prado — 70 000 ₸/день</option>
@@ -2059,7 +2054,7 @@ const translations = {
     "badge.popular":"Popular","badge.new":"New","class.economy":"Economy Class","class.business":"Business Class","class.premiumSuv":"Premium SUV","class.economyPlus":"Economy Plus",
     "spec.auto":"Automatic","spec.seats5":"5 seats","spec.seats6":"6 seats","spec.seats7":"7 seats","spec.petrol":"Petrol","spec.electro":"Electric","price.day":"/ day","btn.rent":"Rent Now",
     "price.car1":"$35 <small>/ day</small>","price.car2":"$55 <small>/ day</small>","price.car3":"60 000 ₸ <small>/ day</small>","price.car4":"$80 <small>/ day</small>","price.car5":"$120 <small>/ day</small>","price.car6":"$42 <small>/ day</small>",
-    "select.car1":"Hyundai Accent — $35/day","select.car2":"Toyota Camry — $55/day","select.car3":"BMW 230i — $65/day","select.car4":"BMW 3 Series — $80/day","select.car5":"BMW i4 — $120/day","select.car6":"Kia K5 — $42/day",
+    "select.car1":"Ford Mustang Cabriolet — $120/day","select.car2":"Ford Mustang — $120/day","select.car3":"BMW 230i — $120/day","select.car4":"Dodge Challenger — $120/day","select.car5":"BMW i4 — $120/day","select.car6":"Tank 500 — $140/day","select.car7":"Toyota Prado — $140/day",
     "avail.label":"Availability","avail.title":"Check Available Dates","avail.desc":"See which dates are free for each car. Green means available, red means booked.",
     "avail.loading":"Loading availability data...","avail.free":"Available","avail.booked":"Booked","avail.today":"Today","avail.selHint1":"Tap a start date for your rental","avail.selHint2":"Now tap the end date of your rental",
     "avail.noData":"Availability data not loaded. Place bookings.xlsx in the same folder as this page.",
@@ -2094,7 +2089,7 @@ const translations = {
     "car5.infoBtn":"Additional Information","car5.day":"Per day","car5.day3":"From 3 days","car5.day10":"From 10 days","car5.deposit":"Deposit","car5.usage":"Available for city and out-of-city trips",
     "car6.infoBtn":"Additional Information","car6.day":"Per day","car6.day3":"From 3 days","car6.day10":"From 10 days","car6.deposit":"Deposit","car6.usage":"Available for city and out-of-city trips",
     "car7.infoBtn":"Additional Information","car7.day":"Per day","car7.day3":"From 3 days","car7.day10":"From 10 days","car7.deposit":"Deposit","car7.usage":"Available for city and out-of-city trips",
-    "car8.infoBtn":"Additional Information","car8.usage":"Available for city and out-of-city trips","car8.priceNoDriver":"no driver","car8.priceWithDriver":"with driver",
+    "car8.infoBtn":"Additional Information","car8.usage":"Available for city and out-of-city trips","car8.priceNoDriver":"/ 10h · no driver","car8.priceWithDriver":"/ 10h · with driver",
     "car8.titleWorkDay":"Working Day","car8.workDay":"10 working hours, 6 seats (including driver). All related costs are included: water, tissues, parking, driver's services. Working-day rate — <strong>110 000 ₸</strong>. Exceeding the 10-hour limit — <strong>10 000 ₸ per extra hour</strong>.",
     "car8.titleHourly":"Hourly Rental","car8.hourly":"<strong>25 000 ₸ / hour</strong>. Minimum booking — 2 hours.",
     "car8.titleOther":"Other Services","car8.transfer":"Transfer","car8.noDriver":"Rental without driver","car8.deposit":"Refundable deposit","car8.depositNote":"The deposit is returned 7 days after the traffic-fines check.",
@@ -2111,8 +2106,8 @@ const translations = {
     "cars.label":"Наш автопарк","cars.title":"Выберите автомобиль","cars.filterAll":"Все","cars.filterCabrio":"Кабриолеты","cars.filterSport":"Спорткупе","cars.filterElectro":"Электрокары","cars.filterSuv":"Люкс Внедорожники",
     "badge.popular":"Популярный","badge.new":"Новый","class.economy":"Эконом класс","class.business":"Бизнес класс","class.premiumSuv":"Премиум внедорожник","class.economyPlus":"Эконом плюс",
     "spec.auto":"Автомат","spec.seats5":"5 мест","spec.seats6":"6 мест","spec.seats7":"7 мест","spec.petrol":"Бензин","spec.electro":"Электро","price.day":"/ день","btn.rent":"Арендовать",
-    "price.car1":"15 000 ₸ <small>/ день</small>","price.car2":"25 000 ₸ <small>/ день</small>","price.car3":"60 000 ₸ <small>/ день</small>","price.car4":"40 000 ₸ <small>/ день</small>","price.car5":"60 000 ₸ <small>/ день</small>","price.car6":"20 000 ₸ <small>/ день</small>",
-    "select.car1":"Hyundai Accent — 15 000 ₸/день","select.car2":"Toyota Camry — 25 000 ₸/день","select.car3":"BMW 230i — 60 000 ₸/день","select.car4":"BMW 3 Series — 40 000 ₸/день","select.car5":"BMW i4 — 60 000 ₸/день","select.car6":"Kia K5 — 20 000 ₸/день",
+    "price.car1":"15 000 ₸ <small>/ день</small>","price.car2":"25 000 ₸ <small>/ день</small>","price.car3":"60 000 ₸ <small>/ день</small>","price.car4":"60 000 ₸ <small>/ день</small>","price.car5":"60 000 ₸ <small>/ день</small>","price.car6":"20 000 ₸ <small>/ день</small>",
+    "select.car1":"Ford Mustang Cabriolet — 60 000 ₸/день","select.car2":"Ford Mustang — 60 000 ₸/день","select.car3":"BMW 230i — 60 000 ₸/день","select.car4":"Dodge Challenger — 60 000 ₸/день","select.car5":"BMW i4 — 60 000 ₸/день","select.car6":"Tank 500 — 70 000 ₸/день","select.car7":"Toyota Prado — 70 000 ₸/день",
     "avail.label":"Наличие","avail.title":"Проверьте свободные даты","avail.desc":"Посмотрите, какие даты свободны для каждого автомобиля. Зелёный — свободно, красный — забронировано.",
     "avail.loading":"Загрузка данных о наличии...","avail.free":"Свободно","avail.booked":"Забронировано","avail.today":"Сегодня","avail.selHint1":"Нажмите на дату начала аренды","avail.selHint2":"Теперь нажмите на дату окончания аренды",
     "avail.noData":"Данные о наличии не загружены. Поместите bookings.xlsx в ту же папку, что и эту страницу.",
@@ -2147,7 +2142,7 @@ const translations = {
     "car5.infoBtn":"Дополнительная информация","car5.day":"Сутки","car5.day3":"От 3-х суток","car5.day10":"От 10 суток","car5.deposit":"Депозит","car5.usage":"Аренда по городу и за городом",
     "car6.infoBtn":"Дополнительная информация","car6.day":"Сутки","car6.day3":"От 3-х суток","car6.day10":"От 10 суток","car6.deposit":"Депозит","car6.usage":"Аренда по городу и за городом",
     "car7.infoBtn":"Дополнительная информация","car7.day":"Сутки","car7.day3":"От 3-х суток","car7.day10":"От 10 суток","car7.deposit":"Депозит","car7.usage":"Аренда по городу и за городом",
-    "car8.infoBtn":"Дополнительная информация","car8.usage":"Аренда по городу и за городом","car8.priceNoDriver":"без водителя","car8.priceWithDriver":"с водителем",
+    "car8.infoBtn":"Дополнительная информация","car8.usage":"Аренда по городу и за городом","car8.priceNoDriver":"/ 10ч · без водителя","car8.priceWithDriver":"/ 10ч · с водителем",
     "car8.titleWorkDay":"Рабочий день","car8.workDay":"10 часов работы, 6 посадочных мест (с учётом водителя). В стоимость входят все сопутствующие расходы: вода, салфетки, парковка, услуги водителя. Стоимость рабочего дня — <strong>110 000 ₸</strong>. Превышение 10-часового лимита — <strong>10 000 ₸ за каждый час</strong>.",
     "car8.titleHourly":"Почасовая аренда","car8.hourly":"<strong>25 000 ₸ / час</strong>. Минимальный выезд по часовому тарифу — 2 часа.",
     "car8.titleOther":"Другие услуги","car8.transfer":"Трансфер","car8.noDriver":"Аренда без водителя","car8.deposit":"Депозит (возвратный)","car8.depositNote":"Депозит возвращается через 7 дней после проверки на штрафы.",
@@ -2164,8 +2159,8 @@ const translations = {
     "cars.label":"Біздің автопарк","cars.title":"Көлігіңізді таңдаңыз","cars.filterAll":"Барлығы","cars.filterCabrio":"Кабриолеттер","cars.filterSport":"Спорткупе","cars.filterElectro":"Электрокөліктер","cars.filterSuv":"Люкс жол талғамайтын",
     "badge.popular":"Танымал","badge.new":"Жаңа","class.economy":"Эконом класс","class.business":"Бизнес класс","class.premiumSuv":"Премиум жол талғамайтын","class.economyPlus":"Эконом плюс",
     "spec.auto":"Автомат","spec.seats5":"5 орын","spec.seats6":"6 орын","spec.seats7":"7 орын","spec.petrol":"Бензин","spec.electro":"Электр","price.day":"/ күн","btn.rent":"Жалдау",
-    "price.car1":"15 000 ₸ <small>/ күн</small>","price.car2":"25 000 ₸ <small>/ күн</small>","price.car3":"60 000 ₸ <small>/ күн</small>","price.car4":"40 000 ₸ <small>/ күн</small>","price.car5":"60 000 ₸ <small>/ күн</small>","price.car6":"20 000 ₸ <small>/ күн</small>",
-    "select.car1":"Hyundai Accent — 15 000 ₸/күн","select.car2":"Toyota Camry — 25 000 ₸/күн","select.car3":"BMW 230i — 60 000 ₸/күн","select.car4":"BMW 3 Series — 40 000 ₸/күн","select.car5":"BMW i4 — 60 000 ₸/күн","select.car6":"Kia K5 — 20 000 ₸/күн",
+    "price.car1":"15 000 ₸ <small>/ күн</small>","price.car2":"25 000 ₸ <small>/ күн</small>","price.car3":"60 000 ₸ <small>/ күн</small>","price.car4":"60 000 ₸ <small>/ күн</small>","price.car5":"60 000 ₸ <small>/ күн</small>","price.car6":"20 000 ₸ <small>/ күн</small>",
+    "select.car1":"Ford Mustang Cabriolet — 60 000 ₸/күн","select.car2":"Ford Mustang — 60 000 ₸/күн","select.car3":"BMW 230i — 60 000 ₸/күн","select.car4":"Dodge Challenger — 60 000 ₸/күн","select.car5":"BMW i4 — 60 000 ₸/күн","select.car6":"Tank 500 — 70 000 ₸/күн","select.car7":"Toyota Prado — 70 000 ₸/күн",
     "avail.label":"Қолжетімділік","avail.title":"Бос күндерді тексеріңіз","avail.desc":"Әр көлік үшін қай күндер бос екенін қараңыз. Жасыл — бос, қызыл — брондалған.",
     "avail.loading":"Қолжетімділік деректері жүктелуде...","avail.free":"Бос","avail.booked":"Брондалған","avail.today":"Бүгін","avail.selHint1":"Жалдаудың басталу күнін басыңыз","avail.selHint2":"Енді жалдаудың аяқталу күнін басыңыз",
     "avail.noData":"Қолжетімділік деректері жүктелмеді. bookings.xlsx файлын осы беттің қалтасына орналастырыңыз.",
@@ -2200,7 +2195,7 @@ const translations = {
     "car5.infoBtn":"Қосымша ақпарат","car5.day":"Тәулік","car5.day3":"3 тәуліктен бастап","car5.day10":"10 тәуліктен бастап","car5.deposit":"Депозит","car5.usage":"Қала бойынша және қаладан тыс жалдау",
     "car6.infoBtn":"Қосымша ақпарат","car6.day":"Тәулік","car6.day3":"3 тәуліктен бастап","car6.day10":"10 тәуліктен бастап","car6.deposit":"Депозит","car6.usage":"Қала бойынша және қаладан тыс жалдау",
     "car7.infoBtn":"Қосымша ақпарат","car7.day":"Тәулік","car7.day3":"3 тәуліктен бастап","car7.day10":"10 тәуліктен бастап","car7.deposit":"Депозит","car7.usage":"Қала бойынша және қаладан тыс жалдау",
-    "car8.infoBtn":"Қосымша ақпарат","car8.usage":"Қала бойынша және қаладан тыс жалдау","car8.priceNoDriver":"жүргізушісіз","car8.priceWithDriver":"жүргізушімен",
+    "car8.infoBtn":"Қосымша ақпарат","car8.usage":"Қала бойынша және қаладан тыс жалдау","car8.priceNoDriver":"/ 10сағ · жүргізушісіз","car8.priceWithDriver":"/ 10сағ · жүргізушімен",
     "car8.titleWorkDay":"Жұмыс күні","car8.workDay":"10 сағат жұмыс, 6 отыратын орын (жүргізушіні қосқанда). Құнына бәрі кіреді: су, майлық, тұрақ, жүргізуші қызметі. Жұмыс күнінің құны — <strong>110 000 ₸</strong>. 10 сағаттық лимиттен асқанда — <strong>әр қосымша сағатқа 10 000 ₸</strong>.",
     "car8.titleHourly":"Сағаттық жалдау","car8.hourly":"<strong>25 000 ₸ / сағат</strong>. Сағаттық тарифпен ең аз шығу — 2 сағат.",
     "car8.titleOther":"Басқа қызметтер","car8.transfer":"Трансфер","car8.noDriver":"Жүргізушісіз жалдау","car8.deposit":"Қайтарымды кепілдік","car8.depositNote":"Кепілдік айыппұлдарды тексергеннен кейін 7 күн ішінде қайтарылады.",
@@ -2211,7 +2206,7 @@ const translations = {
 // ============================================
 // EXCHANGE RATE FROM NATIONAL BANK OF KAZAKHSTAN
 // ============================================
-const BASE_PRICES_KZT = [60000, 60000, 60000, 40000, 60000, 70000, 70000];
+const BASE_PRICES_KZT = [60000, 60000, 60000, 60000, 60000, 70000, 70000];
 const CAR_NAMES_EN = ['Ford Mustang Cabriolet','Ford Mustang','BMW 230i','Dodge Challenger','BMW i4','Tank 500','Toyota Prado'];
 let nbkRate = 473; // Начальный курс (обновится из rate.json / НБ РК)
 let nbkRateDate = '';
@@ -2638,15 +2633,15 @@ trustItems.forEach(el => countObserver.observe(el));
 // ============================================
 
 // Google Таблица: ID вашей таблицы
-const SHEET_ID = '1NZYwjxFqrE0Rdds1pIT7ZiNoPaWiLDobakOZhwo-4_E';
+const SHEET_ID = '1-kDH5MqhSH_JdI9z45_eRrTHnvifdDEAwAlWi9PWV80';
 const CSV_URL = 'https://opensheet.elk.sh/' + SHEET_ID + '/1';
 
 // Список машин
 const CARS = [
   { id: 'CAR001', name: 'Ford Mustang Cabriolet' },
   { id: 'CAR002', name: 'Ford Mustang' },
-  { id: 'CAR003', name: 'Toyota RAV4' },
-  { id: 'CAR004', name: 'BMW 3 Series' },
+  { id: 'CAR003', name: 'BMW 230i' },
+  { id: 'CAR004', name: 'Dodge Challenger' },
   { id: 'CAR005', name: 'BMW i4' },
   { id: 'CAR006', name: 'Tank 500' },
   { id: 'CAR007', name: 'Toyota Prado' },
@@ -2661,6 +2656,8 @@ const DEMO_DATA = {
   "CAR004": new Set(['2026-04-01','2026-04-02','2026-04-03','2026-04-04','2026-04-05','2026-04-08','2026-04-09','2026-04-10','2026-04-11','2026-04-12','2026-04-13','2026-04-17','2026-04-18','2026-04-19','2026-04-20','2026-04-21','2026-04-22','2026-04-26','2026-04-27','2026-04-28','2026-04-29','2026-04-30']),
   "CAR005": new Set(['2026-04-03','2026-04-04','2026-04-05','2026-04-06','2026-04-07','2026-04-08','2026-04-09','2026-04-10','2026-04-16','2026-04-17','2026-04-18','2026-04-19','2026-04-20','2026-04-21','2026-04-22','2026-04-23']),
   "CAR006": new Set(['2026-04-04','2026-04-05','2026-04-06','2026-04-07','2026-04-08','2026-04-13','2026-04-14','2026-04-15','2026-04-16','2026-04-17','2026-04-22','2026-04-23','2026-04-24','2026-04-25','2026-04-26','2026-04-27']),
+  "CAR007": new Set(),
+  "CAR008": new Set(),
 };
 
 let BOOKED_DATA = DEMO_DATA;
