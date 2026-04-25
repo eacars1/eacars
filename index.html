@@ -239,8 +239,21 @@ body::before {
 .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px; background: rgba(184,150,15,0.15); border: 1px solid rgba(184,150,15,0.3); border-radius: 100px; font-size: 0.82rem; font-weight: 600; color: #D4A847; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 28px; animation: fadeUp 0.8s var(--ease) both; position: relative; overflow: hidden; }
 .hero-badge::before { content: ''; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; position: relative; flex-shrink: 0; box-shadow: 0 0 8px var(--accent), 0 0 20px rgba(184,150,15,0.3); }
 .hero-badge::after { content: ''; position: absolute; top: 0; left: -100%; width: 60%; height: 100%; background: linear-gradient(90deg, transparent, rgba(212,168,71,0.2), transparent); animation: glow-line 4s ease-in-out infinite; }
-.hero-notice { display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px; margin-top: 20px; background: rgba(234,179,8,0.10); border: 1px solid rgba(234,179,8,0.35); border-radius: 12px; font-size: 0.88rem; font-weight: 500; color: #fde68a; animation: fadeUp 0.8s var(--ease) 0.5s both; }
-.hero-notice svg { width: 18px; height: 18px; flex-shrink: 0; color: #facc15; }
+.hero-notice { display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px; margin: 4px 0 28px; background: rgba(220,38,38,0.12); border: 1px solid rgba(239,68,68,0.45); border-radius: 12px; font-size: 0.9rem; font-weight: 500; color: #fecaca; animation: fadeUp 0.8s var(--ease) 0.5s both; box-shadow: 0 4px 14px rgba(220,38,38,0.18); }
+.hero-notice svg { width: 18px; height: 18px; flex-shrink: 0; color: #f87171; }
+.exp-modal-overlay { position: fixed; inset: 0; background: rgba(15,12,10,0.72); backdrop-filter: blur(6px); z-index: 9999; display: none; align-items: center; justify-content: center; padding: 20px; animation: fadeIn 0.25s ease; }
+.exp-modal-overlay.active { display: flex; }
+.exp-modal { position: relative; background: linear-gradient(180deg, #1f1b18 0%, #181513 100%); border: 1px solid rgba(239,68,68,0.4); border-radius: 18px; max-width: 460px; width: 100%; padding: 38px 32px 28px; text-align: center; box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04); animation: modalIn 0.35s var(--ease); }
+.exp-modal-close { position: absolute; top: 12px; right: 14px; background: none; border: none; color: var(--text-secondary); font-size: 1.8rem; line-height: 1; cursor: pointer; width: 36px; height: 36px; border-radius: 50%; transition: all 0.2s; }
+.exp-modal-close:hover { background: rgba(255,255,255,0.08); color: #fff; }
+.exp-modal-icon { width: 64px; height: 64px; margin: 0 auto 18px; display: flex; align-items: center; justify-content: center; background: rgba(220,38,38,0.15); border: 1px solid rgba(239,68,68,0.4); border-radius: 50%; color: #f87171; }
+.exp-modal-icon svg { width: 32px; height: 32px; }
+.exp-modal h3 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: #fff; margin-bottom: 12px; }
+.exp-modal p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.55; margin-bottom: 24px; }
+.exp-modal-btn { background: var(--accent); color: #fff; border: none; padding: 12px 32px; border-radius: 100px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.exp-modal-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(184,150,15,0.4); }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes modalIn { from { opacity: 0; transform: translateY(20px) scale(0.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
 .hero h1 { font-family: var(--font-display); font-size: clamp(2.8rem, 6vw, 4.5rem); font-weight: 800; line-height: 1.06; letter-spacing: -1.5px; color: #FAF9F7; margin-bottom: 24px; animation: fadeUp 0.8s var(--ease) 0.15s both; }
 .hero h1 em { font-style: normal; color: #D4A847; position: relative; }
 .hero h1 em::after { content: ''; position: absolute; bottom: 4px; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent-hover), rgba(212,168,71,0.5), var(--accent-hover)); background-size: 200% 100%; border-radius: 2px; animation: shimmer 3s linear infinite; }
@@ -1395,12 +1408,12 @@ body.intro-playing .nav { opacity: 0 !important; pointer-events: none; }
   </div>
   <div class="container hero-content">
     <div class="hero-badge" data-i18n="hero.badge">Доступно 24/7 · Мгновенное бронирование</div>
+    <h1 data-i18n="hero.title">Премиум аренда авто<br>в <em>Астане</em></h1>
+    <p class="hero-sub" data-i18n="hero.sub">Прозрачные цены, подача за 15 минут и парк проверенных премиальных автомобилей — ваше путешествие начинается здесь.</p>
     <div class="hero-notice">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
       <span data-i18n="hero.notice">Аренда только водителям со стажем от 3 лет</span>
     </div>
-    <h1 data-i18n="hero.title">Премиум аренда авто<br>в <em>Астане</em></h1>
-    <p class="hero-sub" data-i18n="hero.sub">Прозрачные цены, подача за 15 минут и парк проверенных премиальных автомобилей — ваше путешествие начинается здесь.</p>
     <div class="hero-actions">
       <a href="#cars" class="btn btn-primary">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
@@ -1898,6 +1911,19 @@ body.intro-playing .nav { opacity: 0 !important; pointer-events: none; }
   </div>
 </section>
 
+<!-- EXPERIENCE NOTICE MODAL -->
+<div class="exp-modal-overlay" id="expModal" onclick="if(event.target===this)closeExpModal()">
+  <div class="exp-modal" role="dialog" aria-modal="true">
+    <button class="exp-modal-close" onclick="closeExpModal()" aria-label="Close">&times;</button>
+    <div class="exp-modal-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    <h3 data-i18n="expModal.title">Внимание</h3>
+    <p data-i18n="expModal.text">Аренда автомобилей доступна только водителям со стажем вождения от 3 лет. Пожалуйста, убедитесь, что у вас достаточный стаж, перед оформлением заявки.</p>
+    <button class="exp-modal-btn" onclick="closeExpModal()" data-i18n="expModal.ok">Понятно</button>
+  </div>
+</div>
+
 <!-- BOOKING -->
 <section class="section booking-section" id="booking">
   <div class="container">
@@ -2058,7 +2084,7 @@ body.intro-playing .nav { opacity: 0 !important; pointer-events: none; }
 const translations = {
   en: {
     "nav.cars":"Cars","nav.availability":"Availability","nav.why":"Why Us","nav.how":"How It Works","nav.reviews":"Reviews","nav.contact":"Contact","nav.book":"Book Now",
-    "hero.badge":"Available 24/7 · Instant Booking","hero.title":'Premium Car Rental<br>in <em>Astana</em>',"hero.sub":"Transparent pricing, fast pickup in 15 minutes, and a fleet of inspected, premium vehicles — your journey starts here.","hero.viewCars":"View Cars","hero.bookNow":"Book Now","hero.checkAvail":"Check Availability","hero.notice":"Rentals only for drivers with 3+ years of experience",
+    "hero.badge":"Available 24/7 · Instant Booking","hero.title":'Premium Car Rental<br>in <em>Astana</em>',"hero.sub":"Transparent pricing, fast pickup in 15 minutes, and a fleet of inspected, premium vehicles — your journey starts here.","hero.viewCars":"View Cars","hero.bookNow":"Book Now","hero.checkAvail":"Check Availability","hero.notice":"Rentals only for drivers with 3+ years of experience","expModal.title":"Notice","expModal.text":"Car rentals are available only to drivers with at least 3 years of driving experience. Please make sure you meet this requirement before submitting a request.","expModal.ok":"Got it",
     "trust.clients":"Happy Clients","trust.rating":"Average Rating","trust.support":"Customer Support","trust.cars":"Cars Available",
     "why.label":"Why Choose Us","why.title":"Built Around Your Convenience","why.desc":"Everything a modern renter needs — from fair pricing to rapid delivery.",
     "why.card1.title":"Uniqueness","why.card1.desc":"With our cars you'll stand out from the crowd and feel truly special.",
@@ -2111,7 +2137,7 @@ const translations = {
   },
   ru: {
     "nav.cars":"Автомобили","nav.availability":"Наличие","nav.why":"Преимущества","nav.how":"Как это работает","nav.reviews":"Отзывы","nav.contact":"Контакты","nav.book":"Забронировать",
-    "hero.badge":"Доступно 24/7 · Мгновенное бронирование","hero.notice":"Аренда только водителям со стажем от 3 лет","hero.title":'Премиум аренда авто<br>в <em>Астане</em>',"hero.sub":"Прозрачные цены, подача за 15 минут и парк проверенных премиальных автомобилей — ваше путешествие начинается здесь.","hero.viewCars":"Смотреть авто","hero.bookNow":"Забронировать","hero.checkAvail":"Проверить наличие",
+    "hero.badge":"Доступно 24/7 · Мгновенное бронирование","hero.notice":"Аренда только водителям со стажем от 3 лет","expModal.title":"Внимание","expModal.text":"Аренда автомобилей доступна только водителям со стажем вождения от 3 лет. Пожалуйста, убедитесь, что у вас достаточный стаж, перед оформлением заявки.","expModal.ok":"Понятно","hero.title":'Премиум аренда авто<br>в <em>Астане</em>',"hero.sub":"Прозрачные цены, подача за 15 минут и парк проверенных премиальных автомобилей — ваше путешествие начинается здесь.","hero.viewCars":"Смотреть авто","hero.bookNow":"Забронировать","hero.checkAvail":"Проверить наличие",
     "trust.clients":"Довольных клиентов","trust.rating":"Средний рейтинг","trust.support":"Поддержка клиентов","trust.cars":"Авто в наличии",
     "why.label":"Почему мы","why.title":"Создано для вашего удобства","why.desc":"Всё, что нужно современному арендатору — от честных цен до быстрой подачи.",
     "why.card1.title":"Уникальность","why.card1.desc":"С нашими автомобилями вы выделитесь из серой массы и почувствуете себя особенным.",
@@ -2164,7 +2190,7 @@ const translations = {
   },
   kz: {
     "nav.cars":"Көліктер","nav.availability":"Қолжетімділік","nav.why":"Артықшылықтар","nav.how":"Қалай жұмыс істейді","nav.reviews":"Пікірлер","nav.contact":"Байланыс","nav.book":"Брондау",
-    "hero.badge":"24/7 қолжетімді · Лезде брондау","hero.notice":"Көлік тек 3 жылдан астам жүргізу өтілі бар жүргізушілерге беріледі","hero.title":'Премиум көлік жалдау<br><em>Астанада</em>',"hero.sub":"Ашық баға, 15 минутта жеткізу және тексерілген премиум көліктер паркі — сіздің сапарыңыз осы жерден басталады.","hero.viewCars":"Көліктерді көру","hero.bookNow":"Брондау","hero.checkAvail":"Қолжетімділікті тексеру",
+    "hero.badge":"24/7 қолжетімді · Лезде брондау","hero.notice":"Көлік тек 3 жылдан астам жүргізу өтілі бар жүргізушілерге беріледі","expModal.title":"Назар аударыңыз","expModal.text":"Көлік жалдау тек жүргізу өтілі 3 жылдан асатын жүргізушілерге қолжетімді. Өтінім жасамас бұрын өтіліңіздің жеткілікті екеніне көз жеткізіңіз.","expModal.ok":"Түсінікті","hero.title":'Премиум көлік жалдау<br><em>Астанада</em>',"hero.sub":"Ашық баға, 15 минутта жеткізу және тексерілген премиум көліктер паркі — сіздің сапарыңыз осы жерден басталады.","hero.viewCars":"Көліктерді көру","hero.bookNow":"Брондау","hero.checkAvail":"Қолжетімділікті тексеру",
     "trust.clients":"Қанағаттанған клиенттер","trust.rating":"Орташа рейтинг","trust.support":"Клиенттерді қолдау","trust.cars":"Қолжетімді көліктер",
     "why.label":"Неге біз","why.title":"Сіздің ыңғайлылығыңыз үшін жасалған","why.desc":"Заманауи жалдаушыға қажеттінің бәрі — әділ бағадан бастап жылдам жеткізуге дейін.",
     "why.card1.title":"Ерекшелік","why.card1.desc":"Біздің көліктермен сіз көпшіліктен ерекшеленіп, өзіңізді ерекше сезінесіз.",
@@ -2457,7 +2483,26 @@ function scrollToBooking(carName) {
   const select = document.getElementById('carSelect');
   for (let opt of select.options) { if (opt.text.includes(carName)) { opt.selected = true; break; } }
   document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+  showExpModal();
 }
+function showExpModal() {
+  if (sessionStorage.getItem('expModalShown') === '1') return;
+  document.getElementById('expModal').classList.add('active');
+  sessionStorage.setItem('expModalShown', '1');
+}
+function closeExpModal() {
+  document.getElementById('expModal').classList.remove('active');
+}
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeExpModal(); });
+// Show modal when booking section first becomes visible (scroll-triggered, e.g. nav click)
+window.addEventListener('load', function(){
+  const bookingEl = document.getElementById('booking');
+  if (!bookingEl || !('IntersectionObserver' in window)) return;
+  const io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if (en.isIntersecting) { showExpModal(); io.disconnect(); } });
+  }, { threshold: 0.25 });
+  io.observe(bookingEl);
+});
 
 function onFileSelect(input, areaId) {
   var area = document.getElementById(areaId);
