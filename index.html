@@ -815,8 +815,18 @@ body::before {
 /* REVIEWS */
 .reviews-section { background: var(--bg-primary); position: relative; }
 .reviews-section::before { content: ''; position: absolute; top: 0; left: 10%; right: 10%; height: 1px; background: linear-gradient(90deg, transparent, rgba(184,150,15,0.15), transparent); }
-.reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
-.review-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; transition: all 0.4s var(--ease); position: relative; overflow: hidden; }
+.reviews-carousel { position: relative; margin-top: 56px; }
+.reviews-grid { display: flex; gap: 24px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding: 8px 4px 16px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+.reviews-grid::-webkit-scrollbar { display: none; }
+.reviews-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; background: var(--bg-card); border: 1px solid var(--border); color: var(--text-primary); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 5; box-shadow: 0 6px 20px rgba(26,24,22,0.12); transition: all 0.25s var(--ease); }
+.reviews-arrow:hover { background: var(--accent); color: #fff; border-color: var(--accent); transform: translateY(-50%) scale(1.08); }
+.reviews-arrow svg { width: 20px; height: 20px; }
+.reviews-arrow.prev { left: -8px; }
+.reviews-arrow.next { right: -8px; }
+@media (max-width: 768px) { .reviews-arrow { display: none; } }
+.review-card { flex: 0 0 calc((100% - 48px) / 3); scroll-snap-align: start; background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; transition: all 0.4s var(--ease); position: relative; overflow: hidden; }
+@media (max-width: 1024px) { .review-card { flex: 0 0 calc((100% - 24px) / 2); } }
+@media (max-width: 768px) { .review-card { flex: 0 0 88%; } }
 .review-card::before { content: '"'; position: absolute; top: -5px; right: 20px; font-family: Georgia, serif; font-size: 6rem; color: rgba(184,150,15,0.05); line-height: 1; pointer-events: none; }
 .review-card:hover { border-color: var(--border-hover); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(26,24,22,0.06); }
 .review-stars { display: flex; gap: 3px; margin-bottom: 18px; color: var(--accent); }
@@ -1051,7 +1061,6 @@ body::before {
   .why-grid { grid-template-columns: 1fr; }
   .car-grid { grid-template-columns: 1fr; }
   .steps-grid { grid-template-columns: 1fr; }
-  .reviews-grid { grid-template-columns: 1fr; }
   .contact-grid { grid-template-columns: 1fr; }
   .catalog-header { flex-direction: column; align-items: flex-start; gap: 20px; }
   .form-row { grid-template-columns: 1fr; }
@@ -2009,10 +2018,14 @@ body.intro-playing .nav { opacity: 0 !important; pointer-events: none; }
       <div class="section-label" style="justify-content:center;" data-i18n="reviews.label">Отзывы клиентов</div>
       <div class="section-title" data-i18n="reviews.title">Что говорят наши клиенты</div>
     </div>
-    <div class="reviews-grid">
+    <div class="reviews-carousel">
+      <button class="reviews-arrow prev" type="button" aria-label="Previous" onclick="scrollReviews(-1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <button class="reviews-arrow next" type="button" aria-label="Next" onclick="scrollReviews(1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+    <div class="reviews-grid" id="reviewsTrack">
       <div class="review-card reveal" style="--i:0"><div class="review-stars"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><p class="review-text" data-i18n="reviews.r1.text">"Rented a Tank 500 for a week-long business trip. Spotless car, quick paperwork, and the price was exactly what was quoted. Will definitely use again."</p><div class="review-author"><div class="review-avatar">AK</div><div><div class="review-name" data-i18n="reviews.r1.name">Aibek K.</div><div class="review-date" data-i18n="reviews.r1.date">Март 2026</div></div></div></div>
       <div class="review-card reveal" style="--i:1"><div class="review-stars"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><p class="review-text" data-i18n="reviews.r2.text">"I was visiting from abroad and needed a car urgently. They delivered a clean Toyota Prado to my hotel within 30 minutes. Outstanding service!"</p><div class="review-author"><div class="review-avatar">SN</div><div><div class="review-name" data-i18n="reviews.r2.name">Sarah N.</div><div class="review-date" data-i18n="reviews.r2.date">Февраль 2026</div></div></div></div>
       <div class="review-card reveal" style="--i:2"><div class="review-stars"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><p class="review-text" data-i18n="reviews.r3.text">"Best rental experience in the city. The BMW was in perfect condition and they even threw in a free car wash. Highly recommend to everyone."</p><div class="review-author"><div class="review-avatar">DM</div><div><div class="review-name" data-i18n="reviews.r3.name">Damir M.</div><div class="review-date" data-i18n="reviews.r3.date">Январь 2026</div></div></div></div>
+    </div>
     </div>
   </div>
 </section>
@@ -2471,6 +2484,13 @@ filterBtns.forEach(btn => {
   });
 });
 
+function scrollReviews(dir) {
+  const track = document.getElementById('reviewsTrack');
+  if (!track) return;
+  const card = track.querySelector('.review-card');
+  const step = card ? card.offsetWidth + 24 : 360;
+  track.scrollBy({ left: dir * step, behavior: 'smooth' });
+}
 function scrollToBooking(carName) {
   const select = document.getElementById('carSelect');
   for (let opt of select.options) { if (opt.text.includes(carName)) { opt.selected = true; break; } }
