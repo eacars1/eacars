@@ -2895,10 +2895,29 @@ function toggleCarInfo(btn) {
   btn.classList.toggle('open', isOpen);
 }
 
+function carIdFromBookingSelect() {
+  var select = document.getElementById('carSelect');
+  if (!select || !select.value && select.selectedIndex <= 0) return null;
+  var val = select.value;
+  if (val === 'zeekr-nd' || val === 'zeekr-wd') return 'CAR008';
+  var text = select.options[select.selectedIndex].text || '';
+  for (var i = 0; i < CARS.length; i++) {
+    if (text.indexOf(CARS[i].name + ' —') === 0) return CARS[i].id;
+  }
+  return null;
+}
 function openCalendarForSelection() {
   window.calendarSelectionMode = true;
   window.calendarPickStart = null;
   window.calendarPickEnd = null;
+  var picked = carIdFromBookingSelect();
+  if (picked) {
+    window.selectedCar = picked;
+    window.calendarOffset = 0;
+    document.querySelectorAll('.avail-tab').forEach(function(t){
+      t.classList.toggle('active', t.dataset.carId === picked);
+    });
+  }
   document.getElementById('availability').scrollIntoView({ behavior: 'smooth' });
   setTimeout(function() { renderCalendars(window.selectedCar); }, 200);
 }
