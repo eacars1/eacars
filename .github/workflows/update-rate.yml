@@ -2,8 +2,8 @@ name: Update NBK Exchange Rate
 
 on:
   schedule:
-    # Каждый час с 4:00 до 18:00 UTC (10:00–00:00 Астана)
-    - cron: '0 4-18 * * *'
+    # Раз в сутки в 07:00 UTC (13:00 Астана) — после утренней публикации курса НБ РК
+    - cron: '0 7 * * *'
   workflow_dispatch: # Ручной запуск
 
 permissions:
