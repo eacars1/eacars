@@ -2887,10 +2887,34 @@ function selectCalendarDate(dateKey) {
       var ret = document.getElementById('bookReturn');
       if (pickup) pickup.value = window.calendarPickStart;
       if (ret) ret.value = window.calendarPickEnd;
+      // Auto-fill the car in booking form based on currently selected calendar tab
+      syncBookingCarFromAvail();
       window.calendarPickStart = null;
       window.calendarPickEnd = null;
       document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
     }, 700);
+  }
+}
+
+function syncBookingCarFromAvail() {
+  var carObj = CARS.find(function(c){ return c.id === window.selectedCar; });
+  if (!carObj) return;
+  var select = document.getElementById('carSelect');
+  if (!select) return;
+  // Special case: Zeekr 009 has two options (with/without driver) — keep current selection if user
+  // already chose one of them; otherwise default to no-driver (zeekr-nd).
+  if (carObj.id === 'CAR008') {
+    if (select.value === 'zeekr-nd' || select.value === 'zeekr-wd') return;
+    for (var i = 0; i < select.options.length; i++) {
+      if (select.options[i].value === 'zeekr-nd') { select.selectedIndex = i; break; }
+    }
+    return;
+  }
+  // Match by option text starting with "<car name> —" (em dash separator) for exact match.
+  for (var j = 0; j < select.options.length; j++) {
+    var opt = select.options[j];
+    if (!opt.text) continue;
+    if (opt.text.indexOf(carObj.name + ' —') === 0) { select.selectedIndex = j; return; }
   }
 }
 
