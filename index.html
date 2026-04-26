@@ -254,8 +254,14 @@ body::before {
 .exp-modal p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.55; margin-bottom: 24px; }
 .exp-modal-btn { background: var(--accent); color: #fff; border: none; padding: 12px 32px; border-radius: 100px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
 .exp-modal-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(184,150,15,0.4); }
-.outcity-icon { background: rgba(20,128,80,0.15) !important; color: #34d399 !important; }
-.catalog-info-row { display: flex; justify-content: flex-start; margin: 18px 0 28px; }
+.info-modal { background: linear-gradient(180deg, #2a2622 0%, #221e1a 100%) !important; border: 1px solid rgba(74,222,128,0.35) !important; }
+.info-modal h3 { color: #fff !important; }
+.info-modal p { color: #d8d2c4 !important; }
+.info-modal .exp-modal-btn { background: linear-gradient(135deg, #15803d 0%, #16a34a 50%, #22c55e 100%); box-shadow: 0 4px 14px rgba(22,163,74,0.35), inset 0 1px 0 rgba(255,255,255,0.15); }
+.info-modal .exp-modal-btn:hover { box-shadow: 0 8px 22px rgba(22,163,74,0.5), inset 0 1px 0 rgba(255,255,255,0.18); }
+.outcity-icon { background: rgba(34,197,94,0.18) !important; color: #4ade80 !important; border: 1px solid rgba(74,222,128,0.4) !important; }
+.catalog-right { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+.catalog-info-row { display: flex; justify-content: flex-end; }
 .btn-outcity-info { display: inline-flex; align-items: center; gap: 10px; padding: 11px 20px; background: linear-gradient(135deg, #14532d 0%, #166534 50%, #15803d 100%); color: #fff; border: 1px solid rgba(34,197,94,0.35); border-radius: 100px; font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: all 0.25s var(--ease); box-shadow: 0 4px 14px rgba(20,83,45,0.35), inset 0 1px 0 rgba(255,255,255,0.12); font-family: inherit; }
 .btn-outcity-info:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(20,83,45,0.5), inset 0 1px 0 rgba(255,255,255,0.15); border-color: rgba(34,197,94,0.55); }
 .btn-outcity-info svg { flex-shrink: 0; opacity: 0.95; }
@@ -1520,19 +1526,21 @@ body.intro-playing .nav { opacity: 0 !important; pointer-events: none; }
         <div class="section-label" data-i18n="cars.label">Наш автопарк</div>
         <div class="section-title" data-i18n="cars.title">Выберите автомобиль</div>
       </div>
-      <div class="catalog-filters">
-        <button class="filter-btn active" data-filter="all" data-i18n="cars.filterAll">Все</button>
-        <button class="filter-btn" data-filter="cabrio" data-i18n="cars.filterCabrio">Кабриолеты</button>
-        <button class="filter-btn" data-filter="sport" data-i18n="cars.filterSport">Спорткупе</button>
-        <button class="filter-btn" data-filter="electro" data-i18n="cars.filterElectro">Электрокары</button>
-        <button class="filter-btn" data-filter="suv" data-i18n="cars.filterSuv">Люкс Внедорожники</button>
+      <div class="catalog-right">
+        <div class="catalog-info-row">
+          <button class="btn-outcity-info" onclick="openOutCityModal()" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M12 2 L6 11 H9 L4 19 H11 V22 H13 V19 H20 L15 11 H18 Z"/></svg>
+            <span data-i18n="cars.outCityBtn">Информация об аренде за городом</span>
+          </button>
+        </div>
+        <div class="catalog-filters">
+          <button class="filter-btn active" data-filter="all" data-i18n="cars.filterAll">Все</button>
+          <button class="filter-btn" data-filter="cabrio" data-i18n="cars.filterCabrio">Кабриолеты</button>
+          <button class="filter-btn" data-filter="sport" data-i18n="cars.filterSport">Спорткупе</button>
+          <button class="filter-btn" data-filter="electro" data-i18n="cars.filterElectro">Электрокары</button>
+          <button class="filter-btn" data-filter="suv" data-i18n="cars.filterSuv">Люкс Внедорожники</button>
+        </div>
       </div>
-    </div>
-    <div class="catalog-info-row reveal">
-      <button class="btn-outcity-info" onclick="openOutCityModal()" type="button">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        <span data-i18n="cars.outCityBtn">Информация об аренде за городом</span>
-      </button>
     </div>
     <div class="car-grid">
       <div class="car-card reveal" data-category="cabrio" style="--i:0">
@@ -1964,10 +1972,10 @@ body.intro-playing .nav { opacity: 0 !important; pointer-events: none; }
 
 <!-- EXPERIENCE NOTICE MODAL -->
 <div class="exp-modal-overlay" id="outCityModal" onclick="if(event.target===this)closeOutCityModal()">
-  <div class="exp-modal" role="dialog" aria-modal="true">
+  <div class="exp-modal info-modal" role="dialog" aria-modal="true">
     <button class="exp-modal-close" onclick="closeOutCityModal()" aria-label="Close">&times;</button>
     <div class="exp-modal-icon outcity-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 L5 12 H8.5 L3 21 H10.5 V22.5 H13.5 V21 H21 L15.5 12 H19 Z"/></svg>
     </div>
     <h3 data-i18n="outCityModal.title">Аренда за городом</h3>
     <p data-i18n="outCityModal.text">Выезд в Боровое на сутки: дополнительная оплата в размере <strong>25 000 тенге</strong>. В случае аренды от 2-х суток и более — оплата за выезд <strong>не предусмотрена</strong>.</p>
