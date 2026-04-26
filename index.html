@@ -817,7 +817,9 @@ body::before {
 
 .file-upload { position: relative; }
 .file-upload input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; z-index: 2; }
-.file-upload-area { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: var(--bg-primary); border: 1.5px dashed rgba(184,150,15,0.3); border-radius: 10px; transition: all 0.3s; cursor: pointer; }
+.file-upload-area { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: var(--bg-primary); border: 1.5px dashed rgba(184,150,15,0.3); border-radius: 10px; transition: all 0.3s; cursor: pointer; min-height: 72px; height: 100%; box-sizing: border-box; }
+.form-row > .form-group { display: flex; flex-direction: column; }
+.form-row > .form-group > .file-upload { flex: 1; }
 .file-upload:hover .file-upload-area { border-color: var(--accent); background: rgba(184,150,15,0.04); }
 .file-upload-area.has-file { border-style: solid; border-color: #50C878; background: rgba(80,200,120,0.05); }
 .file-upload-icon { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; background: rgba(184,150,15,0.1); border-radius: 8px; color: var(--accent); flex-shrink: 0; }
@@ -831,6 +833,21 @@ body::before {
 .consent-group label { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5; cursor: pointer; }
 .consent-error { color: #EF4444; font-size: 0.78rem; margin-top: -4px; margin-bottom: 12px; display: none; }
 .btn-submit { width: 100%; padding: 16px; margin-top: 8px; }
+.price-summary { margin-top: 6px; padding: 18px 20px; background: linear-gradient(135deg, rgba(184,150,15,0.08) 0%, rgba(212,168,71,0.05) 100%); border: 1px solid rgba(212,168,71,0.25); border-radius: 12px; animation: fadeUp 0.4s var(--ease) both; }
+.price-summary-label { font-size: 0.78rem; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
+.price-summary-main { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.price-summary-orig { font-size: 1.05rem; color: var(--text-muted); text-decoration: line-through; text-decoration-thickness: 2px; text-decoration-color: rgba(239,68,68,0.7); }
+.price-summary-orig:empty { display: none; }
+.price-summary-final { font-family: var(--font-display); font-size: 1.7rem; font-weight: 700; color: var(--accent); }
+.price-summary-discount { display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; padding: 6px 12px; background: rgba(34,197,94,0.14); border: 1px solid rgba(34,197,94,0.35); border-radius: 100px; font-size: 0.82rem; font-weight: 600; color: #4ade80; }
+.price-summary-discount[hidden] { display: none !important; }
+.price-summary[hidden] { display: none !important; }
+.price-summary-fee { display: inline-flex; align-items: center; gap: 9px; margin-top: 10px; padding: 7px 16px 7px 8px; background: #2a1f17; border: 1px solid #4a3a2a; border-radius: 100px; font-size: 0.86rem; font-weight: 600; color: #faf3e3; box-shadow: 0 2px 8px rgba(0,0,0,0.25); }
+.price-summary-fee::before { content: '+'; display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; background: var(--accent); color: #1a120b; font-weight: 800; font-size: 0.95rem; line-height: 1; }
+.price-summary-fee[hidden] { display: none !important; }
+.price-outcity-free { margin-left: 8px; }
+@media (max-width: 480px) { .price-outcity-free { margin-left: 0; } }
+.price-summary-meta { margin-top: 8px; font-size: 0.83rem; color: var(--text-muted); }
 .divider-or { text-align: center; margin: 24px 0; position: relative; color: var(--text-muted); font-size: 0.85rem; }
 .divider-or::before, .divider-or::after { content: ''; position: absolute; top: 50%; width: calc(50% - 30px); height: 1px; background: var(--border); }
 .divider-or::before { left: 0; }
@@ -1179,9 +1196,8 @@ body::before {
 .avail-day.sel-start, .avail-day.sel-end {
   background: rgba(184,150,15,0.35) !important;
   color: var(--accent) !important;
-  border-color: var(--accent) !important;
-  box-shadow: 0 0 0 2px var(--accent) !important;
-  transform: scale(1.12);
+  border: 1.5px solid var(--accent) !important;
+  box-shadow: inset 0 0 0 1px var(--accent) !important;
 }
 .avail-day.sel-range {
   background: rgba(184,150,15,0.12) !important;
@@ -2058,6 +2074,17 @@ body.intro-playing .nav { opacity: 0 !important; pointer-events: none; }
               </div>
             </div>
           </div>
+          <div class="price-summary" id="priceSummary" hidden>
+            <div class="price-summary-label" data-i18n="price.total">Общая сумма</div>
+            <div class="price-summary-main">
+              <span class="price-summary-orig" id="priceOrig"></span>
+              <span class="price-summary-final" id="priceFinal">—</span>
+            </div>
+            <div class="price-summary-discount" id="priceDiscount" hidden></div>
+            <div class="price-summary-discount price-outcity-free" id="priceOutCityFree" hidden></div>
+            <div class="price-summary-fee" id="priceOutCityFee" hidden></div>
+            <div class="price-summary-meta" id="priceMeta"></div>
+          </div>
           <div class="consent-group">
             <input type="checkbox" id="consentCheck">
             <label for="consentCheck" data-i18n="booking.consent">Я согласен на обработку персональных данных для оформления аренды</label>
@@ -2184,7 +2211,7 @@ const translations = {
     "how.step4.title":"Get the Car","how.step4.desc":"Pick up at our office or request delivery — and you're all set.",
     "booking.formTitle":"Request a Car","booking.formDesc":"Fill in the form and we'll get back to you within minutes.",
     "booking.phone":"Phone Number","booking.selectCar":"Select a Car","booking.chooseCar":"Choose a car","booking.idCard":"ID Card","booking.license":"Driver's License","booking.idUpload":"Upload ID card","booking.licUpload":"Upload driver's license","booking.fileHint":"Photo or PDF","booking.consent":"I consent to the processing of my personal data for the purpose of this rental request","booking.consentError":"You must agree to continue",
-    "booking.availTip":"Before choosing dates — check which days are available","booking.availBtn":"View Availability →","booking.pickup":"Pickup Date","booking.return":"Return Date","booking.outOfCity":"Are you renting for an out-of-town trip (to Borovoe)?","booking.submit":"Send Request","booking.or":"or","booking.whatsapp":"Book via WhatsApp",
+    "booking.availTip":"Before choosing dates — check which days are available","booking.availBtn":"View Availability →","booking.pickup":"Pickup Date","booking.return":"Return Date","booking.outOfCity":"Are you renting for an out-of-town trip (to Borovoe)?","booking.submit":"Send Request","booking.or":"or","booking.whatsapp":"Book via WhatsApp","price.total":"Total amount","price.perDay":" / day","price.daysWord":" days","price.discount3":"3+ days discount","price.discount10":"10+ days discount","price.metaFlat":"Rate: {f} × {d} sessions of 10h","price.outCityFree":"Free out-of-town trip (2+ days)","price.outCityFee":"Out-of-town surcharge",
     "booking.quickLabel":"Quick Booking","booking.infoTitle":"Get Your Car in Minutes","booking.infoDesc":"We respond to every request within 5 minutes during operating hours. No lengthy contracts — just a quick confirmation and you're ready to drive.",
     "booking.perk1":"No deposit required for most cars","booking.perk2":"Free delivery within the city","booking.perk3":"Flexible rental periods (1 day to 1 year)","booking.perk4":"Full insurance included","booking.perk5":"24/7 roadside assistance",
     "reviews.label":"Testimonials","reviews.title":"What Our Clients Say",
@@ -2237,7 +2264,7 @@ const translations = {
     "how.step4.title":"Получите авто","how.step4.desc":"Заберите в офисе или закажите доставку — и вы готовы к поездке.",
     "booking.formTitle":"Заказать автомобиль","booking.formDesc":"Заполните форму, и мы свяжемся с вами в течение нескольких минут.",
     "booking.phone":"Номер телефона","booking.selectCar":"Выберите авто","booking.chooseCar":"Выберите автомобиль","booking.idCard":"Удостоверение личности","booking.license":"Водительские права","booking.idUpload":"Загрузите удостоверение","booking.licUpload":"Загрузите водительские права","booking.fileHint":"Фото или PDF","booking.consent":"Я согласен(-на) на обработку моих персональных данных в целях данной заявки на аренду","booking.consentError":"Необходимо дать согласие",
-    "booking.availTip":"Перед выбором дат — проверьте наличие свободных дней","booking.availBtn":"Проверить наличие →","booking.pickup":"Дата получения","booking.return":"Дата возврата","booking.outOfCity":"Вы арендуете для поездки за город (Выезд в Боровое)?","booking.submit":"Отправить заявку","booking.or":"или","booking.whatsapp":"Забронировать в WhatsApp",
+    "booking.availTip":"Перед выбором дат — проверьте наличие свободных дней","booking.availBtn":"Проверить наличие →","booking.pickup":"Дата получения","booking.return":"Дата возврата","booking.outOfCity":"Вы арендуете для поездки за город (Выезд в Боровое)?","booking.submit":"Отправить заявку","booking.or":"или","booking.whatsapp":"Забронировать в WhatsApp","price.total":"Общая сумма","price.perDay":" / сут","price.daysWord":" дн.","price.discount3":"Скидка за аренду от 3 дней","price.discount10":"Скидка за аренду от 10 дней","price.metaFlat":"Тариф: {f} × {d} сессий по 10ч","price.outCityFree":"Бесплатный выезд за город (от 2 суток)","price.outCityFee":"Доплата за выезд за город",
     "booking.quickLabel":"Быстрое бронирование","booking.infoTitle":"Получите авто за минуты","booking.infoDesc":"Мы отвечаем на каждый запрос в течение 5 минут в рабочее время. Без длинных договоров — просто быстрое подтверждение, и вы готовы к поездке.",
     "booking.perk1":"Без залога для большинства авто","booking.perk2":"Бесплатная доставка по городу","booking.perk3":"Гибкие сроки аренды (от 1 дня до 1 года)","booking.perk4":"Полная страховка включена","booking.perk5":"Круглосуточная помощь на дороге",
     "reviews.label":"Отзывы","reviews.title":"Что говорят наши клиенты",
@@ -2290,7 +2317,7 @@ const translations = {
     "how.step4.title":"Көлікті алыңыз","how.step4.desc":"Кеңседен алыңыз немесе жеткізуге тапсырыс беріңіз — бәрі дайын.",
     "booking.formTitle":"Көлікке тапсырыс беру","booking.formDesc":"Форманы толтырыңыз, біз сізге бірнеше минут ішінде жауап береміз.",
     "booking.phone":"Телефон нөмірі","booking.selectCar":"Көлікті таңдаңыз","booking.chooseCar":"Көлікті таңдаңыз","booking.idCard":"Жеке куәлік","booking.license":"Жүргізуші куәлігі","booking.idUpload":"Жеке куәлікті жүктеңіз","booking.licUpload":"Жүргізуші куәлігін жүктеңіз","booking.fileHint":"Фото немесе PDF","booking.consent":"Мен осы жалдау өтінімі мақсатында жеке деректерімді өңдеуге келісемін","booking.consentError":"Келісім беру қажет",
-    "booking.availTip":"Күн таңдамас бұрын — бос күндерді тексеріңіз","booking.availBtn":"Қолжетімділікті көру →","booking.pickup":"Алу күні","booking.return":"Қайтару күні","booking.outOfCity":"Қала сыртына шығу үшін жалдайсыз ба (Бурабайға сапар)?","booking.submit":"Өтініш жіберу","booking.or":"немесе","booking.whatsapp":"WhatsApp арқылы брондау",
+    "booking.availTip":"Күн таңдамас бұрын — бос күндерді тексеріңіз","booking.availBtn":"Қолжетімділікті көру →","booking.pickup":"Алу күні","booking.return":"Қайтару күні","booking.outOfCity":"Қала сыртына шығу үшін жалдайсыз ба (Бурабайға сапар)?","booking.submit":"Өтініш жіберу","booking.or":"немесе","booking.whatsapp":"WhatsApp арқылы брондау","price.total":"Жалпы сома","price.perDay":" / тәул","price.daysWord":" күн","price.discount3":"3 күннен бастап жеңілдік","price.discount10":"10 күннен бастап жеңілдік","price.metaFlat":"Тариф: {f} × {d} сессия (10 сағ)","price.outCityFree":"Қала сыртына тегін шығу (2 күннен бастап)","price.outCityFee":"Қала сыртына шығу үшін қосымша төлем",
     "booking.quickLabel":"Жылдам брондау","booking.infoTitle":"Көлікті минуттарда алыңыз","booking.infoDesc":"Біз жұмыс уақытында әр өтінішке 5 минут ішінде жауап береміз. Ұзақ келісімшарттар жоқ — тек жылдам растау, және сіз жолға дайынсыз.",
     "booking.perk1":"Көптеген көліктер үшін кепілдік салым қажет емес","booking.perk2":"Қала бойынша тегін жеткізу","booking.perk3":"Икемді жалдау мерзімдері (1 күннен 1 жылға дейін)","booking.perk4":"Толық сақтандыру қосылған","booking.perk5":"24/7 жол бойындағы көмек",
     "reviews.label":"Пікірлер","reviews.title":"Клиенттеріміз не айтады",
@@ -2494,7 +2521,10 @@ function setLanguage(lang) {
   currentLang = lang;
   const dict = translations[lang];
   if (!dict) return;
-  document.documentElement.lang = lang === 'kz' ? 'kk' : lang;
+  const htmlLang = lang === 'kz' ? 'kk' : lang;
+  document.documentElement.lang = htmlLang;
+  // Native date pickers follow the input's lang attribute in Chromium-based browsers
+  document.querySelectorAll('input[type="date"]').forEach(function(inp){ inp.setAttribute('lang', htmlLang); });
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
     if (dict[key] !== undefined) el.innerHTML = dict[key];
@@ -2512,6 +2542,8 @@ function setLanguage(lang) {
     const carId = window.selectedCar || (window.CARS && window.CARS[0] && window.CARS[0].id);
     if (carId) { try { renderCalendars(carId); } catch(e) {} }
   }
+  // Re-render price summary so its labels and currency follow the active language
+  if (typeof updatePriceSummary === 'function') { try { updatePriceSummary(); } catch(e) {} }
 }
 
 document.querySelectorAll('.lang-btn').forEach(btn => {
@@ -2572,6 +2604,9 @@ function showExpModal() {
   sessionStorage.setItem('expModalShown', '1');
 }
 function openOutCityModal() { document.getElementById('outCityModal').classList.add('active'); }
+document.addEventListener('change', function(e){
+  if (e.target && e.target.id === 'bookOutOfCity' && e.target.checked) openOutCityModal();
+});
 function closeOutCityModal() { document.getElementById('outCityModal').classList.remove('active'); }
 function closeExpModal() {
   document.getElementById('expModal').classList.remove('active');
@@ -2889,12 +2924,118 @@ function selectCalendarDate(dateKey) {
       if (ret) ret.value = window.calendarPickEnd;
       // Auto-fill the car in booking form based on currently selected calendar tab
       syncBookingCarFromAvail();
+      if (typeof updatePriceSummary === 'function') updatePriceSummary();
       window.calendarPickStart = null;
       window.calendarPickEnd = null;
       document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
     }, 700);
   }
 }
+
+// Price table for booking summary. Per-day rates by tier; Zeekr is per 10h flat.
+const CAR_PRICE_TABLE = {
+  'CAR001': { base: 60000, day3: 55000, day10: 50000 },
+  'CAR002': { base: 60000, day3: 55000, day10: 50000 },
+  'CAR003': { base: 60000, day3: 55000, day10: 50000 },
+  'CAR004': { base: 60000, day3: 55000, day10: 50000 },
+  'CAR005': { base: 60000, day3: 55000, day10: 50000 },
+  'CAR006': { base: 70000, day3: 65000, day10: 60000 },
+  'CAR007': { base: 70000, day3: 65000, day10: 60000 },
+  'zeekr-nd': { flat: 80000, label: '/ 10ч' },
+  'zeekr-wd': { flat: 110000, label: '/ 10ч' }
+};
+function fmtMoney(n) {
+  if (currentLang === 'en' && nbkRate) {
+    return '$' + Math.round(n / nbkRate).toLocaleString('en-US');
+  }
+  return n.toLocaleString('ru-RU').replace(/,/g, ' ') + ' ₸';
+}
+function fmtTenge(n) { return fmtMoney(n); }
+function getSelectedBookingCarKey() {
+  var select = document.getElementById('carSelect');
+  if (!select) return null;
+  if (select.value === 'zeekr-nd' || select.value === 'zeekr-wd') return select.value;
+  var txt = select.options[select.selectedIndex] ? select.options[select.selectedIndex].text : '';
+  for (var i = 0; i < CARS.length; i++) {
+    if (txt.indexOf(CARS[i].name + ' —') === 0 && CARS[i].id !== 'CAR008') return CARS[i].id;
+  }
+  return null;
+}
+function updatePriceSummary() {
+  var box = document.getElementById('priceSummary');
+  var origEl = document.getElementById('priceOrig');
+  var finalEl = document.getElementById('priceFinal');
+  var discEl = document.getElementById('priceDiscount');
+  var freeEl = document.getElementById('priceOutCityFree');
+  var feeEl = document.getElementById('priceOutCityFee');
+  var metaEl = document.getElementById('priceMeta');
+  if (!box) return;
+  if (freeEl) freeEl.hidden = true;
+  if (feeEl) feeEl.hidden = true;
+  var pickup = document.getElementById('bookPickup').value;
+  var ret = document.getElementById('bookReturn').value;
+  var key = getSelectedBookingCarKey();
+  if (!key || !pickup || !ret) { box.hidden = true; return; }
+  var d1 = new Date(pickup), d2 = new Date(ret);
+  var days = Math.round((d2 - d1) / 86400000) + 1;
+  if (!isFinite(days) || days < 1) { box.hidden = true; return; }
+  var p = CAR_PRICE_TABLE[key];
+  if (!p) { box.hidden = true; return; }
+  var dict = translations[currentLang] || {};
+  // Zeekr — flat per session, no day-based discount
+  if (p.flat) {
+    var totalZ = p.flat * days;
+    var outCityCkZ = document.getElementById('bookOutOfCity');
+    if (outCityCkZ && outCityCkZ.checked) {
+      if (days >= 2) {
+        if (freeEl) { freeEl.textContent = (dict['price.outCityFree'] || 'Бесплатный выезд за город (от 2 суток)'); freeEl.hidden = false; }
+      } else {
+        totalZ += 25000;
+        if (feeEl) { feeEl.textContent = (dict['price.outCityFee'] || 'Доплата за выезд за город') + ': +' + fmtTenge(25000); feeEl.hidden = false; }
+      }
+    }
+    origEl.textContent = '';
+    finalEl.textContent = fmtTenge(totalZ);
+    discEl.hidden = true;
+    metaEl.textContent = (dict['price.metaFlat'] || 'Тариф: {f} × {d} сессий по 10ч')
+      .replace('{f}', fmtTenge(p.flat)).replace('{d}', days);
+    box.hidden = false;
+    return;
+  }
+  var origTotal = p.base * days;
+  var rate = p.base, tier = null;
+  if (days >= 10) { rate = p.day10; tier = 'day10'; }
+  else if (days >= 3) { rate = p.day3; tier = 'day3'; }
+  var finalTotal = rate * days;
+  var saved = origTotal - finalTotal;
+  // Out-of-city: 25 000 ₸ surcharge for rentals of 1–2 days, free for 3+ days
+  var outCityCk = document.getElementById('bookOutOfCity');
+  if (outCityCk && outCityCk.checked) {
+    if (days >= 2) {
+      if (freeEl) { freeEl.textContent = (dict['price.outCityFree'] || 'Бесплатный выезд за город (от 2 суток)'); freeEl.hidden = false; }
+    } else {
+      finalTotal += 25000;
+      if (feeEl) { feeEl.textContent = (dict['price.outCityFee'] || 'Доплата за выезд за город') + ': +' + fmtTenge(25000); feeEl.hidden = false; }
+    }
+  }
+  finalEl.textContent = fmtTenge(finalTotal);
+  if (tier) {
+    origEl.textContent = fmtTenge(origTotal);
+    var key3 = (dict['price.discount3'] || 'Скидка за аренду от 3 дней');
+    var key10 = (dict['price.discount10'] || 'Скидка за аренду от 10 дней');
+    discEl.textContent = (tier === 'day10' ? key10 : key3) + ': −' + fmtTenge(saved);
+    discEl.hidden = false;
+  } else {
+    origEl.textContent = '';
+    discEl.hidden = true;
+  }
+  metaEl.textContent = fmtTenge(rate) + (dict['price.perDay'] || ' / сут') + ' × ' + days + (dict['price.daysWord'] || ' дн.');
+  box.hidden = false;
+}
+['bookPickup','bookReturn','carSelect','bookOutOfCity'].forEach(function(id){
+  var el = document.getElementById(id);
+  if (el) el.addEventListener('change', updatePriceSummary);
+});
 
 function syncBookingCarFromAvail() {
   var carObj = CARS.find(function(c){ return c.id === window.selectedCar; });
