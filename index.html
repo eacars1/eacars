@@ -2507,8 +2507,11 @@ function setLanguage(lang) {
     btn.classList.toggle('active', btn.dataset.lang === lang);
   });
   try { localStorage.setItem('eacars-lang', lang); } catch(e) {}
-  // Re-render calendars with new language
-  if (window.availData && window.selectedCar) renderCalendars(window.selectedCar);
+  // Re-render calendars with new language (works even if no car explicitly chosen)
+  if (typeof renderCalendars === 'function') {
+    const carId = window.selectedCar || (typeof CARS !== 'undefined' && CARS[0] && CARS[0].id);
+    if (carId) { try { renderCalendars(carId); } catch(e) {} }
+  }
 }
 
 document.querySelectorAll('.lang-btn').forEach(btn => {
