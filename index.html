@@ -2780,6 +2780,28 @@ function handleBooking(e) {
 
   var base = '/telegram';
 
+  // ---- Отправка в Google Sheets СРАЗУ (не зависит от AI) ----
+  // Имя клиента дополним позже после распознавания, если AI отработает
+  try {
+    var carKeyEarly = getSelectedBookingCarKey();
+    var pricesEarly = calcBookingPrices(carKeyEarly, pickup, returnDate, document.getElementById('bookOutOfCity').checked);
+    fetch(BOOKING_WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({
+        carId: carKeyEarly || '',
+        clientName: '', // будет пусто если AI отключён
+        phone: phone,
+        pickup: pickupFmt,
+        returnDate: returnFmt,
+        priceBase: pricesEarly.base,
+        priceDiscount: pricesEarly.discount,
+        outOfCity: pricesEarly.outOfCity,
+        priceTotal: pricesEarly.total
+      })
+    }).catch(function(e) { console.warn('Sheet webhook failed:', e); });
+  } catch (e) { console.warn('Sheet payload build failed:', e); }
+
   // Запускаем распознавание через Claude AI
   recognizeWithClaude(fileId, fileLic)
   .then(function(docData) {
@@ -2857,6 +2879,9 @@ trustItems.forEach(el => countObserver.observe(el));
 // Google Таблица: ID вашей таблицы
 const SHEET_ID = '1-kDH5MqhSH_JdI9z45_eRrTHnvifdDEAwAlWi9PWV80';
 const CSV_URL = 'https://opensheet.elk.sh/' + SHEET_ID + '/1';
+
+// Apps Script Web App для создания новых заявок в таблице
+const BOOKING_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbyHGfi1_zRmWq6EvEPC1HitVJIO33sfqVLFrVKKRefguaRD4QIFprwxgkGG-HS5fHk_lw/exec';
 
 // Список машин
 const CARS = [
@@ -2967,6 +2992,49 @@ function fmtMoney(n) {
     return '$' + Math.round(n / nbkRate).toLocaleString('en-US');
   }
   return n.toLocaleString('ru-RU').replace(/,/g, ' ') + ' ₸';
+}
+// Форматирование тенге без зависимости от языка (для записи в таблицу)
+function fmtTengeRu(n) { return Number(n).toLocaleString('ru-RU').replace(/,/g, ' ') + ' ₸'; }
+
+// Расчёт всех сумм для заявки. Возвращает объект с готовыми текстовыми значениями для столбцов H/I/J/K
+function calcBookingPrices(carKey, pickupISO, returnISO, outOfCity) {
+  var price = CAR_PRICE_TABLE[carKey];
+  if (!price || !pickupISO || !returnISO) {
+    return { base: '', discount: '', outOfCity: 'N/A', total: '' };
+  }
+  var d1 = new Date(pickupISO), d2 = new Date(returnISO);
+  var days = Math.max(1, Math.round((d2 - d1) / 86400000));
+
+  var baseRate, discRate, discLabel;
+  if (price.flat) {
+    // Zeekr: фиксированная ставка за 10ч, считаем как days × flat
+    baseRate = price.flat; discRate = price.flat; discLabel = '';
+  } else {
+    baseRate = price.base;
+    if (days >= 10)      { discRate = price.day10; discLabel = 'скидка от 10 дней'; }
+    else if (days >= 3)  { discRate = price.day3;  discLabel = 'скидка от 3 дней';  }
+    else                 { discRate = price.base;  discLabel = ''; }
+  }
+  var baseTotal = baseRate * days;
+  var discTotal = discRate * days;
+  var savings   = baseTotal - discTotal;
+
+  var discText = fmtTengeRu(discTotal) + (discLabel
+      ? ' (' + discLabel + ', сэкономлено ' + fmtTengeRu(savings) + ')'
+      : ' (без скидки)');
+
+  var outFee = 0, outText = 'N/A';
+  if (outOfCity) {
+    if (days <= 1) { outFee = 25000; outText = '25 000 ₸ (1 день)'; }
+    else           { outFee = 0;     outText = 'Бесплатно'; }
+  }
+
+  return {
+    base: fmtTengeRu(baseTotal),
+    discount: discText,
+    outOfCity: outText,
+    total: fmtTengeRu(discTotal + outFee)
+  };
 }
 function fmtTenge(n) { return fmtMoney(n); }
 function getSelectedBookingCarKey() {
