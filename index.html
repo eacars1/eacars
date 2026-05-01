@@ -2781,8 +2781,7 @@ function handleBooking(e) {
 
   var base = '/telegram';
 
-  // ---- Отправка в Google Sheets СРАЗУ (не зависит от AI) ----
-  // Файлы УДЛ и прав читаем как base64 и отправляем в Apps Script — он сохранит на Drive
+  // Хелпер для чтения файла как base64
   function fileToBase64(file) {
     return new Promise(function(resolve) {
       if (!file) { resolve(null); return; }
@@ -2792,32 +2791,6 @@ function handleBooking(e) {
       reader.readAsDataURL(file);
     });
   }
-
-  Promise.all([fileToBase64(fileId), fileToBase64(fileLic)]).then(function(b64) {
-    try {
-      var carKeyEarly = getSelectedBookingCarKey();
-      var pricesEarly = calcBookingPrices(carKeyEarly, pickup, returnDate, document.getElementById('bookOutOfCity').checked);
-      fetch(BOOKING_WEBHOOK_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify({
-          carId: carKeyEarly || '',
-          clientName: '',
-          phone: phone,
-          pickup: pickupFmt,
-          returnDate: returnFmt,
-          priceBase: pricesEarly.base,
-          priceDiscount: pricesEarly.discount,
-          outOfCity: pricesEarly.outOfCity,
-          priceTotal: pricesEarly.total,
-          idCardBase64: b64[0] || '',
-          idCardName: fileId ? fileId.name : '',
-          licenseBase64: b64[1] || '',
-          licenseName: fileLic ? fileLic.name : ''
-        })
-      }).catch(function(e) { console.warn('Sheet webhook failed:', e); });
-    } catch (e) { console.warn('Sheet payload build failed:', e); }
-  });
 
   // Запускаем распознавание через Claude AI
   recognizeWithClaude(fileId, fileLic)
@@ -2841,23 +2814,38 @@ function handleBooking(e) {
 
     btn.textContent = '...';
 
-    return fetch(base + '/sendMessage', {
+    // Параллельно: текст в Telegram + полная заявка с файлами в Google Sheets/Drive
+    var telegramPromise = fetch(base + '/sendMessage', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ text: text })
-    })
-    .then(function() {
-      var fd1 = new FormData();
-      fd1.append('document', fileId);
-      fd1.append('caption', 'Удостоверение личности — ' + phone);
-      return fetch(base + '/sendDocument', { method: 'POST', body: fd1 });
-    })
-    .then(function() {
-      var fd2 = new FormData();
-      fd2.append('document', fileLic);
-      fd2.append('caption', 'Водительские права — ' + phone);
-      return fetch(base + '/sendDocument', { method: 'POST', body: fd2 });
     });
+
+    var sheetsPromise = Promise.all([fileToBase64(fileId), fileToBase64(fileLic)]).then(function(b64) {
+      var carKey = getSelectedBookingCarKey();
+      var prices = calcBookingPrices(carKey, pickup, returnDate, document.getElementById('bookOutOfCity').checked);
+      return fetch(BOOKING_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({
+          carId: carKey || '',
+          clientName: docData.fullName || '',
+          phone: phone,
+          pickup: pickupFmt,
+          returnDate: returnFmt,
+          priceBase: prices.base,
+          priceDiscount: prices.discount,
+          outOfCity: prices.outOfCity,
+          priceTotal: prices.total,
+          idCardBase64: b64[0] || '',
+          idCardName: fileId ? fileId.name : '',
+          licenseBase64: b64[1] || '',
+          licenseName: fileLic ? fileLic.name : ''
+        })
+      });
+    }).catch(function(e) { console.warn('Sheets webhook failed:', e); });
+
+    return Promise.all([telegramPromise, sheetsPromise]);
   })
   .then(function() {
     var successTexts = { en: 'Request sent, we will contact you soon', ru: 'Заявка отправлена, ждите когда с вами свяжутся', kz: 'Otinish zhiberildi, sizben baylanysady' };
