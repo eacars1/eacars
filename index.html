@@ -3068,7 +3068,8 @@ function updatePriceSummary() {
   var key = getSelectedBookingCarKey();
   if (!key || !pickup || !ret) { box.hidden = true; return; }
   var d1 = new Date(pickup), d2 = new Date(ret);
-  var days = Math.round((d2 - d1) / 86400000) + 1;
+  // Правило 14:00 → 14:00: 2 мая → 3 мая = ровно 1 сутки
+  var days = Math.round((d2 - d1) / 86400000);
   if (!isFinite(days) || days < 1) { box.hidden = true; return; }
   var p = CAR_PRICE_TABLE[key];
   if (!p) { box.hidden = true; return; }
