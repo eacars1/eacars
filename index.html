@@ -2782,26 +2782,42 @@ function handleBooking(e) {
   var base = '/telegram';
 
   // ---- Отправка в Google Sheets СРАЗУ (не зависит от AI) ----
-  // Имя клиента дополним позже после распознавания, если AI отработает
-  try {
-    var carKeyEarly = getSelectedBookingCarKey();
-    var pricesEarly = calcBookingPrices(carKeyEarly, pickup, returnDate, document.getElementById('bookOutOfCity').checked);
-    fetch(BOOKING_WEBHOOK_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify({
-        carId: carKeyEarly || '',
-        clientName: '', // будет пусто если AI отключён
-        phone: phone,
-        pickup: pickupFmt,
-        returnDate: returnFmt,
-        priceBase: pricesEarly.base,
-        priceDiscount: pricesEarly.discount,
-        outOfCity: pricesEarly.outOfCity,
-        priceTotal: pricesEarly.total
-      })
-    }).catch(function(e) { console.warn('Sheet webhook failed:', e); });
-  } catch (e) { console.warn('Sheet payload build failed:', e); }
+  // Файлы УДЛ и прав читаем как base64 и отправляем в Apps Script — он сохранит на Drive
+  function fileToBase64(file) {
+    return new Promise(function(resolve) {
+      if (!file) { resolve(null); return; }
+      var reader = new FileReader();
+      reader.onload = function() { resolve(reader.result); };
+      reader.onerror = function() { resolve(null); };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  Promise.all([fileToBase64(fileId), fileToBase64(fileLic)]).then(function(b64) {
+    try {
+      var carKeyEarly = getSelectedBookingCarKey();
+      var pricesEarly = calcBookingPrices(carKeyEarly, pickup, returnDate, document.getElementById('bookOutOfCity').checked);
+      fetch(BOOKING_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({
+          carId: carKeyEarly || '',
+          clientName: '',
+          phone: phone,
+          pickup: pickupFmt,
+          returnDate: returnFmt,
+          priceBase: pricesEarly.base,
+          priceDiscount: pricesEarly.discount,
+          outOfCity: pricesEarly.outOfCity,
+          priceTotal: pricesEarly.total,
+          idCardBase64: b64[0] || '',
+          idCardName: fileId ? fileId.name : '',
+          licenseBase64: b64[1] || '',
+          licenseName: fileLic ? fileLic.name : ''
+        })
+      }).catch(function(e) { console.warn('Sheet webhook failed:', e); });
+    } catch (e) { console.warn('Sheet payload build failed:', e); }
+  });
 
   // Запускаем распознавание через Claude AI
   recognizeWithClaude(fileId, fileLic)
