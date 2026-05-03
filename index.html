@@ -798,6 +798,7 @@ body::before {
 .form-group { margin-bottom: 22px; }
 .form-group label { display: block; font-size: 0.85rem; font-weight: 500; color: var(--text-secondary); margin-bottom: 8px; }
 .form-group input, .form-group select { width: 100%; padding: 14px 18px; background: var(--bg-primary); border: 1px solid var(--border); border-radius: 10px; color: var(--text-primary); font-family: var(--font-body); font-size: 0.92rem; transition: border 0.3s; outline: none; }
+.form-group select { -webkit-appearance: none; -moz-appearance: none; appearance: none; padding-right: 48px; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='1,1 6,7 11,1'/></svg>"); background-repeat: no-repeat; background-position: right 20px center; background-size: 12px 8px; }
 .form-group input[type="date"] { cursor: pointer; position: relative; text-align: left; -webkit-appearance: none; appearance: none; min-height: 50px; font-size: 16px; line-height: 1.2; display: block; }
 .form-group input[type="date"]::-webkit-date-and-time-value { text-align: left; }
 .form-group input[type="date"]::-webkit-calendar-picker-indicator { position: absolute; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
@@ -847,6 +848,44 @@ body::before {
 .price-summary-fee[hidden] { display: none !important; }
 .price-outcity-free { margin-left: 0; }
 .price-summary-meta { margin-top: 8px; font-size: 0.83rem; color: var(--text-muted); }
+
+/* ===== Подсказка как уменьшить цену ===== */
+.discount-tip { margin-top: 12px; }
+.discount-tip[hidden] { display: none !important; }
+.discount-tip-badge { display: flex; align-items: center; gap: 10px; width: 100%; padding: 12px 18px; background: linear-gradient(135deg, #f7c860 0%, #e0a93a 50%, #c89020 100%); color: #1a120b; border: none; border-radius: 12px; font-family: var(--font-body); font-size: 0.92rem; font-weight: 700; cursor: pointer; box-shadow: 0 4px 14px rgba(216,162,40,0.35); animation: discountPulse 2s ease-in-out infinite; transition: transform 0.2s, box-shadow 0.2s; }
+.discount-tip-badge:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(216,162,40,0.5); animation: none; }
+.discount-tip-badge:active { transform: translateY(0); }
+.discount-tip-spark { font-size: 1.2rem; animation: discountSpark 1.4s ease-in-out infinite; }
+.discount-tip-arrow { margin-left: auto; font-size: 1.1rem; transition: transform 0.3s; }
+.discount-tip.expanded .discount-tip-arrow { transform: rotate(90deg); }
+@keyframes discountPulse {
+  0%, 100% { box-shadow: 0 4px 14px rgba(216,162,40,0.35); }
+  50%      { box-shadow: 0 4px 22px rgba(247,200,96,0.7), 0 0 0 4px rgba(247,200,96,0.15); }
+}
+@keyframes discountSpark {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50%      { transform: scale(1.2) rotate(15deg); }
+}
+
+/* Раскрывающаяся панель */
+.discount-tip-panel { position: relative; margin-top: 10px; padding: 18px 20px 16px; background: linear-gradient(135deg, #fffbf0 0%, #fff5dd 100%); border: 1px solid rgba(216,162,40,0.45); border-radius: 12px; color: #2a1f0a; animation: discountSlideDown 0.35s cubic-bezier(0.4, 0, 0.2, 1) both; }
+.discount-tip-panel[hidden] { display: none !important; }
+.discount-tip-close { position: absolute; top: 8px; right: 10px; width: 26px; height: 26px; border: none; background: rgba(0,0,0,0.06); color: #2a1f0a; border-radius: 50%; font-size: 1.1rem; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+.discount-tip-close:hover { background: rgba(0,0,0,0.15); }
+.discount-tip-title { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; margin: 0 0 12px; color: #6b4a0c; padding-right: 24px; }
+.discount-tip-tiers { display: flex; flex-direction: column; gap: 8px; }
+.discount-tip-tier { display: flex; align-items: center; gap: 12px; padding: 10px 14px; background: rgba(255,255,255,0.6); border: 1px solid rgba(216,162,40,0.2); border-radius: 10px; font-size: 0.9rem; transition: all 0.2s; }
+.discount-tip-tier.active { background: linear-gradient(135deg, #fff8e0 0%, #ffe9a8 100%); border-color: #d8a228; box-shadow: 0 2px 8px rgba(216,162,40,0.25); }
+.discount-tip-tier-label { flex: 1; font-weight: 600; }
+.discount-tip-tier-price { font-family: var(--font-display); font-weight: 700; color: #b8800a; }
+.discount-tip-tier.active .discount-tip-tier-price { color: #6b4a0c; }
+.discount-tip-tier-badge { display: inline-block; padding: 2px 8px; background: #d8a228; color: white; font-size: 0.7rem; font-weight: 700; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.5px; margin-left: 4px; }
+.discount-tip-cta { margin-top: 12px; padding: 10px 14px; background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.35); border-radius: 10px; font-size: 0.88rem; font-weight: 600; color: #15803d; }
+.discount-tip-cta strong { color: #15803d; }
+@keyframes discountSlideDown {
+  from { opacity: 0; transform: translateY(-8px); max-height: 0; }
+  to   { opacity: 1; transform: translateY(0); max-height: 600px; }
+}
 .divider-or { text-align: center; margin: 24px 0; position: relative; color: var(--text-muted); font-size: 0.85rem; }
 .divider-or::before, .divider-or::after { content: ''; position: absolute; top: 50%; width: calc(50% - 30px); height: 1px; background: var(--border); }
 .divider-or::before { left: 0; }
@@ -2085,6 +2124,17 @@ body.intro-playing .nav { opacity: 0 !important; pointer-events: none; }
             <div class="price-summary-fee" id="priceOutCityFee" hidden></div>
             <div class="price-summary-meta" id="priceMeta"></div>
           </div>
+          <div class="discount-tip" id="discountTip" hidden>
+            <button class="discount-tip-badge" type="button" onclick="toggleDiscountInfo()">
+              <span class="discount-tip-spark">💡</span>
+              <span id="discountTipBadgeText">Хотите цену ниже? Узнайте как</span>
+              <span class="discount-tip-arrow">→</span>
+            </button>
+            <div class="discount-tip-panel" id="discountTipPanel" hidden>
+              <button class="discount-tip-close" type="button" onclick="closeDiscountInfo()" aria-label="Закрыть">×</button>
+              <div id="discountTipContent"></div>
+            </div>
+          </div>
           <div class="consent-group">
             <input type="checkbox" id="consentCheck">
             <label for="consentCheck" data-i18n="booking.consent">Я согласен на обработку персональных данных для оформления аренды</label>
@@ -2692,17 +2742,19 @@ async function recognizeWithClaude(fileId, fileLic) {
       'Первое изображение — удостоверение личности (ID-карта Казахстана). Извлеки:\n' +
       '1. ИИН (12 цифр)\n' +
       '2. Фамилия Имя Отчество (полностью)\n' +
-      '3. Дата выдачи удостоверения (в формате ДД.ММ.ГГГГ)\n\n' +
+      '3. Дата выдачи удостоверения (в формате ДД.ММ.ГГГГ)\n' +
+      '4. Номер удостоверения личности (он напечатан на лицевой стороне, обычно 9 цифр)\n\n' +
       'Второе изображение — водительское удостоверение. Извлеки:\n' +
-      '4. Дата выдачи водительских прав (в формате ДД.ММ.ГГГГ)\n' +
-      '5. Действительно до (в формате ДД.ММ.ГГГГ)\n' +
-      '6. Номер ВУ (номер водительского удостоверения)\n' +
-      '7. Разрешённые категории (например: B, BC, B1 и т.д.)\n\n' +
+      '5. Дата выдачи водительских прав (в формате ДД.ММ.ГГГГ)\n' +
+      '6. Действительно до (в формате ДД.ММ.ГГГГ)\n' +
+      '7. Номер ВУ (номер водительского удостоверения)\n' +
+      '8. Разрешённые категории (например: B, BC, B1 и т.д.)\n\n' +
       'Ответь ТОЛЬКО в формате JSON без markdown и без дополнительного текста:\n' +
       '{\n' +
       '  "iin": "...",\n' +
       '  "fullName": "...",\n' +
       '  "idIssueDate": "...",\n' +
+      '  "idNumber": "...",\n' +
       '  "licIssueDate": "...",\n' +
       '  "licExpiryDate": "...",\n' +
       '  "licNumber": "...",\n' +
@@ -2741,6 +2793,7 @@ async function recognizeWithClaude(fileId, fileLic) {
       iin: 'не распознано',
       fullName: 'не распознано',
       idIssueDate: 'не распознано',
+      idNumber: 'не распознано',
       licIssueDate: 'не распознано',
       licExpiryDate: 'не распознано',
       licNumber: 'не распознано',
@@ -2796,21 +2849,41 @@ function handleBooking(e) {
   recognizeWithClaude(fileId, fileLic)
   .then(function(docData) {
 
+    var carKey = getSelectedBookingCarKey();
+    var carDisplayName;
+    if (carKey === 'zeekr-nd')      carDisplayName = 'Zeekr 009 (без водителя)';
+    else if (carKey === 'zeekr-wd') carDisplayName = 'Zeekr 009 (с водителем)';
+    else {
+      carDisplayName = '';
+      for (var ci = 0; ci < CARS.length; ci++) {
+        if (CARS[ci].id === carKey) { carDisplayName = CARS[ci].name; break; }
+      }
+      if (!carDisplayName) carDisplayName = car; // fallback
+    }
+    var prices = calcBookingPrices(carKey, pickup, returnDate, document.getElementById('bookOutOfCity').checked);
+    var outCityChecked = document.getElementById('bookOutOfCity').checked;
+
     var text = '🚗 Новая заявка с сайта EAcars\n\n';
     text += '📱 Телефон: ' + phone + '\n';
-    text += '🚘 Авто: ' + car + '\n';
-    text += '📅 Дата получения: ' + pickupFmt + '\n';
-    text += '📅 Дата возврата: ' + returnFmt + '\n';
-    text += '🛣️ Поездка за город: ' + (document.getElementById('bookOutOfCity').checked ? 'Да' : 'Нет') + '\n';
+    text += '🚘 Авто: ' + carDisplayName + '\n';
+    text += '📅 Получение: ' + pickupFmt + ' в 14:00\n';
+    text += '📅 Возврат:    ' + returnFmt + ' в 14:00\n';
+    text += '🛣️ Поездка за город: ' + (outCityChecked ? 'Да' : 'Нет') + '\n';
+    text += '\n━━━ 💰 Стоимость ━━━\n';
+    text += '💵 Без скидки: ' + (prices.base || '—') + '\n';
+    text += '💸 Со скидкой: ' + (prices.discount || '—') + '\n';
+    text += '🛣️ Выезд за город: ' + (prices.outOfCity || 'N/A') + '\n';
+    text += '✅ ИТОГО К ОПЛАТЕ: ' + (prices.total || '—') + '\n';
     text += '\n━━━ 🪪 Удостоверение личности ━━━\n';
     text += '🔢 ИИН: ' + (docData.iin || 'не распознано') + '\n';
     text += '👤 ФИО: ' + (docData.fullName || 'не распознано') + '\n';
+    text += '🆔 Номер УДЛ: ' + (docData.idNumber || 'не распознано') + '\n';
     text += '📆 Дата выдачи УДЛ: ' + (docData.idIssueDate || 'не распознано') + '\n';
     text += '\n━━━ 🚗 Водительские права ━━━\n';
-    text += '📆 Дата выдачи ВУ: ' + (docData.licIssueDate || 'не распознано') + '\n';
-    text += '📆 Действительно до: ' + (docData.licExpiryDate || 'не распознано') + '\n';
     text += '🔢 Номер ВУ: ' + (docData.licNumber || 'не распознано') + '\n';
     text += '🏷 Категории: ' + (docData.categories || 'не распознано') + '\n';
+    text += '📆 Дата выдачи ВУ: ' + (docData.licIssueDate || 'не распознано') + '\n';
+    text += '📆 Действительно до: ' + (docData.licExpiryDate || 'не распознано') + '\n';
 
     btn.textContent = '...';
 
@@ -2822,8 +2895,6 @@ function handleBooking(e) {
     });
 
     var sheetsPromise = Promise.all([fileToBase64(fileId), fileToBase64(fileLic)]).then(function(b64) {
-      var carKey = getSelectedBookingCarKey();
-      var prices = calcBookingPrices(carKey, pickup, returnDate, document.getElementById('bookOutOfCity').checked);
       return fetch(BOOKING_WEBHOOK_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
@@ -3042,6 +3113,90 @@ function calcBookingPrices(carKey, pickupISO, returnISO, outOfCity) {
   };
 }
 function fmtTenge(n) { return fmtMoney(n); }
+
+// ===== Подсказка как уменьшить цену =====
+function toggleDiscountInfo() {
+  var tip = document.getElementById('discountTip');
+  var panel = document.getElementById('discountTipPanel');
+  if (!tip || !panel) return;
+  if (panel.hidden) { panel.hidden = false; tip.classList.add('expanded'); }
+  else { panel.hidden = true; tip.classList.remove('expanded'); }
+}
+function closeDiscountInfo() {
+  var tip = document.getElementById('discountTip');
+  var panel = document.getElementById('discountTipPanel');
+  if (panel) panel.hidden = true;
+  if (tip) tip.classList.remove('expanded');
+}
+function updateDiscountTip(carKey, days) {
+  var tip = document.getElementById('discountTip');
+  var content = document.getElementById('discountTipContent');
+  var badgeText = document.getElementById('discountTipBadgeText');
+  if (!tip || !content) return;
+  if (!carKey) { tip.hidden = true; return; }
+  var p = CAR_PRICE_TABLE[carKey];
+  if (!p) { tip.hidden = true; return; }
+
+  // Получим название машины
+  var carName = '';
+  if (carKey === 'zeekr-nd') carName = 'Zeekr 009 (без водителя)';
+  else if (carKey === 'zeekr-wd') carName = 'Zeekr 009 (с водителем)';
+  else { for (var i = 0; i < CARS.length; i++) if (CARS[i].id === carKey) { carName = CARS[i].name; break; } }
+
+  var html = '';
+
+  if (p.flat) {
+    // Zeekr — фиксированный тариф, нет дневных скидок, но есть бонус для выезда
+    html += '<h4 class="discount-tip-title">⚡ ' + carName + ' — как сэкономить</h4>';
+    html += '<div class="discount-tip-tiers">';
+    html += '<div class="discount-tip-tier active"><span class="discount-tip-tier-label">📍 Фиксированный тариф (10 часов)</span><span class="discount-tip-tier-price">' + fmtTengeRu(p.flat) + '</span></div>';
+    html += '</div>';
+    html += '<div class="discount-tip-cta">🛣️ <strong>Выезд за город:</strong> бесплатно при аренде от 2 сессий! Иначе — доплата 25 000 ₸.</div>';
+  } else {
+    // Обычные машины — три тарифа
+    html += '<h4 class="discount-tip-title">💰 ' + carName + ' — экономия по дням</h4>';
+    html += '<div class="discount-tip-tiers">';
+
+    var tier1Active = days >= 1 && days <= 2;
+    var tier2Active = days >= 3 && days <= 9;
+    var tier3Active = days >= 10;
+
+    html += '<div class="discount-tip-tier' + (tier1Active ? ' active' : '') + '">';
+    html += '<span class="discount-tip-tier-label">1–2 суток' + (tier1Active ? '<span class="discount-tip-tier-badge">сейчас</span>' : '') + '</span>';
+    html += '<span class="discount-tip-tier-price">' + fmtTengeRu(p.base) + '/день</span></div>';
+
+    var save3 = (p.base - p.day3) * 3;
+    html += '<div class="discount-tip-tier' + (tier2Active ? ' active' : '') + '">';
+    html += '<span class="discount-tip-tier-label">От 3 суток' + (tier2Active ? '<span class="discount-tip-tier-badge">сейчас</span>' : '') + '</span>';
+    html += '<span class="discount-tip-tier-price">' + fmtTengeRu(p.day3) + '/день</span></div>';
+
+    var save10 = (p.base - p.day10) * 10;
+    html += '<div class="discount-tip-tier' + (tier3Active ? ' active' : '') + '">';
+    html += '<span class="discount-tip-tier-label">От 10 суток' + (tier3Active ? '<span class="discount-tip-tier-badge">сейчас</span>' : '') + '</span>';
+    html += '<span class="discount-tip-tier-price">' + fmtTengeRu(p.day10) + '/день</span></div>';
+
+    html += '</div>';
+
+    // Подсказка-CTA
+    if (days < 3) {
+      var needDays = 3 - days;
+      var savedIfExtended = (p.base - p.day3) * 3;
+      html += '<div class="discount-tip-cta">🎯 Возьмите ещё на <strong>' + needDays + ' ' + (needDays === 1 ? 'сутки' : 'суток') + '</strong> — и цена за день упадёт на <strong>' + fmtTengeRu(p.base - p.day3) + '</strong>! Экономия от <strong>' + fmtTengeRu(savedIfExtended) + '</strong>. Плюс выезд за город станет бесплатным.</div>';
+      if (badgeText) badgeText.textContent = 'Хотите скидку? Возьмите от 3 суток';
+    } else if (days < 10) {
+      var needDays2 = 10 - days;
+      var savedIfExtended2 = (p.day3 - p.day10) * 10;
+      html += '<div class="discount-tip-cta">🚀 Ещё <strong>' + needDays2 + ' ' + (needDays2 === 1 ? 'сутки' : 'суток') + '</strong> — и тариф упадёт до <strong>' + fmtTengeRu(p.day10) + '/день</strong>! Дополнительная экономия от <strong>' + fmtTengeRu(savedIfExtended2) + '</strong>.</div>';
+      if (badgeText) badgeText.textContent = 'Скидка уже работает! Можно ещё больше';
+    } else {
+      html += '<div class="discount-tip-cta">🏆 У вас максимальная скидка! Вы экономите <strong>' + fmtTengeRu((p.base - p.day10) * days) + '</strong> по сравнению с обычным тарифом.</div>';
+      if (badgeText) badgeText.textContent = 'Вы получили максимальную скидку 🎉';
+    }
+  }
+
+  content.innerHTML = html;
+  tip.hidden = false;
+}
 function getSelectedBookingCarKey() {
   var select = document.getElementById('carSelect');
   if (!select) return null;
@@ -3066,13 +3221,16 @@ function updatePriceSummary() {
   var pickup = document.getElementById('bookPickup').value;
   var ret = document.getElementById('bookReturn').value;
   var key = getSelectedBookingCarKey();
-  if (!key || !pickup || !ret) { box.hidden = true; return; }
+  var tipBox = document.getElementById('discountTip');
+  if (!key || !pickup || !ret) { box.hidden = true; if (tipBox) tipBox.hidden = true; return; }
   var d1 = new Date(pickup), d2 = new Date(ret);
   // Правило 14:00 → 14:00: 2 мая → 3 мая = ровно 1 сутки
   var days = Math.round((d2 - d1) / 86400000);
-  if (!isFinite(days) || days < 1) { box.hidden = true; return; }
+  if (!isFinite(days) || days < 1) { box.hidden = true; if (tipBox) tipBox.hidden = true; return; }
   var p = CAR_PRICE_TABLE[key];
-  if (!p) { box.hidden = true; return; }
+  if (!p) { box.hidden = true; if (tipBox) tipBox.hidden = true; return; }
+  // Обновим подсказку про скидки
+  updateDiscountTip(key, days);
   var dict = translations[currentLang] || {};
   // Zeekr — flat per session, no day-based discount
   if (p.flat) {
