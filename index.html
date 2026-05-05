@@ -2905,6 +2905,26 @@ function handleBooking(e) {
   // Запускаем распознавание через Claude AI
   recognizeWithClaude(fileId, fileLic)
   .then(function(docData) {
+    // Проверка на наличие исполнительных производств (долгов) перед отправкой заявки
+    var checkingTexts = { en: 'Checking debt registry...', ru: 'Проверка по реестру должников...', kz: 'Борыштар тізілімі тексерілуде...' };
+    btn.textContent = checkingTexts[currentLang] || checkingTexts.ru;
+
+    return fetch('/check-debt', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ iin: docData.iin || '', fullName: docData.fullName || '' })
+    })
+    .then(function(r) { return r.json().catch(function(){ return {}; }); })
+    .then(function(check) {
+      if (check && check.isDebtor) {
+        var err = new Error('DEBTOR');
+        err.isDebtor = true;
+        throw err;
+      }
+      return docData;
+    });
+  })
+  .then(function(docData) {
 
     var carKey = getSelectedBookingCarKey();
     var carDisplayName;
@@ -2990,9 +3010,14 @@ function handleBooking(e) {
   })
   .catch(function(err) {
     console.error(err);
-    btn.textContent = 'Ошибка, попробуйте ещё раз';
+    if (err && err.isDebtor) {
+      var debtorTexts = { en: 'Error — you are listed as a debtor', ru: 'Ошибка — вы должник', kz: 'Қате — сіз борышкерсіз' };
+      btn.textContent = debtorTexts[currentLang] || debtorTexts.ru;
+    } else {
+      btn.textContent = 'Ошибка, попробуйте ещё раз';
+    }
     btn.style.background = '#EF4444';
-    setTimeout(function() { btn.style.background = ''; btn.disabled = false; btn.textContent = origText; }, 3000);
+    setTimeout(function() { btn.style.background = ''; btn.disabled = false; btn.textContent = origText; }, 5000);
   });
 }
 
