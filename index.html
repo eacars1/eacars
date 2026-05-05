@@ -2902,10 +2902,14 @@ function handleBooking(e) {
     });
   }
 
+  // Контейнеры для предупреждений из проверок (мягкие сигналы, не блок)
+  var debtWarning = null;
+  var finesWarning = null;
+
   // Запускаем распознавание через Claude AI
   recognizeWithClaude(fileId, fileLic)
   .then(function(docData) {
-    // Проверка на наличие исполнительных производств (долгов) перед отправкой заявки
+    // Проверка по реестру должников
     var checkingTexts = { en: 'Checking debt registry...', ru: 'Проверка по реестру должников...', kz: 'Борыштар тізілімі тексерілуде...' };
     btn.textContent = checkingTexts[currentLang] || checkingTexts.ru;
 
@@ -2916,10 +2920,20 @@ function handleBooking(e) {
     })
     .then(function(r) { return r.json().catch(function(){ return {}; }); })
     .then(function(check) {
-      if (check && check.isDebtor) {
-        var err = new Error('DEBTOR');
-        err.isDebtor = true;
+      check = check || {};
+      if (check.hasTravelBan) {
+        var err = new Error('TRAVEL_BAN');
+        err.hasTravelBan = true;
         throw err;
+      }
+      if ((check.totalElements || 0) >= 5) {
+        var err2 = new Error('MANY_DEBTS');
+        err2.manyDebts = true;
+        err2.debtCount = check.totalElements;
+        throw err2;
+      }
+      if ((check.totalElements || 0) > 0) {
+        debtWarning = '⚠️ В реестре должников: ' + check.totalElements + ' производств (без запрета на выезд)';
       }
       return docData;
     });
@@ -2940,10 +2954,16 @@ function handleBooking(e) {
     })
     .then(function(r) { return r.json().catch(function(){ return {}; }); })
     .then(function(check) {
-      if (check && check.hasFines) {
-        var err = new Error('FINES');
-        err.hasFines = true;
+      check = check || {};
+      var unpaid = check.unpaidCount || 0;
+      if (unpaid >= 5) {
+        var err = new Error('MANY_FINES');
+        err.manyFines = true;
+        err.fineCount = unpaid;
         throw err;
+      }
+      if (unpaid > 0) {
+        finesWarning = '⚠️ Неоплаченных штрафов: ' + unpaid;
       }
       return docData;
     });
@@ -2987,6 +3007,12 @@ function handleBooking(e) {
     text += '🏷 Категории: ' + (docData.categories || 'не распознано') + '\n';
     text += '📆 Дата выдачи ВУ: ' + (docData.licIssueDate || 'не распознано') + '\n';
     text += '📆 Действительно до: ' + (docData.licExpiryDate || 'не распознано') + '\n';
+
+    if (debtWarning || finesWarning) {
+      text += '\n━━━ ⚠️ Предупреждения ━━━\n';
+      if (debtWarning)  text += debtWarning + '\n';
+      if (finesWarning) text += finesWarning + '\n';
+    }
 
     var sendingTexts = { en: 'Please wait...', ru: 'Пожалуйста, подождите...', kz: 'Күте тұрыңыз...' };
     btn.textContent = sendingTexts[currentLang] || sendingTexts.ru;
@@ -3034,12 +3060,15 @@ function handleBooking(e) {
   })
   .catch(function(err) {
     console.error(err);
-    if (err && err.isDebtor) {
-      var debtorTexts = { en: 'Error — you are listed as a debtor', ru: 'Ошибка — вы должник', kz: 'Қате — сіз борышкерсіз' };
-      btn.textContent = debtorTexts[currentLang] || debtorTexts.ru;
-    } else if (err && err.hasFines) {
-      var finesTexts = { en: 'Error — you have unpaid fines', ru: 'Ошибка — у вас есть неоплаченные штрафы', kz: 'Қате — төленбеген айыппұлдар бар' };
-      btn.textContent = finesTexts[currentLang] || finesTexts.ru;
+    if (err && err.hasTravelBan) {
+      var banTexts = { en: 'Error — travel ban from RK', ru: 'Ошибка — у вас запрет на выезд', kz: 'Қате — сізге шығу тыйым салынған' };
+      btn.textContent = banTexts[currentLang] || banTexts.ru;
+    } else if (err && err.manyDebts) {
+      var manyDebtTexts = { en: 'Error — too many debts (' + err.debtCount + ')', ru: 'Ошибка — у вас слишком много долгов (' + err.debtCount + ')', kz: 'Қате — қарыз тым көп (' + err.debtCount + ')' };
+      btn.textContent = manyDebtTexts[currentLang] || manyDebtTexts.ru;
+    } else if (err && err.manyFines) {
+      var manyFinesTexts = { en: 'Error — too many unpaid fines (' + err.fineCount + ')', ru: 'Ошибка — у вас слишком много штрафов (' + err.fineCount + ')', kz: 'Қате — айыппұл тым көп (' + err.fineCount + ')' };
+      btn.textContent = manyFinesTexts[currentLang] || manyFinesTexts.ru;
     } else {
       btn.textContent = 'Ошибка, попробуйте ещё раз';
     }

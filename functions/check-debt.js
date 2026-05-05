@@ -14,7 +14,8 @@ export async function onRequestPost(context) {
       captcha: ''
     };
 
-    const upstream = await fetch('https://aisoip.adilet.gov.kz/rest/debtor/findErd?page=0&size=10', {
+    // size=50, чтобы покрыть и проверку запрета на выезд по большинству производств
+    const upstream = await fetch('https://aisoip.adilet.gov.kz/rest/debtor/findErd?page=0&size=50', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -38,21 +39,24 @@ export async function onRequestPost(context) {
       return Response.json({ error: 'Bad upstream JSON', body: text.slice(0, 500) }, { status: 502 });
     }
 
-    const matches = (data && data.content) || [];
-    let isDebtor = false;
+    const allMatches = (data && data.content) || [];
+    let matches;
 
     if (iin) {
       const iinClean = String(iin).replace(/\D/g, '');
-      isDebtor = matches.some(m => String(m.debtorIinBin || '').replace(/\D/g, '') === iinClean);
+      matches = allMatches.filter(m => String(m.debtorIinBin || '').replace(/\D/g, '') === iinClean);
     } else {
       const target = String(fullName).trim().toUpperCase().replace(/\s+/g, ' ');
-      isDebtor = matches.some(m => String(m.debtorFullName || '').trim().toUpperCase().replace(/\s+/g, ' ') === target);
+      matches = allMatches.filter(m => String(m.debtorFullName || '').trim().toUpperCase().replace(/\s+/g, ' ') === target);
     }
 
+    const totalElements = (data.pagination && data.pagination.totalElements) || matches.length;
+    const hasTravelBan = matches.some(m => m.hasTravelBan === true);
+
     return Response.json({
-      isDebtor,
-      totalElements: (data.pagination && data.pagination.totalElements) || matches.length,
-      matchCount: matches.length
+      isInRegistry: matches.length > 0 || totalElements > 0,
+      totalElements,
+      hasTravelBan
     });
   } catch (err) {
     return Response.json({ error: err.message }, { status: 500 });
