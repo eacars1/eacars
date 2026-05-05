@@ -1953,16 +1953,20 @@ body.intro-playing .nav { opacity: 0 !important; pointer-events: none; }
       <div class="car-card reveal" data-category="suv" style="--i:7">
         <div class="car-gallery" id="gallery-prado" onclick="openLightbox(event, 'prado')">
           <div class="gallery-track" id="track-prado">
-            <img src="img/prado1.jpg" alt="Toyota Prado" loading="lazy">
-            <img src="img/prado2.jpg" alt="Toyota Prado" loading="lazy">
+            <img src="img/toyota1.jpg" alt="Toyota Prado" loading="lazy">
+            <img src="img/toyota2.jpg" alt="Toyota Prado" loading="lazy">
+            <img src="img/toyota3.jpg" alt="Toyota Prado" loading="lazy">
+            <img src="img/toyota4.jpg" alt="Toyota Prado" loading="lazy">
           </div>
           <button class="gallery-btn prev" onclick="slideGallery(event,'prado',-1)">&#8249;</button>
           <button class="gallery-btn next" onclick="slideGallery(event,'prado',1)">&#8250;</button>
           <div class="gallery-dots" id="dots-prado">
             <div class="gallery-dot active" onclick="goGallery(event,'prado',0)"></div>
             <div class="gallery-dot" onclick="goGallery(event,'prado',1)"></div>
+            <div class="gallery-dot" onclick="goGallery(event,'prado',2)"></div>
+            <div class="gallery-dot" onclick="goGallery(event,'prado',3)"></div>
           </div>
-          <div class="gallery-count" id="count-prado">1 / 2</div>
+          <div class="gallery-count" id="count-prado">1 / 4</div>
         </div>
         <div class="car-info">
           <div class="car-name">Toyota Prado</div>
@@ -2940,7 +2944,8 @@ function handleBooking(e) {
     text += '📆 Дата выдачи ВУ: ' + (docData.licIssueDate || 'не распознано') + '\n';
     text += '📆 Действительно до: ' + (docData.licExpiryDate || 'не распознано') + '\n';
 
-    btn.textContent = '...';
+    var sendingTexts = { en: 'Please wait...', ru: 'Пожалуйста, подождите...', kz: 'Күте тұрыңыз...' };
+    btn.textContent = sendingTexts[currentLang] || sendingTexts.ru;
 
     // Параллельно: текст в Telegram + полная заявка с файлами в Google Sheets/Drive
     var telegramPromise = fetch(base + '/sendMessage', {
