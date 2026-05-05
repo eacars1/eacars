@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#171411">
+<meta name="theme-color" content="#121613">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>EA Cars — Аренда авто в Астане | Прокат машин 24/7</title>
 <meta name="description" content="Аренда авто в Астане от $35/день. Прозрачные цены, подача за 15 минут. Ford Mustang, BMW, Dodge, Zeekr, Tank, Toyota Prado. Бронируйте 24/7 по WhatsApp +7 771 777 87 78.">
@@ -20,20 +20,22 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root {
-  --accent: #B8960F;
-  --accent-hover: #D4A847;
-  --accent-glow: rgba(184, 150, 15, 0.15);
-  --bg-primary: #F7F5F0;
-  --bg-secondary: #EFECE4;
-  --bg-card: #FDFCF9;
-  --bg-card-hover: #F5F2EB;
-  --bg-elevated: #E6E2D8;
-  --bg-dark: #171411;
+  --accent: #1B4332;
+  --accent-hover: #3A6B52;
+  --accent-glow: rgba(201, 169, 110, 0.18);
+  --bg-primary: #FAF8F3;
+  --bg-secondary: #F1EEE5;
+  --bg-card: #FFFEFB;
+  --bg-card-hover: #F7F4ED;
+  --bg-elevated: #E9E5DA;
+  --bg-dark: #121613;
   --text-primary: #1A1816;
-  --text-secondary: #6B6560;
+  --text-secondary: #5C5650;
   --text-muted: #A09A94;
   --border: rgba(26,24,22,0.08);
-  --border-hover: rgba(184,150,15,0.35);
+  --border-hover: rgba(201, 169, 110, 0.4);
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06);
+  --shadow-card-hover: 0 2px 6px rgba(0,0,0,0.05), 0 16px 40px rgba(0,0,0,0.09);
   --section-pad: 120px;
   --container: 1200px;
   --font-display: 'Outfit', sans-serif;
@@ -106,12 +108,12 @@ body::before {
 .stagger > * { transition-delay: calc(var(--i, 0) * 0.1s); }
 
 /* NAV */
-.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: calc(18px + env(safe-area-inset-top)) 0 18px; background: rgba(23,20,17,0.92); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid rgba(184,150,15,0.1); transition: all 0.4s var(--ease), opacity 0.6s ease; }
-.nav.scrolled { background: rgba(23,20,17,0.97); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: calc(14px + env(safe-area-inset-top)) 0 14px; border-bottom: 1px solid rgba(184,150,15,0.15); box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: calc(18px + env(safe-area-inset-top)) 0 18px; background: rgba(18,22,19,0.92); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid rgba(201,169,110,0.1); transition: all 0.4s var(--ease), opacity 0.6s ease; }
+.nav.scrolled { background: rgba(18,22,19,0.97); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: calc(14px + env(safe-area-inset-top)) 0 14px; border-bottom: 1px solid rgba(201,169,110,0.15); box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
 .nav-inner { display: flex; align-items: center; justify-content: space-between; max-width: var(--container); margin: 0 auto; padding: 0 24px; }
-.logo { font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; letter-spacing: -0.5px; color: #F5F0E8; transition: text-shadow 0.3s; }
-.logo:hover { text-shadow: 0 0 20px rgba(212,168,71,0.4); }
-.logo span { color: var(--accent); }
+.logo { font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; letter-spacing: -0.5px; color: #FFFFFF; transition: text-shadow 0.3s; }
+.logo:hover { text-shadow: 0 0 24px rgba(111,170,133,0.7); }
+.logo span { color: #6FAA85; text-shadow: 0 0 12px rgba(111,170,133,0.55), 0 0 22px rgba(111,170,133,0.3); }
 
 /* Header mini 3D coin */
 .logo { display: flex; align-items: center; gap: 0; }
@@ -144,7 +146,7 @@ body::before {
 .logo-coin-front {
   background: radial-gradient(circle, #3d2e12 0%, #6b5528 30%, #9a7e3a 50%, #b8994a 70%, #c8a850 100%);
   transform: translateZ(6px);
-  box-shadow: 0 0 8px rgba(212,168,71,0.2);
+  box-shadow: 0 0 8px rgba(217,189,135,0.2);
 }
 .logo-coin-front img {
   width: 100%;
@@ -194,8 +196,8 @@ body::before {
 .nav-links a:not(.nav-cta)::after { content: ''; position: absolute; bottom: -4px; left: 0; right: 0; height: 1.5px; background: var(--accent); transform: scaleX(0); transform-origin: right; transition: transform 0.35s var(--ease); }
 .nav-links a:not(.nav-cta):hover::after { transform: scaleX(1); transform-origin: left; }
 .nav-links a:hover { color: #F5F0E8; }
-.nav-cta { background: var(--accent); color: #FDFCFA !important; padding: 10px 24px; border-radius: 8px; font-weight: 600 !important; transition: all 0.3s var(--ease) !important; box-shadow: 0 2px 10px rgba(184,150,15,0.25); }
-.nav-cta:hover { background: var(--accent-hover); transform: translateY(-1px); box-shadow: 0 4px 20px var(--accent-glow), 0 0 40px rgba(184,150,15,0.15); }
+.nav-cta { background: var(--accent); color: #FDFCFA !important; padding: 10px 24px; border-radius: 8px; font-weight: 600 !important; transition: all 0.3s var(--ease) !important; box-shadow: 0 2px 10px rgba(201,169,110,0.25); }
+.nav-cta:hover { background: var(--accent-hover); transform: translateY(-1px); box-shadow: 0 4px 20px var(--accent-glow), 0 0 40px rgba(201,169,110,0.15); }
 .nav-right { display: flex; align-items: center; gap: 14px; }
 .lang-switcher { display: flex; align-items: center; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; overflow: hidden; padding: 2px; gap: 2px; }
 .lang-btn { padding: 6px 12px; border: none; background: transparent; color: rgba(245,240,232,0.55); font-family: var(--font-body); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.5px; cursor: pointer; border-radius: 6px; transition: all 0.25s var(--ease); text-transform: uppercase; line-height: 1; }
@@ -207,7 +209,7 @@ body::before {
 /* HERO */
 .hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; padding: 140px 0 100px; }
 .hero-bg { position: absolute; inset: 0; z-index: 0; }
-.hero-bg::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 70% 40%, rgba(184,150,15,0.06), transparent 70%), radial-gradient(ellipse 60% 80% at 20% 80%, rgba(184,150,15,0.03), transparent 60%), linear-gradient(180deg, #171411 0%, rgba(23,20,17,0.92) 100%); z-index: 1; }
+.hero-bg::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 70% 40%, rgba(201,169,110,0.06), transparent 70%), radial-gradient(ellipse 60% 80% at 20% 80%, rgba(201,169,110,0.03), transparent 60%), linear-gradient(180deg, #121613 0%, rgba(18,22,19,0.92) 100%); z-index: 1; }
 .hero-bg-image { position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1600&q=80') center/cover no-repeat; opacity: 0.25; filter: saturate(0.5) brightness(0.8); }
 .hero-grid-overlay { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 80px 80px; z-index: 2; }
 
@@ -221,13 +223,13 @@ body::before {
 }
 .hero-orb-1 {
   width: 400px; height: 400px;
-  background: radial-gradient(circle, rgba(212,168,71,0.15), transparent 70%);
+  background: radial-gradient(circle, rgba(217,189,135,0.15), transparent 70%);
   top: 10%; right: 5%;
   animation: drift 20s ease-in-out infinite;
 }
 .hero-orb-2 {
   width: 300px; height: 300px;
-  background: radial-gradient(circle, rgba(212,168,71,0.1), transparent 70%);
+  background: radial-gradient(circle, rgba(217,189,135,0.1), transparent 70%);
   bottom: 15%; left: 10%;
   animation: drift 25s ease-in-out infinite reverse;
 }
@@ -238,9 +240,9 @@ body::before {
   animation: drift 18s ease-in-out infinite 3s;
 }
 .hero-content { position: relative; z-index: 3; max-width: 700px; color: #FAF9F7; }
-.hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px; background: rgba(184,150,15,0.15); border: 1px solid rgba(184,150,15,0.3); border-radius: 100px; font-size: 0.82rem; font-weight: 600; color: #D4A847; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 28px; animation: fadeUp 0.8s var(--ease) both; position: relative; overflow: hidden; }
-.hero-badge::before { content: ''; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; position: relative; flex-shrink: 0; box-shadow: 0 0 8px var(--accent), 0 0 20px rgba(184,150,15,0.3); }
-.hero-badge::after { content: ''; position: absolute; top: 0; left: -100%; width: 60%; height: 100%; background: linear-gradient(90deg, transparent, rgba(212,168,71,0.2), transparent); animation: glow-line 4s ease-in-out infinite; }
+.hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px; background: rgba(201,169,110,0.15); border: 1px solid rgba(201,169,110,0.3); border-radius: 100px; font-size: 0.82rem; font-weight: 600; color: #3A6B52; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 28px; animation: fadeUp 0.8s var(--ease) both; position: relative; overflow: hidden; }
+.hero-badge::before { content: ''; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; position: relative; flex-shrink: 0; box-shadow: 0 0 8px var(--accent), 0 0 20px rgba(201,169,110,0.3); }
+.hero-badge::after { content: ''; position: absolute; top: 0; left: -100%; width: 60%; height: 100%; background: linear-gradient(90deg, transparent, rgba(217,189,135,0.2), transparent); animation: glow-line 4s ease-in-out infinite; }
 .hero-notice { display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px; margin: 4px 0 28px; background: rgba(220,38,38,0.12); border: 1px solid rgba(239,68,68,0.45); border-radius: 12px; font-size: 0.9rem; font-weight: 500; color: #fecaca; animation: fadeUp 0.8s var(--ease) 0.5s both; box-shadow: 0 4px 14px rgba(220,38,38,0.18); }
 .hero-notice svg { width: 18px; height: 18px; flex-shrink: 0; color: #f87171; }
 .exp-modal-overlay { position: fixed; inset: 0; background: rgba(15,12,10,0.72); backdrop-filter: blur(6px); z-index: 9999; display: none; align-items: center; justify-content: center; padding: 20px; animation: fadeIn 0.25s ease; }
@@ -253,7 +255,7 @@ body::before {
 .exp-modal h3 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: #fff; margin-bottom: 12px; }
 .exp-modal p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.55; margin-bottom: 24px; }
 .exp-modal-btn { background: var(--accent); color: #fff; border: none; padding: 12px 32px; border-radius: 100px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
-.exp-modal-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(184,150,15,0.4); }
+.exp-modal-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(201,169,110,0.4); }
 .info-modal { background: linear-gradient(180deg, #2a2622 0%, #221e1a 100%) !important; border: 1px solid rgba(74,222,128,0.35) !important; }
 .info-modal h3 { color: #fff !important; }
 .info-modal p { color: #d8d2c4 !important; }
@@ -268,8 +270,8 @@ body::before {
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes modalIn { from { opacity: 0; transform: translateY(20px) scale(0.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
 .hero h1 { font-family: var(--font-display); font-size: clamp(2.8rem, 6vw, 4.5rem); font-weight: 800; line-height: 1.06; letter-spacing: -1.5px; color: #FAF9F7; margin-bottom: 24px; animation: fadeUp 0.8s var(--ease) 0.15s both; }
-.hero h1 em { font-style: normal; color: #D4A847; position: relative; }
-.hero h1 em::after { content: ''; position: absolute; bottom: 4px; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent-hover), rgba(212,168,71,0.5), var(--accent-hover)); background-size: 200% 100%; border-radius: 2px; animation: shimmer 3s linear infinite; }
+.hero h1 em { font-style: normal; color: #3A6B52; position: relative; }
+.hero h1 em::after { content: ''; position: absolute; bottom: 4px; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent-hover), rgba(217,189,135,0.5), var(--accent-hover)); background-size: 200% 100%; border-radius: 2px; animation: shimmer 3s linear infinite; }
 .hero-sub { font-size: 1.15rem; color: rgba(250,249,247,0.7); line-height: 1.7; max-width: 520px; margin-bottom: 40px; animation: fadeUp 0.8s var(--ease) 0.3s both; }
 .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; animation: fadeUp 0.8s var(--ease) 0.45s both; }
 
@@ -299,7 +301,7 @@ body::before {
 .btn { display: inline-flex; align-items: center; gap: 10px; padding: 16px 32px; border-radius: 10px; font-family: var(--font-body); font-size: 0.95rem; font-weight: 600; cursor: pointer; border: none; transition: all 0.35s var(--ease); letter-spacing: 0.2px; }
 .btn-primary { background: var(--accent); color: #FDFCFA; position: relative; overflow: hidden; }
 .btn-primary::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(26,24,22,0.08), transparent 50%); pointer-events: none; }
-.btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 8px 30px var(--accent-glow), 0 0 60px rgba(184,150,15,0.1); }
+.btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 8px 30px var(--accent-glow), 0 0 60px rgba(201,169,110,0.1); }
 .btn-secondary { background: rgba(255,255,255,0.08); color: #F4F1EC; border: 1px solid rgba(255,255,255,0.15); }
 .btn-secondary:hover { background: rgba(255,255,255,0.14); border-color: rgba(255,255,255,0.25); transform: translateY(-2px); }
 .btn svg { width: 18px; height: 18px; flex-shrink: 0; }
@@ -310,8 +312,8 @@ body::before {
 .trust-item { padding: 36px 32px; text-align: center; position: relative; transition: background 0.3s; }
 .trust-item:not(:last-child)::after { content: ''; position: absolute; right: 0; top: 20%; bottom: 20%; width: 1px; background: var(--border); }
 .trust-item:hover { background: var(--bg-card-hover); }
-.trust-icon { width: 44px; height: 44px; margin: 0 auto 14px; display: flex; align-items: center; justify-content: center; background: rgba(184,150,15,0.1); border-radius: 12px; color: var(--accent); position: relative; }
-.trust-icon::after { content: ''; position: absolute; inset: -3px; border-radius: 14px; background: linear-gradient(135deg, rgba(184,150,15,0.25), transparent 50%); z-index: -1; }
+.trust-icon { width: 44px; height: 44px; margin: 0 auto 14px; display: flex; align-items: center; justify-content: center; background: rgba(201,169,110,0.1); border-radius: 12px; color: var(--accent); position: relative; }
+.trust-icon::after { content: ''; position: absolute; inset: -3px; border-radius: 14px; background: linear-gradient(135deg, rgba(201,169,110,0.25), transparent 50%); z-index: -1; }
 .trust-icon svg { width: 22px; height: 22px; }
 .trust-number { font-family: var(--font-display); font-size: 1.8rem; font-weight: 700; color: var(--text-primary); letter-spacing: -0.5px; background: linear-gradient(135deg, var(--text-primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .trust-label { font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px; }
@@ -325,17 +327,17 @@ body::before {
 
 /* WHY */
 .why-section { background: var(--bg-primary); position: relative; overflow: hidden; }
-.why-section::before { content: ''; position: absolute; top: 0; left: 10%; right: 10%; height: 1px; background: linear-gradient(90deg, transparent, rgba(184,150,15,0.15), transparent); }
-.why-section::after { content: ''; position: absolute; top: -20%; right: -10%; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(184,150,15,0.06), transparent 70%); filter: blur(80px); animation: orbFloat1 18s ease-in-out infinite; pointer-events: none; }
+.why-section::before { content: ''; position: absolute; top: 0; left: 10%; right: 10%; height: 1px; background: linear-gradient(90deg, transparent, rgba(201,169,110,0.15), transparent); }
+.why-section::after { content: ''; position: absolute; top: -20%; right: -10%; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(201,169,110,0.06), transparent 70%); filter: blur(80px); animation: orbFloat1 18s ease-in-out infinite; pointer-events: none; }
 .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 56px; }
 .why-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 36px 28px; transition: all 0.4s var(--ease); position: relative; overflow: hidden; box-shadow: 0 1px 3px rgba(26,24,22,0.04); }
 .why-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--accent), transparent); opacity: 0; transition: opacity 0.4s; }
-.why-card::after { content: ''; position: absolute; top: -50%; right: -50%; width: 100%; height: 100%; background: radial-gradient(circle, rgba(184,150,15,0.03), transparent 70%); opacity: 0; transition: opacity 0.5s; pointer-events: none; }
+.why-card::after { content: ''; position: absolute; top: -50%; right: -50%; width: 100%; height: 100%; background: radial-gradient(circle, rgba(201,169,110,0.03), transparent 70%); opacity: 0; transition: opacity 0.5s; pointer-events: none; }
 .why-card:hover { border-color: var(--border-hover); transform: translateY(-4px); background: var(--bg-card-hover); box-shadow: 0 12px 30px rgba(26,24,22,0.1); }
 .why-card:hover::before { opacity: 1; }
 .why-card:hover::after { opacity: 1; }
-.why-icon { width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; background: rgba(184,150,15,0.08); border: 1px solid rgba(184,150,15,0.15); border-radius: 14px; margin-bottom: 22px; color: var(--accent); transition: all 0.3s; }
-.why-card:hover .why-icon { background: rgba(184,150,15,0.15); }
+.why-icon { width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; background: rgba(201,169,110,0.08); border: 1px solid rgba(201,169,110,0.15); border-radius: 14px; margin-bottom: 22px; color: var(--accent); transition: all 0.3s; }
+.why-card:hover .why-icon { background: rgba(201,169,110,0.15); }
 .why-icon svg { width: 24px; height: 24px; }
 .why-card h3 { font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; margin-bottom: 10px; color: var(--text-primary); }
 .why-card p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65; }
@@ -347,9 +349,9 @@ body::before {
 .filter-btn:hover,
 .filter-btn.active { background: var(--accent); color: #FDFCFA; border-color: var(--accent); }
 .car-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: start; }
-.car-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: all 0.4s var(--ease); position: relative; }
+.car-card { background: var(--bg-card); border: 1px solid transparent; border-radius: 16px; overflow: hidden; transition: all 0.4s var(--ease); position: relative; box-shadow: var(--shadow-card); }
 .car-card.filter-hide { display: none !important; }
-.car-card:hover { border-color: var(--border-hover); transform: translateY(-6px); box-shadow: 0 20px 50px rgba(26,24,22,0.12); }
+.car-card:hover { border-color: var(--border-hover); transform: translateY(-6px); box-shadow: var(--shadow-card-hover); }
 .car-image { position: relative; height: 220px; background: var(--bg-primary); overflow: hidden; }
 .car-image::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 60%, rgba(28,25,23,0.4) 100%); pointer-events: none; z-index: 1; }
 .car-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--ease), filter 0.6s; }
@@ -425,7 +427,7 @@ body::before {
 .gallery-track { display: flex; height: 100%; transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); will-change: transform; }
 .gallery-track img { flex-shrink: 0; width: 100%; height: 100%; object-fit: cover; }
 .gallery-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 3; width: 34px; height: 34px; border-radius: 50%; background: rgba(0,0,0,0.45); backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,0.15); color: #fff; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; transition: opacity 0.25s, background 0.2s; }
-.gallery-btn:hover { background: rgba(184,150,15,0.75); }
+.gallery-btn:hover { background: rgba(201,169,110,0.75); }
 .gallery-btn.prev { left: 10px; }
 .gallery-btn.next { right: 10px; }
 .car-gallery:hover .gallery-btn { opacity: 1; }
@@ -440,7 +442,7 @@ body::before {
 .lightbox-track { display: flex; width: 100vw; height: 100vh; transition: transform 0.45s cubic-bezier(0.4,0,0.2,1); will-change: transform; }
 .lightbox-track img { flex-shrink: 0; width: 100vw; height: 100vh; object-fit: contain; padding: 60px 80px; box-sizing: border-box; }
 .lightbox-btn { position: fixed; top: 50%; transform: translateY(-50%); z-index: 10000; width: 50px; height: 50px; border-radius: 50%; background: rgba(255,255,255,0.1); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.2); color: #fff; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s; }
-.lightbox-btn:hover { background: rgba(184,150,15,0.6); }
+.lightbox-btn:hover { background: rgba(201,169,110,0.6); }
 .lightbox-btn.prev { left: 16px; }
 .lightbox-btn.next { right: 16px; }
 .lightbox-close { position: fixed; top: 16px; right: 16px; z-index: 10000; width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; font-size: 1.4rem; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s; }
@@ -467,18 +469,18 @@ body::before {
 .car-spec svg { width: 15px; height: 15px; color: var(--text-muted); }
 .car-footer { display: flex; align-items: center; justify-content: space-between; }
 .car-price { font-family: var(--font-display); font-weight: 700; font-size: 1.3rem; color: var(--accent); transition: text-shadow 0.3s; }
-.car-card:hover .car-price { text-shadow: 0 0 20px rgba(184,150,15,0.3); }
+.car-card:hover .car-price { text-shadow: 0 0 20px rgba(201,169,110,0.3); }
 .car-price small { font-weight: 400; font-size: 0.78rem; color: var(--text-muted); }
-.btn-rent { padding: 10px 24px; border-radius: 10px; background: rgba(184,150,15,0.1); border: 1px solid rgba(184,150,15,0.2); color: var(--accent); font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.3s var(--ease); }
-.btn-rent:hover { background: var(--accent); color: #FDFCFA; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(184,150,15,0.25); }
+.btn-rent { padding: 10px 24px; border-radius: 10px; background: var(--accent); border: 1px solid var(--accent); color: #FDFCFA; font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.3s var(--ease); box-shadow: 0 4px 16px rgba(27,67,50,0.2); }
+.btn-rent:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: #FDFCFA; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(27,67,50,0.28); }
 
 /* Car requirement badge */
 .car-requirement {
   display: flex;
   align-items: flex-start;
   gap: 8px;
-  background: rgba(184,150,15,0.07);
-  border: 1px solid rgba(184,150,15,0.2);
+  background: rgba(201,169,110,0.07);
+  border: 1px solid rgba(201,169,110,0.2);
   border-radius: 8px;
   padding: 9px 12px;
   margin-bottom: 16px;
@@ -493,8 +495,8 @@ body::before {
   width: 100%;
   margin-top: 12px;
   padding: 9px 14px;
-  background: rgba(184,150,15,0.05);
-  border: 1px solid rgba(184,150,15,0.15);
+  background: rgba(201,169,110,0.05);
+  border: 1px solid rgba(201,169,110,0.15);
   border-radius: 8px;
   color: var(--text-secondary);
   font-family: var(--font-body);
@@ -507,7 +509,7 @@ body::before {
   justify-content: space-between;
   align-items: center;
 }
-.btn-car-info:hover { background: rgba(184,150,15,0.1); color: var(--accent); border-color: rgba(184,150,15,0.3); }
+.btn-car-info:hover { background: rgba(201,169,110,0.1); color: var(--accent); border-color: rgba(201,169,110,0.3); }
 .btn-car-info .info-arrow { transition: transform 0.25s; font-style: normal; }
 .btn-car-info.open .info-arrow { transform: rotate(180deg); }
 
@@ -548,7 +550,7 @@ body::before {
 .car-price-dual .price-row { display: flex; align-items: baseline; gap: 8px; font-family: var(--font-display); line-height: 1.1; }
 .car-price-dual .price-row .amt { font-weight: 700; font-size: 1.05rem; color: var(--accent); white-space: nowrap; }
 .car-price-dual .price-row .meta { font-size: 0.66rem; color: var(--text-muted); font-weight: 400; text-transform: uppercase; letter-spacing: 0.04em; }
-.car-price-dual .price-row.with-driver .amt { color: #d4b23a; }
+.car-price-dual .price-row.with-driver .amt { color: #5C8A6F; }
 .car-price-dual .price-row.with-driver::before { content: '+ '; color: var(--text-muted); font-weight: 400; font-size: 0.85rem; margin-right: -4px; }
 .car-footer-dual { align-items: stretch; padding: 0; }
 .car-price-dual.full { width: 100%; gap: 0; }
@@ -571,8 +573,8 @@ body::before {
    AVAILABILITY CALENDAR — NEW SECTION
    ============================================ */
 .avail-section { background: var(--bg-secondary); position: relative; overflow: hidden; }
-.avail-section::before { content: ''; position: absolute; top: 0; left: 10%; right: 10%; height: 1px; background: linear-gradient(90deg, transparent, rgba(184,150,15,0.15), transparent); }
-.avail-section::after { content: ''; position: absolute; bottom: -15%; left: -5%; width: 450px; height: 450px; border-radius: 50%; background: radial-gradient(circle, rgba(184,150,15,0.05), transparent 70%); filter: blur(90px); animation: orbFloat2 22s ease-in-out infinite; pointer-events: none; }
+.avail-section::before { content: ''; position: absolute; top: 0; left: 10%; right: 10%; height: 1px; background: linear-gradient(90deg, transparent, rgba(201,169,110,0.15), transparent); }
+.avail-section::after { content: ''; position: absolute; bottom: -15%; left: -5%; width: 450px; height: 450px; border-radius: 50%; background: radial-gradient(circle, rgba(201,169,110,0.05), transparent 70%); filter: blur(90px); animation: orbFloat2 22s ease-in-out infinite; pointer-events: none; }
 
 .avail-car-tabs {
   display: flex;
@@ -617,7 +619,7 @@ body::before {
 .avail-month-card {
   box-shadow: 0 4px 20px rgba(26,24,22,0.06);
   background: var(--bg-card);
-  border: 1px solid rgba(184,150,15,0.1);
+  border: 1px solid rgba(201,169,110,0.1);
   border-radius: 16px;
   padding: 28px;
   transition: all 0.3s var(--ease);
@@ -650,7 +652,7 @@ body::before {
   font-size: 1.1rem;
 }
 .avail-nav-btn:hover {
-  background: rgba(184,150,15,0.15);
+  background: rgba(201,169,110,0.15);
   color: var(--accent);
   border-color: var(--border-hover);
 }
@@ -779,51 +781,73 @@ body::before {
 
 /* STEPS */
 .steps-section { background: var(--bg-primary); position: relative; overflow: hidden; }
-.steps-section::before { content: ''; position: absolute; top: 0; left: 10%; right: 10%; height: 1px; background: linear-gradient(90deg, transparent, rgba(184,150,15,0.15), transparent); }
-.steps-section::after { content: ''; position: absolute; top: 10%; right: -8%; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(184,150,15,0.05), transparent 65%); filter: blur(80px); animation: orbFloat3 15s ease-in-out infinite; pointer-events: none; }
+.steps-section::before { content: ''; position: absolute; top: 0; left: 10%; right: 10%; height: 1px; background: linear-gradient(90deg, transparent, rgba(201,169,110,0.15), transparent); }
+.steps-section::after { content: ''; position: absolute; top: 10%; right: -8%; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(201,169,110,0.05), transparent 65%); filter: blur(80px); animation: orbFloat3 15s ease-in-out infinite; pointer-events: none; }
 .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 56px; position: relative; }
 .steps-grid::before { content: ''; position: absolute; top: 42px; left: 12%; right: 12%; height: 1px; background: linear-gradient(90deg, transparent, var(--border), var(--border), transparent); }
 .step-card { text-align: center; position: relative; }
-.step-number { width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; background: var(--bg-card); border: 2px solid var(--accent); border-radius: 50%; font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--accent); position: relative; z-index: 2; box-shadow: 0 0 20px rgba(184,150,15,0.15), inset 0 0 15px rgba(184,150,15,0.05); }
+.step-number { width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; background: var(--bg-card); border: 2px solid var(--accent); border-radius: 50%; font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--accent); position: relative; z-index: 2; box-shadow: 0 0 20px rgba(201,169,110,0.15), inset 0 0 15px rgba(201,169,110,0.05); }
 .step-card h3 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 10px; }
 .step-card p { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; max-width: 220px; margin: 0 auto; }
 
 /* BOOKING */
 .booking-section { position: relative; overflow: hidden; background: var(--bg-secondary); }
-.booking-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 40% at 30% 50%, rgba(184,150,15,0.05), transparent), radial-gradient(ellipse 40% 60% at 80% 30%, rgba(184,150,15,0.04), transparent); pointer-events: none; }
-.booking-section::after { content: ''; position: absolute; top: -10%; left: 50%; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(184,150,15,0.04), transparent 60%); filter: blur(100px); animation: orbFloat1 20s ease-in-out infinite 3s; pointer-events: none; }
+.booking-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 40% at 30% 50%, rgba(201,169,110,0.05), transparent), radial-gradient(ellipse 40% 60% at 80% 30%, rgba(201,169,110,0.04), transparent); pointer-events: none; }
+.booking-section::after { content: ''; position: absolute; top: -10%; left: 50%; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(201,169,110,0.04), transparent 60%); filter: blur(100px); animation: orbFloat1 20s ease-in-out infinite 3s; pointer-events: none; }
 .booking-wrapper { display: flex; justify-content: center; position: relative; }
 .booking-wrapper .booking-form-card { width: 100%; max-width: 640px; }
-.booking-form-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 44px; box-shadow: 0 8px 30px rgba(26,24,22,0.08); }
+.booking-form-card { background: var(--bg-card); border: 1px solid rgba(26,24,22,0.06); border-radius: 20px; padding: 44px; box-shadow: 0 2px 6px rgba(26,24,22,0.04), 0 20px 50px rgba(26,24,22,0.10); }
 .form-group { margin-bottom: 22px; }
-.form-group label { display: block; font-size: 0.85rem; font-weight: 500; color: var(--text-secondary); margin-bottom: 8px; }
-.form-group input, .form-group select { width: 100%; padding: 14px 18px; background: var(--bg-primary); border: 1px solid var(--border); border-radius: 10px; color: var(--text-primary); font-family: var(--font-body); font-size: 0.92rem; transition: border 0.3s; outline: none; }
+.form-group label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-primary); margin-bottom: 8px; letter-spacing: 0.1px; }
+.form-group input, .form-group select { width: 100%; padding: 14px 18px; background: rgba(27,67,50,0.04); border: 1.5px solid rgba(26,24,22,0.10); border-radius: 10px; color: var(--text-primary); font-family: var(--font-body); font-size: 0.95rem; font-weight: 500; transition: border 0.25s, box-shadow 0.25s; outline: none; }
+.form-group input:hover, .form-group select:hover { border-color: rgba(26,24,22,0.18); }
 .form-group select { -webkit-appearance: none; -moz-appearance: none; appearance: none; padding-right: 48px; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='1,1 6,7 11,1'/></svg>"); background-repeat: no-repeat; background-position: right 20px center; background-size: 12px 8px; }
 .form-group input[type="date"] { cursor: pointer; position: relative; text-align: left; -webkit-appearance: none; appearance: none; min-height: 50px; font-size: 16px; line-height: 1.2; display: block; }
 .form-group input[type="date"]::-webkit-date-and-time-value { text-align: left; }
 .form-group input[type="date"]::-webkit-calendar-picker-indicator { position: absolute; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
 .form-group input::placeholder { color: var(--text-muted); }
 .form-checkbox { margin-top: 4px; }
-.form-group label.check-row, .check-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; cursor: pointer; user-select: none; padding: 12px 14px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-primary); transition: all 0.25s var(--ease); flex-direction: row-reverse; margin-bottom: 0; }
+.form-group label.check-row, .check-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; cursor: pointer; user-select: none; padding: 12px 14px; border: 1.5px solid rgba(26,24,22,0.10); border-radius: 10px; background: rgba(27,67,50,0.04); transition: border 0.25s var(--ease), box-shadow 0.25s var(--ease); flex-direction: row-reverse; margin-bottom: 0; }
+.check-row:hover { border-color: rgba(26,24,22,0.18); }
+.check-text .price-chip {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 10px;
+  padding: 3px 10px;
+  background: var(--accent);
+  color: #FFFFFF;
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  border-radius: 100px;
+  vertical-align: middle;
+  box-shadow: 0 2px 6px rgba(27,67,50,0.25);
+  white-space: nowrap;
+}
+.check-row input[type="checkbox"]:checked ~ .check-text .price-chip {
+  background: var(--accent-hover);
+  box-shadow: 0 2px 8px rgba(58,107,82,0.4), 0 0 0 2px rgba(58,107,82,0.15);
+}
 .check-row .check-text { flex: 1; }
-.check-row:hover { border-color: rgba(184,150,15,0.4); }
+.check-row:hover { border-color: rgba(201,169,110,0.4); }
 .check-row input[type="checkbox"] { position: absolute; opacity: 0; pointer-events: none; }
 .check-row .check-box { width: 22px; height: 22px; border-radius: 6px; border: 1.5px solid var(--border); background: #fff; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.2s var(--ease); position: relative; }
 .check-row .check-box::after { content: ''; width: 10px; height: 6px; border-left: 2px solid #fff; border-bottom: 2px solid #fff; transform: rotate(-45deg) translate(1px,-1px) scale(0); transition: transform 0.2s var(--ease); }
 .check-row input[type="checkbox"]:checked + .check-box { background: var(--accent); border-color: var(--accent); }
 .check-row input[type="checkbox"]:checked + .check-box::after { transform: rotate(-45deg) translate(1px,-1px) scale(1); }
 .check-row .check-text { font-size: 0.92rem; color: var(--text-primary); line-height: 1.35; }
-.form-group input:focus, .form-group select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+.form-group input:focus, .form-group select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(27,67,50,0.15); }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 
 .file-upload { position: relative; }
 .file-upload input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; z-index: 2; }
-.file-upload-area { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: var(--bg-primary); border: 1.5px dashed rgba(184,150,15,0.3); border-radius: 10px; transition: all 0.3s; cursor: pointer; min-height: 72px; height: 100%; box-sizing: border-box; }
+.file-upload-area { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: rgba(27,67,50,0.04); border: 1.5px dashed rgba(27,67,50,0.28); border-radius: 10px; transition: border 0.3s, box-shadow 0.3s; cursor: pointer; min-height: 72px; height: 100%; box-sizing: border-box; }
 .form-row > .form-group { display: flex; flex-direction: column; }
 .form-row > .form-group > .file-upload { flex: 1; }
-.file-upload:hover .file-upload-area { border-color: var(--accent); background: rgba(184,150,15,0.04); }
+.file-upload:hover .file-upload-area { border-color: var(--accent); }
 .file-upload-area.has-file { border-style: solid; border-color: #50C878; background: rgba(80,200,120,0.05); }
-.file-upload-icon { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; background: rgba(184,150,15,0.1); border-radius: 8px; color: var(--accent); flex-shrink: 0; }
+.file-upload-icon { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; background: rgba(201,169,110,0.1); border-radius: 8px; color: var(--accent); flex-shrink: 0; }
 .file-upload-icon svg { width: 18px; height: 18px; }
 .file-upload-text { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4; }
 .file-upload-text strong { display: block; color: var(--text-primary); font-weight: 600; font-size: 0.88rem; }
@@ -834,13 +858,13 @@ body::before {
 .consent-group label { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5; cursor: pointer; }
 .consent-error { color: #EF4444; font-size: 0.78rem; margin-top: -4px; margin-bottom: 12px; display: none; }
 .btn-submit { width: 100%; padding: 16px; margin-top: 8px; }
-.price-summary { margin-top: 6px; padding: 18px 20px; background: linear-gradient(135deg, rgba(184,150,15,0.08) 0%, rgba(212,168,71,0.05) 100%); border: 1px solid rgba(212,168,71,0.25); border-radius: 12px; animation: fadeUp 0.4s var(--ease) both; }
-.price-summary-label { font-size: 0.78rem; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
+.price-summary { margin-top: 6px; padding: 18px 20px; background: linear-gradient(135deg, #FBFAF6 0%, #F4F2EA 100%); border: 1px solid rgba(26,24,22,0.10); border-radius: 12px; animation: fadeUp 0.4s var(--ease) both; box-shadow: 0 2px 8px rgba(26,24,22,0.04); }
+.price-summary-label { font-size: 0.78rem; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
 .price-summary-main { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
 .price-summary-orig { font-size: 1.05rem; color: var(--text-muted); text-decoration: line-through; text-decoration-thickness: 2px; text-decoration-color: rgba(239,68,68,0.7); }
 .price-summary-orig:empty { display: none; }
-.price-summary-final { font-family: var(--font-display); font-size: 1.7rem; font-weight: 700; color: var(--accent); }
-.price-summary-discount { display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; padding: 6px 12px; background: rgba(34,197,94,0.14); border: 1px solid rgba(34,197,94,0.35); border-radius: 100px; font-size: 0.82rem; font-weight: 600; color: #4ade80; }
+.price-summary-final { font-family: var(--font-display); font-size: 1.85rem; font-weight: 800; color: var(--text-primary); letter-spacing: -0.5px; }
+.price-summary-discount { display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; padding: 7px 14px; background: var(--accent); border: 1px solid var(--accent); border-radius: 100px; font-size: 0.82rem; font-weight: 600; color: #FFFFFF; box-shadow: 0 2px 8px rgba(27,67,50,0.25); }
 .price-summary-discount[hidden] { display: none !important; }
 .price-summary[hidden] { display: none !important; }
 .price-summary-fee { display: inline-flex; align-items: center; gap: 9px; margin-top: 10px; padding: 7px 16px 7px 8px; background: #2a1f17; border: 1px solid #4a3a2a; border-radius: 100px; font-size: 0.86rem; font-weight: 600; color: #faf3e3; box-shadow: 0 2px 8px rgba(0,0,0,0.25); }
@@ -852,15 +876,15 @@ body::before {
 /* ===== Подсказка как уменьшить цену ===== */
 .discount-tip { margin-top: 12px; }
 .discount-tip[hidden] { display: none !important; }
-.discount-tip-badge { position: relative; display: flex; align-items: center; gap: 12px; width: 100%; padding: 13px 18px; background: linear-gradient(135deg, #fffaf0 0%, #fdf3e0 100%); color: #3a2810; border: 1.5px solid #d4a847; border-radius: 12px; font-family: var(--font-body); font-size: 0.93rem; font-weight: 600; cursor: pointer; transition: background 0.25s ease, transform 0.25s ease; letter-spacing: 0.1px; animation: discountBorderPulse 2.4s ease-in-out infinite; }
-.discount-tip-badge:hover { background: linear-gradient(135deg, #fff5dc 0%, #ffeac2 100%); transform: translateY(-1px); animation: none; border-color: #b8800a; box-shadow: 0 6px 18px rgba(180, 130, 30, 0.18); }
+.discount-tip-badge { position: relative; display: flex; align-items: center; gap: 12px; width: 100%; padding: 13px 18px; background: linear-gradient(135deg, #f3f8f5 0%, #e8f0eb 100%); color: #14352a; border: 1.5px solid var(--accent); border-radius: 12px; font-family: var(--font-body); font-size: 0.93rem; font-weight: 600; cursor: pointer; transition: background 0.25s ease, transform 0.25s ease; letter-spacing: 0.1px; animation: discountBorderPulse 2.4s ease-in-out infinite; box-shadow: 0 2px 8px rgba(27,67,50,0.06); }
+.discount-tip-badge:hover { background: linear-gradient(135deg, #e8f0eb 0%, #d8e6dd 100%); transform: translateY(-1px); animation: none; border-color: var(--accent-hover); box-shadow: 0 6px 18px rgba(27,67,50,0.18); }
 .discount-tip-badge:active { transform: translateY(0); }
-.discount-tip-icon { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; flex-shrink: 0; color: #b8800a; transform-origin: center center; animation: discountIconWiggle 3.2s ease-in-out infinite; }
+.discount-tip-icon { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; flex-shrink: 0; color: var(--accent); transform-origin: center center; animation: discountIconWiggle 3.2s ease-in-out infinite; }
 .discount-tip-icon svg { width: 100%; height: 100%; stroke: currentColor; }
 .discount-tip-badge:hover .discount-tip-icon { animation-duration: 1.4s; }
 @keyframes discountBorderPulse {
-  0%, 100% { border-color: #d4a847; box-shadow: 0 2px 8px rgba(180, 130, 30, 0.08), 0 0 0 0 rgba(212, 168, 71, 0); }
-  50%      { border-color: #b8800a; box-shadow: 0 2px 8px rgba(180, 130, 30, 0.15), 0 0 0 4px rgba(212, 168, 71, 0.15); }
+  0%, 100% { border-color: var(--accent); box-shadow: 0 2px 8px rgba(27,67,50,0.08), 0 0 0 0 rgba(58,107,82,0); }
+  50%      { border-color: var(--accent-hover); box-shadow: 0 2px 8px rgba(27,67,50,0.15), 0 0 0 4px rgba(27,67,50,0.12); }
 }
 @keyframes discountIconWiggle {
   0%, 70%, 100% { transform: rotate(0deg) scale(1); }
@@ -871,19 +895,19 @@ body::before {
 }
 
 /* Раскрывающаяся панель — pop-in (как зелёная плашка) */
-.discount-tip-panel { position: relative; margin-top: 10px; padding: 18px 20px 16px; background: linear-gradient(135deg, #fffbf0 0%, #fff5dd 100%); border: 1px solid rgba(216,162,40,0.45); border-radius: 12px; color: #2a1f0a; transform-origin: top center; animation: discountPop 0.35s cubic-bezier(0.34, 1.4, 0.64, 1) both; }
+.discount-tip-panel { position: relative; margin-top: 10px; padding: 18px 20px 16px; background: linear-gradient(135deg, #FAF6EC 0%, #F2EBD9 100%); border: 1px solid rgba(201,169,110,0.45); border-radius: 12px; color: #2A2418; transform-origin: top center; animation: discountPop 0.35s cubic-bezier(0.34, 1.4, 0.64, 1) both; box-shadow: 0 4px 16px rgba(201,169,110,0.12); }
 .discount-tip-panel[hidden] { display: none !important; }
-.discount-tip-close { position: absolute; top: 8px; right: 10px; width: 26px; height: 26px; border: none; background: rgba(0,0,0,0.06); color: #2a1f0a; border-radius: 50%; font-size: 1.1rem; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+.discount-tip-close { position: absolute; top: 8px; right: 10px; width: 26px; height: 26px; border: none; background: rgba(0,0,0,0.06); color: #2A2418; border-radius: 50%; font-size: 1.1rem; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
 .discount-tip-close:hover { background: rgba(0,0,0,0.15); }
-.discount-tip-title { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; margin: 0 0 12px; color: #6b4a0c; padding-right: 24px; display: flex; align-items: center; gap: 8px; }
-.discount-tip-title svg { width: 20px; height: 20px; stroke: #b8800a; flex-shrink: 0; }
+.discount-tip-title { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; margin: 0 0 12px; color: #2A2418; padding-right: 24px; display: flex; align-items: center; gap: 8px; }
+.discount-tip-title svg { width: 20px; height: 20px; stroke: #B8995E; flex-shrink: 0; }
 .discount-tip-tiers { display: flex; flex-direction: column; gap: 8px; }
-.discount-tip-tier { display: flex; align-items: center; gap: 12px; padding: 10px 14px; background: rgba(255,255,255,0.6); border: 1px solid rgba(216,162,40,0.2); border-radius: 10px; font-size: 0.9rem; transition: all 0.2s; }
-.discount-tip-tier.active { background: linear-gradient(135deg, #fff8e0 0%, #ffe9a8 100%); border-color: #d8a228; box-shadow: 0 2px 8px rgba(216,162,40,0.25); }
+.discount-tip-tier { display: flex; align-items: center; gap: 12px; padding: 10px 14px; background: #FFFFFF; border: 1px solid rgba(201,169,110,0.25); border-radius: 10px; font-size: 0.9rem; transition: all 0.2s; }
+.discount-tip-tier.active { background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%); border-color: var(--accent); box-shadow: 0 4px 14px rgba(27,67,50,0.28); color: #FFFFFF; }
 .discount-tip-tier-label { flex: 1; font-weight: 600; }
-.discount-tip-tier-price { font-family: var(--font-display); font-weight: 700; color: #b8800a; }
-.discount-tip-tier.active .discount-tip-tier-price { color: #6b4a0c; }
-.discount-tip-tier-badge { display: inline-block; padding: 2px 8px; background: #d8a228; color: white; font-size: 0.7rem; font-weight: 700; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.5px; margin-left: 4px; }
+.discount-tip-tier-price { font-family: var(--font-display); font-weight: 700; color: #B8995E; }
+.discount-tip-tier.active .discount-tip-tier-price { color: #FFFFFF; }
+.discount-tip-tier-badge { display: inline-block; padding: 2px 8px; background: #C9A96E; color: #2A2418; font-size: 0.7rem; font-weight: 700; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.5px; margin-left: 4px; }
 .discount-tip-cta { margin-top: 12px; padding: 10px 14px; background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.35); border-radius: 10px; font-size: 0.88rem; font-weight: 400; color: #15803d; display: flex; align-items: flex-start; gap: 9px; line-height: 1.45; }
 .discount-tip-cta strong { color: #15803d; font-weight: 500; }
 .discount-tip-cta svg { width: 18px; height: 18px; stroke: #15803d; flex-shrink: 0; margin-top: 1px; }
@@ -902,12 +926,12 @@ body::before {
 .booking-info p { color: var(--text-secondary); line-height: 1.7; margin-bottom: 32px; }
 .booking-perks { list-style: none; display: flex; flex-direction: column; gap: 18px; }
 .booking-perks li { display: flex; align-items: center; gap: 14px; font-size: 0.95rem; color: var(--text-secondary); }
-.perk-icon { width: 40px; height: 40px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: rgba(184,150,15,0.08); border-radius: 10px; color: var(--accent); }
+.perk-icon { width: 40px; height: 40px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: rgba(201,169,110,0.08); border-radius: 10px; color: var(--accent); }
 .perk-icon svg { width: 18px; height: 18px; }
 
 /* REVIEWS */
 .reviews-section { background: var(--bg-primary); position: relative; }
-.reviews-section::before { content: ''; position: absolute; top: 0; left: 10%; right: 10%; height: 1px; background: linear-gradient(90deg, transparent, rgba(184,150,15,0.15), transparent); }
+.reviews-section::before { content: ''; position: absolute; top: 0; left: 10%; right: 10%; height: 1px; background: linear-gradient(90deg, transparent, rgba(201,169,110,0.15), transparent); }
 .reviews-carousel { position: relative; margin-top: 56px; }
 .reviews-grid { display: flex; gap: 24px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding: 8px 4px 16px; -webkit-overflow-scrolling: touch; scrollbar-width: none; scroll-padding: 0 16px; }
 .reviews-grid::-webkit-scrollbar { display: none; }
@@ -920,7 +944,7 @@ body::before {
 .review-card { flex: 0 0 calc((100% - 48px) / 3); scroll-snap-align: start; background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; transition: all 0.4s var(--ease); position: relative; overflow: hidden; }
 @media (max-width: 1024px) { .review-card { flex: 0 0 calc((100% - 24px) / 2); } }
 @media (max-width: 768px) { .reviews-grid { gap: 14px; padding: 8px 16px 16px; scroll-padding-left: 16px; } .review-card { flex: 0 0 calc(100% - 32px); padding: 26px 22px; scroll-snap-align: center; } }
-.review-card::before { content: '"'; position: absolute; top: -5px; right: 20px; font-family: Georgia, serif; font-size: 6rem; color: rgba(184,150,15,0.05); line-height: 1; pointer-events: none; }
+.review-card::before { content: '"'; position: absolute; top: -5px; right: 20px; font-family: Georgia, serif; font-size: 6rem; color: rgba(201,169,110,0.05); line-height: 1; pointer-events: none; }
 .review-card:hover { border-color: var(--border-hover); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(26,24,22,0.06); }
 .review-stars { display: flex; gap: 3px; margin-bottom: 18px; color: var(--accent); }
 .review-stars svg { width: 16px; height: 16px; }
@@ -935,8 +959,8 @@ body::before {
 .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 48px; }
 .contact-details { display: flex; flex-direction: column; gap: 24px; }
 .contact-item { display: flex; gap: 16px; align-items: flex-start; }
-.contact-icon { width: 48px; height: 48px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: rgba(184,150,15,0.08); border: 1px solid rgba(184,150,15,0.15); border-radius: 12px; color: var(--accent); transition: all 0.3s; }
-.contact-item:hover .contact-icon { background: rgba(184,150,15,0.12); box-shadow: 0 4px 16px rgba(184,150,15,0.15); }
+.contact-icon { width: 48px; height: 48px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: rgba(201,169,110,0.08); border: 1px solid rgba(201,169,110,0.15); border-radius: 12px; color: var(--accent); transition: all 0.3s; }
+.contact-item:hover .contact-icon { background: rgba(201,169,110,0.12); box-shadow: 0 4px 16px rgba(201,169,110,0.15); }
 .contact-icon svg { width: 20px; height: 20px; }
 .contact-item h4 { font-size: 0.92rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
 .contact-item p, .contact-item a { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; }
@@ -988,8 +1012,8 @@ body::before {
 }
 
 /* FOOTER */
-.footer { margin-top: 80px; padding: 40px 0; border-top: 1px solid transparent; background: #171411; position: relative; }
-.footer::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(184,150,15,0.3), rgba(184,150,15,0.1), rgba(184,150,15,0.3), transparent); }
+.footer { margin-top: 80px; padding: 40px 0; border-top: 1px solid transparent; background: #121613; position: relative; }
+.footer::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(201,169,110,0.3), rgba(201,169,110,0.1), rgba(201,169,110,0.3), transparent); }
 .footer-inner { display: flex; align-items: center; justify-content: space-between; }
 .footer-copy { font-size: 0.82rem; color: #A8A29E; }
 .footer-links { display: flex; gap: 24px; list-style: none; }
@@ -1147,7 +1171,7 @@ body::before {
 @media (max-width: 768px) {
   :root { --section-pad: 80px; }
   .nav-links { display: none; }
-  .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(23,20,17,0.98); backdrop-filter: blur(20px); padding: 24px; gap: 20px; border-bottom: 1px solid rgba(184,150,15,0.15); }
+  .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(18,22,19,0.98); backdrop-filter: blur(20px); padding: 24px; gap: 20px; border-bottom: 1px solid rgba(201,169,110,0.15); }
   .mobile-toggle { display: block; }
   .trust-grid { grid-template-columns: repeat(2, 1fr); }
   .trust-item:nth-child(2)::after { display: none; }
@@ -1181,8 +1205,8 @@ body::before {
   display: flex;
   align-items: center;
   gap: 14px;
-  background: rgba(184,150,15,0.07);
-  border: 1px solid rgba(184,150,15,0.25);
+  background: rgba(201,169,110,0.07);
+  border: 1px solid rgba(201,169,110,0.25);
   border-radius: 12px;
   padding: 14px 18px;
   margin-bottom: 20px;
@@ -1190,7 +1214,7 @@ body::before {
 .avail-tip-icon {
   flex-shrink: 0;
   width: 36px; height: 36px;
-  background: rgba(184,150,15,0.12);
+  background: rgba(201,169,110,0.12);
   border-radius: 9px;
   display: flex; align-items: center; justify-content: center;
   color: var(--accent);
@@ -1225,8 +1249,8 @@ body::before {
 /* Calendar selection mode */
 .avail-sel-hint {
   display: none;
-  background: rgba(184,150,15,0.08);
-  border: 1px solid rgba(184,150,15,0.35);
+  background: rgba(201,169,110,0.08);
+  border: 1px solid rgba(201,169,110,0.35);
   border-radius: 12px;
   padding: 14px 20px;
   margin-bottom: 20px;
@@ -1237,16 +1261,10 @@ body::before {
   animation: fadeIn 0.3s ease;
 }
 .avail-sel-hint.visible { display: block; }
-.avail-day.sel-start, .avail-day.sel-end {
-  background: rgba(184,150,15,0.35) !important;
+.avail-day.sel-start, .avail-day.sel-end, .avail-day.sel-range {
+  background: rgba(27,67,50,0.12) !important;
   color: var(--accent) !important;
-  border: 1.5px solid var(--accent) !important;
-  box-shadow: inset 0 0 0 1px var(--accent) !important;
-}
-.avail-day.sel-range {
-  background: rgba(184,150,15,0.12) !important;
-  color: var(--accent) !important;
-  border-color: rgba(184,150,15,0.25) !important;
+  border-color: rgba(27,67,50,0.25) !important;
 }
 /* ============================================
    3D COIN INTRO
@@ -1318,7 +1336,7 @@ body.intro-playing .nav { opacity: 0 !important; pointer-events: none; }
   transform: translateZ(10px);
   backface-visibility: hidden;
   overflow: hidden;
-  box-shadow: 0 0 40px rgba(212,168,71,0.15);
+  box-shadow: 0 0 40px rgba(217,189,135,0.15);
 }
 .coin-front img {
   width: 100%; height: 100%;
@@ -1385,7 +1403,7 @@ body.intro-playing .nav { opacity: 0 !important; pointer-events: none; }
     #d4c898 96%,
     #ddd0a5 100%
   );
-  box-shadow: 0 0 8px rgba(212,168,71,0.25);
+  box-shadow: 0 0 8px rgba(217,189,135,0.25);
   -webkit-mask: radial-gradient(circle, transparent 64%, black 65%);
   mask: radial-gradient(circle, transparent 64%, black 65%);
 }
@@ -2089,12 +2107,19 @@ body.intro-playing .nav { opacity: 0 !important; pointer-events: none; }
             <div class="form-group"><label data-i18n="booking.pickup">Дата получения (в 14:00)</label><input type="date" id="bookPickup" required></div>
             <div class="form-group"><label data-i18n="booking.return">Дата возврата (в 14:00)</label><input type="date" id="bookReturn" required></div>
           </div>
-          <div style="margin:-8px 0 14px;padding:10px 14px;background:rgba(184,150,15,0.08);border-left:3px solid var(--accent);border-radius:6px;font-size:0.85rem;color:var(--text-secondary);line-height:1.5;display:flex;align-items:center;gap:10px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;color:var(--accent);"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-i18n="booking.timeRule">Машина выдаётся в <strong>14:00</strong> в день получения и должна быть возвращена в <strong>14:00</strong> в день возврата.</span></div>
+          <div style="margin:-8px 0 14px;padding:10px 14px;background:rgba(201,169,110,0.08);border-left:3px solid var(--accent);border-radius:6px;font-size:0.85rem;color:var(--text-secondary);line-height:1.5;display:flex;align-items:center;gap:10px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;color:var(--accent);"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-i18n="booking.timeRule">Машина выдаётся в <strong>14:00</strong> в день получения и должна быть возвращена в <strong>14:00</strong> в день возврата.</span></div>
           <div class="form-group form-checkbox">
             <label class="check-row">
               <input type="checkbox" id="bookOutOfCity">
               <span class="check-box"></span>
               <span class="check-text" data-i18n="booking.outOfCity">Вы арендуете для поездки за город (Выезд в Боровое)?</span>
+            </label>
+          </div>
+          <div class="form-group form-checkbox">
+            <label class="check-row">
+              <input type="checkbox" id="bookDelivery">
+              <span class="check-box"></span>
+              <span class="check-text" data-i18n="booking.delivery">Нужна доставка автомобиля по адресу?<span class="price-chip">+10 000 ₸</span></span>
             </label>
           </div>
           <div class="form-row">
@@ -2128,6 +2153,7 @@ body.intro-playing .nav { opacity: 0 !important; pointer-events: none; }
             <div class="price-summary-discount" id="priceDiscount" hidden></div>
             <div class="price-summary-discount price-outcity-free" id="priceOutCityFree" hidden></div>
             <div class="price-summary-fee" id="priceOutCityFee" hidden></div>
+            <div class="price-summary-discount" id="priceDeliveryFee" hidden></div>
             <div class="price-summary-meta" id="priceMeta"></div>
           </div>
           <div class="discount-tip" id="discountTip" hidden>
@@ -2193,12 +2219,12 @@ body.intro-playing .nav { opacity: 0 !important; pointer-events: none; }
       <div class="contact-details reveal">
         <div class="contact-item"><div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div><div><h4 data-i18n="contact.phone">Телефон</h4><a href="tel:+77717778778">+7 (771) 777-87-78</a></div></div>
         <div class="contact-item"><div class="contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div><div><h4>WhatsApp</h4><a href="https://wa.me/77717778778" target="_blank">+7 (771) 777-87-78</a></div></div>
-        <div class="contact-item"><div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg></div><div><h4 data-i18n="contact.address">Адрес</h4><p data-i18n="contact.addressText">ул. Динмухамед Конаев, 12/1<br>слева от кафе Көкtem<br>Есиль район, Астана, Z05H9B0</p></div></div>
+        <div class="contact-item"><div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg></div><div><h4 data-i18n="contact.address">Адрес</h4><p data-i18n="contact.addressText">ул. Кошкарбаева, 28, ВП-9<br>Астана</p></div></div>
         <div class="contact-item"><div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><h4 data-i18n="contact.hours">Время работы</h4><p data-i18n="contact.hoursText">Пн – Вс: 24/7<br>Офис: 09:00 – 20:00</p></div></div>
       </div>
-      <div class="contact-map reveal"><iframe src="https://www.google.com/maps?q=51.129274,71.428557&z=17&output=embed" frameborder="0" allowfullscreen loading="lazy" style="width:100%;height:100%;border:0;"></iframe></div>
+      <div class="contact-map reveal"><iframe src="https://www.google.com/maps?q=51.125674,71.479298&z=17&output=embed" frameborder="0" allowfullscreen loading="lazy" style="width:100%;height:100%;border:0;"></iframe></div>
       <div class="map-buttons reveal">
-        <a href="https://2gis.kz/astana/firm/70000001109944119?m=71.428557%2C51.129274%2F16" target="_blank" rel="noopener" class="map-btn map-btn-2gis">
+        <a href="https://2gis.kz/astana/search/%D0%9A%D0%BE%D1%88%D0%BA%D0%B0%D1%80%D0%B1%D0%B0%D0%B5%D0%B2%D0%B0%2028/geo/9570784863338730/71.479298%2C51.125674" target="_blank" rel="noopener" class="map-btn map-btn-2gis">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg>
           <span data-i18n="contact.2gis">Найти нас в 2ГИС</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
@@ -2266,7 +2292,7 @@ const translations = {
     "how.step4.title":"Get the Car","how.step4.desc":"Pick up at our office or request delivery — and you're all set.",
     "booking.formTitle":"Request a Car","booking.formDesc":"Fill in the form and we'll get back to you within minutes.",
     "booking.phone":"Phone Number","booking.selectCar":"Select a Car","booking.chooseCar":"Choose a car","booking.idCard":"ID Card","booking.license":"Driver's License","booking.idUpload":"Upload ID card","booking.licUpload":"Upload driver's license","booking.fileHint":"Photo or PDF","booking.consent":"I consent to the processing of my personal data for the purpose of this rental request","booking.consentError":"You must agree to continue",
-    "booking.availTip":"Before choosing dates — check which days are available","booking.availBtn":"View Availability →","booking.pickup":"Pickup Date (at 14:00)","booking.return":"Return Date (at 14:00)","booking.timeRule":"The car is handed over at <strong>14:00</strong> on the pickup date and must be returned by <strong>14:00</strong> on the return date.","booking.outOfCity":"Are you renting for an out-of-town trip (to Borovoe)?","booking.submit":"Send Request","booking.or":"or","booking.whatsapp":"Book via WhatsApp","price.total":"Total amount","price.perDay":" / day","price.daysWord":" days","price.discount3":"3+ days discount","price.discount10":"10+ days discount","price.metaFlat":"Rate: {f} × {d} sessions of 10h","price.outCityFree":"Free out-of-town trip (2+ days)","price.outCityFee":"Out-of-town surcharge",
+    "booking.availTip":"Before choosing dates — check which days are available","booking.availBtn":"View Availability →","booking.pickup":"Pickup Date (at 14:00)","booking.return":"Return Date (at 14:00)","booking.timeRule":"The car is handed over at <strong>14:00</strong> on the pickup date and must be returned by <strong>14:00</strong> on the return date.","booking.outOfCity":"Are you renting for an out-of-town trip (to Borovoe)?","booking.delivery":"Need home delivery of the car?<span class=\"price-chip\">+10 000 ₸</span>","booking.submit":"Send Request","booking.or":"or","booking.whatsapp":"Book via WhatsApp","price.total":"Total amount","price.perDay":" / day","price.daysWord":" days","price.discount3":"3+ days discount","price.discount10":"10+ days discount","price.metaFlat":"Rate: {f} × {d} sessions of 10h","price.outCityFree":"Free out-of-town trip (2+ days)","price.outCityFee":"Out-of-town surcharge","price.delivery":"Home delivery",
     "booking.quickLabel":"Quick Booking","booking.infoTitle":"Get Your Car in Minutes","booking.infoDesc":"We respond to every request within 5 minutes during operating hours. No lengthy contracts — just a quick confirmation and you're ready to drive.",
     "booking.perk1":"No deposit required for most cars","booking.perk2":"Free delivery within the city","booking.perk3":"Flexible rental periods (1 day to 1 year)","booking.perk4":"Full insurance included","booking.perk5":"24/7 roadside assistance",
     "reviews.label":"Testimonials","reviews.title":"What Our Clients Say",
@@ -2274,7 +2300,7 @@ const translations = {
     "reviews.r2.text":'"I was visiting from abroad and needed a car urgently. They delivered a clean Toyota Prado to my hotel within 30 minutes. Outstanding service!"',"reviews.r2.name":"Sarah N.","reviews.r2.date":"February 2026",
     "reviews.r3.text":'"Best rental experience in the city. The BMW was in perfect condition and they even threw in a free car wash. Highly recommend to everyone."',"reviews.r3.name":"Damir M.","reviews.r3.date":"January 2026","reviews.r4.text":'"Booked the Mustang for my husband\'s birthday — clean, full tank, top down. Made his day. Big thanks to the team."',"reviews.r4.name":"Aigerim S.","reviews.r4.date":"December 2025","reviews.r5.text":'"Took the Zeekr with a driver for a business meeting — on time, driver in a suit, top-tier service. Highly recommended."',"reviews.r5.name":"Yerlan B.","reviews.r5.date":"November 2025","reviews.r6.text":'"Loved that they delivered the car right to my door. Paperwork took five minutes. The BMW i4 was flawless and the range was even better than advertised."',"reviews.r6.name":"Anastasia P.","reviews.r6.date":"October 2025","reviews.r7.text":'"The Challenger was a childhood dream — finally got to drive one. Fair price, no hidden fees. I\'ll definitely be back."',"reviews.r7.name":"Ruslan T.","reviews.r7.date":"September 2025","reviews.r8.text":'"Booked the Prado for a trip into the mountains. Powerful, no issues. They threw in a free child seat — really nice touch."',"reviews.r8.name":"Madina K.","reviews.r8.date":"August 2025",
     "contact.label":"Get in Touch","contact.title":"Contact Us","contact.desc":"Have questions? We're here to help around the clock.",
-    "contact.phone":"Phone","contact.address":"Address","contact.addressText":"Dinmukhamed Konaev St. 12/1<br>left of café Көкtem<br>Yesil district, Astana, Z05H9B0",
+    "contact.phone":"Phone","contact.address":"Address","contact.addressText":"Koshkarbayev St., 28, VP-9<br>Astana",
     "contact.hours":"Working Hours","contact.hoursText":"Mon – Sun: 24/7<br>Office: 09:00 – 20:00",
     "contact.2gis":"Find us on 2GIS",
     "footer.copy":"&copy; 2026 Exclusive Arts Cars. All rights reserved.","footer.privacy":"Privacy Policy","footer.terms":"Terms of Service",
@@ -2319,7 +2345,7 @@ const translations = {
     "how.step4.title":"Получите авто","how.step4.desc":"Заберите в офисе или закажите доставку — и вы готовы к поездке.",
     "booking.formTitle":"Заказать автомобиль","booking.formDesc":"Заполните форму, и мы свяжемся с вами в течение нескольких минут.",
     "booking.phone":"Номер телефона","booking.selectCar":"Выберите авто","booking.chooseCar":"Выберите автомобиль","booking.idCard":"Удостоверение личности","booking.license":"Водительские права","booking.idUpload":"Загрузите удостоверение","booking.licUpload":"Загрузите водительские права","booking.fileHint":"Фото или PDF","booking.consent":"Я согласен(-на) на обработку моих персональных данных в целях данной заявки на аренду","booking.consentError":"Необходимо дать согласие",
-    "booking.availTip":"Перед выбором дат — проверьте наличие свободных дней","booking.availBtn":"Проверить наличие →","booking.pickup":"Дата получения (в 14:00)","booking.return":"Дата возврата (в 14:00)","booking.timeRule":"Машина выдаётся в <strong>14:00</strong> в день получения и должна быть возвращена в <strong>14:00</strong> в день возврата.","booking.outOfCity":"Вы арендуете для поездки за город (Выезд в Боровое)?","booking.submit":"Отправить заявку","booking.or":"или","booking.whatsapp":"Забронировать в WhatsApp","price.total":"Общая сумма","price.perDay":" / сут","price.daysWord":" дн.","price.discount3":"Скидка за аренду от 3 дней","price.discount10":"Скидка за аренду от 10 дней","price.metaFlat":"Тариф: {f} × {d} сессий по 10ч","price.outCityFree":"Бесплатный выезд за город (от 2 суток)","price.outCityFee":"Доплата за выезд за город",
+    "booking.availTip":"Перед выбором дат — проверьте наличие свободных дней","booking.availBtn":"Проверить наличие →","booking.pickup":"Дата получения (в 14:00)","booking.return":"Дата возврата (в 14:00)","booking.timeRule":"Машина выдаётся в <strong>14:00</strong> в день получения и должна быть возвращена в <strong>14:00</strong> в день возврата.","booking.outOfCity":"Вы арендуете для поездки за город (Выезд в Боровое)?","booking.delivery":"Нужна доставка автомобиля по адресу?<span class=\"price-chip\">+10 000 ₸</span>","booking.submit":"Отправить заявку","booking.or":"или","booking.whatsapp":"Забронировать в WhatsApp","price.total":"Общая сумма","price.perDay":" / сут","price.daysWord":" дн.","price.discount3":"Скидка за аренду от 3 дней","price.discount10":"Скидка за аренду от 10 дней","price.metaFlat":"Тариф: {f} × {d} сессий по 10ч","price.outCityFree":"Бесплатный выезд за город (от 2 суток)","price.outCityFee":"Доплата за выезд за город","price.delivery":"Доставка по адресу",
     "booking.quickLabel":"Быстрое бронирование","booking.infoTitle":"Получите авто за минуты","booking.infoDesc":"Мы отвечаем на каждый запрос в течение 5 минут в рабочее время. Без длинных договоров — просто быстрое подтверждение, и вы готовы к поездке.",
     "booking.perk1":"Без залога для большинства авто","booking.perk2":"Бесплатная доставка по городу","booking.perk3":"Гибкие сроки аренды (от 1 дня до 1 года)","booking.perk4":"Полная страховка включена","booking.perk5":"Круглосуточная помощь на дороге",
     "reviews.label":"Отзывы","reviews.title":"Что говорят наши клиенты",
@@ -2327,7 +2353,7 @@ const translations = {
     "reviews.r2.text":'"Приехала из-за границы и срочно нуждалась в машине. Привезли чистый Toyota Prado в отель за 30 минут. Отличный сервис!"',"reviews.r2.name":"Сара Н.","reviews.r2.date":"Февраль 2026",
     "reviews.r3.text":'"Лучший опыт аренды в городе. BMW был в идеальном состоянии, а ещё бесплатно помыли машину. Рекомендую всем."',"reviews.r3.name":"Дамир М.","reviews.r3.date":"Январь 2026","reviews.r4.text":'"Брала Mustang на день рождения мужа — машина приехала чистая, заправленная, с открытым верхом. Эмоций море. Спасибо ребятам."',"reviews.r4.name":"Айгерим С.","reviews.r4.date":"Декабрь 2025","reviews.r5.text":'"Заказывал Zeekr с водителем на встречу с партнёрами — приехали вовремя, водитель в костюме, всё на высшем уровне. Рекомендую."',"reviews.r5.name":"Ерлан Б.","reviews.r5.date":"Ноябрь 2025","reviews.r6.text":'"Очень удобно, что доставили машину прямо к дому. Оформление заняло минут пять. BMW i4 в идеале, запас хода даже больше обещанного."',"reviews.r6.name":"Анастасия П.","reviews.r6.date":"Октябрь 2025","reviews.r7.text":'"Challenger — мечта детства, наконец-то прокатился. Цена адекватная, без скрытых платежей. Обязательно возьму ещё."',"reviews.r7.name":"Руслан Т.","reviews.r7.date":"Сентябрь 2025","reviews.r8.text":'"Заказывала Prado для поездки в горы. Машина мощная, без проблем. Ребята дали бесплатное детское кресло — приятный сюрприз."',"reviews.r8.name":"Мадина К.","reviews.r8.date":"Август 2025",
     "contact.label":"Связаться с нами","contact.title":"Контакты","contact.desc":"Есть вопросы? Мы на связи круглосуточно.",
-    "contact.phone":"Телефон","contact.address":"Адрес","contact.addressText":"ул. Динмухамед Конаев, 12/1<br>слева от кафе Көкtem<br>Есиль район, Астана, Z05H9B0",
+    "contact.phone":"Телефон","contact.address":"Адрес","contact.addressText":"ул. Кошкарбаева, 28, ВП-9<br>Астана",
     "contact.hours":"Часы работы","contact.hoursText":"Пн – Вс: 24/7<br>Офис: 09:00 – 20:00",
     "contact.2gis":"Найти нас в 2ГИС",
     "footer.copy":"&copy; 2026 Exclusive Arts Cars. Все права защищены.","footer.privacy":"Политика конфиденциальности","footer.terms":"Условия использования",
@@ -2372,7 +2398,7 @@ const translations = {
     "how.step4.title":"Көлікті алыңыз","how.step4.desc":"Кеңседен алыңыз немесе жеткізуге тапсырыс беріңіз — бәрі дайын.",
     "booking.formTitle":"Көлікке тапсырыс беру","booking.formDesc":"Форманы толтырыңыз, біз сізге бірнеше минут ішінде жауап береміз.",
     "booking.phone":"Телефон нөмірі","booking.selectCar":"Көлікті таңдаңыз","booking.chooseCar":"Көлікті таңдаңыз","booking.idCard":"Жеке куәлік","booking.license":"Жүргізуші куәлігі","booking.idUpload":"Жеке куәлікті жүктеңіз","booking.licUpload":"Жүргізуші куәлігін жүктеңіз","booking.fileHint":"Фото немесе PDF","booking.consent":"Мен осы жалдау өтінімі мақсатында жеке деректерімді өңдеуге келісемін","booking.consentError":"Келісім беру қажет",
-    "booking.availTip":"Күн таңдамас бұрын — бос күндерді тексеріңіз","booking.availBtn":"Қолжетімділікті көру →","booking.pickup":"Алу күні (14:00-де)","booking.return":"Қайтару күні (14:00-де)","booking.timeRule":"Көлік алу күні <strong>14:00</strong>-де беріледі және қайтару күні <strong>14:00</strong>-ге дейін қайтарылуы тиіс.","booking.outOfCity":"Қала сыртына шығу үшін жалдайсыз ба (Бурабайға сапар)?","booking.submit":"Өтініш жіберу","booking.or":"немесе","booking.whatsapp":"WhatsApp арқылы брондау","price.total":"Жалпы сома","price.perDay":" / тәул","price.daysWord":" күн","price.discount3":"3 күннен бастап жеңілдік","price.discount10":"10 күннен бастап жеңілдік","price.metaFlat":"Тариф: {f} × {d} сессия (10 сағ)","price.outCityFree":"Қала сыртына тегін шығу (2 күннен бастап)","price.outCityFee":"Қала сыртына шығу үшін қосымша төлем",
+    "booking.availTip":"Күн таңдамас бұрын — бос күндерді тексеріңіз","booking.availBtn":"Қолжетімділікті көру →","booking.pickup":"Алу күні (14:00-де)","booking.return":"Қайтару күні (14:00-де)","booking.timeRule":"Көлік алу күні <strong>14:00</strong>-де беріледі және қайтару күні <strong>14:00</strong>-ге дейін қайтарылуы тиіс.","booking.outOfCity":"Қала сыртына шығу үшін жалдайсыз ба (Бурабайға сапар)?","booking.delivery":"Көлікті мекенжайға жеткізу қажет пе?<span class=\"price-chip\">+10 000 ₸</span>","booking.submit":"Өтініш жіберу","booking.or":"немесе","booking.whatsapp":"WhatsApp арқылы брондау","price.total":"Жалпы сома","price.perDay":" / тәул","price.daysWord":" күн","price.discount3":"3 күннен бастап жеңілдік","price.discount10":"10 күннен бастап жеңілдік","price.metaFlat":"Тариф: {f} × {d} сессия (10 сағ)","price.outCityFree":"Қала сыртына тегін шығу (2 күннен бастап)","price.outCityFee":"Қала сыртына шығу үшін қосымша төлем","price.delivery":"Мекенжайға жеткізу",
     "booking.quickLabel":"Жылдам брондау","booking.infoTitle":"Көлікті минуттарда алыңыз","booking.infoDesc":"Біз жұмыс уақытында әр өтінішке 5 минут ішінде жауап береміз. Ұзақ келісімшарттар жоқ — тек жылдам растау, және сіз жолға дайынсыз.",
     "booking.perk1":"Көптеген көліктер үшін кепілдік салым қажет емес","booking.perk2":"Қала бойынша тегін жеткізу","booking.perk3":"Икемді жалдау мерзімдері (1 күннен 1 жылға дейін)","booking.perk4":"Толық сақтандыру қосылған","booking.perk5":"24/7 жол бойындағы көмек",
     "reviews.label":"Пікірлер","reviews.title":"Клиенттеріміз не айтады",
@@ -2380,7 +2406,7 @@ const translations = {
     "reviews.r2.text":'"Шетелден келіп, көлік шұғыл керек болды. Таза Toyota Prado қонақүйіме 30 минутта жеткізілді. Керемет қызмет!"',"reviews.r2.name":"Сара Н.","reviews.r2.date":"Ақпан 2026",
     "reviews.r3.text":'"Қаладағы ең жақсы жалдау тәжірибесі. BMW мінсіз жағдайда болды, тіпті тегін көлік жуу қызметі де көрсетілді. Барлығына ұсынамын."',"reviews.r3.name":"Дамир М.","reviews.r3.date":"Қаңтар 2026","reviews.r4.text":'"Күйеуімнің туған күніне Mustang жалдадым — таза, толық бакпен, ашық үстімен келді. Эмоция шексіз. Жігіттерге рахмет."',"reviews.r4.name":"Айгерим С.","reviews.r4.date":"Желтоқсан 2025","reviews.r5.text":'"Серіктестермен кездесуге Zeekr-ді жүргізушімен алдым — уақытында келдік, жүргізуші костюмде, бәрі жоғары деңгейде. Ұсынамын."',"reviews.r5.name":"Ерлан Б.","reviews.r5.date":"Қараша 2025","reviews.r6.text":'"Көлікті үйге жеткізгені өте ыңғайлы. Ресімдеу 5 минут алды. BMW i4 мінсіз, жүру қоры тіпті уәде етілгеннен жақсы шықты."',"reviews.r6.name":"Анастасия П.","reviews.r6.date":"Қазан 2025","reviews.r7.text":'"Challenger — балалықтың арманы еді, ақыры мінуге қол жеткіздім. Бағасы әділ, жасырын төлемдер жоқ. Тағы аламын."',"reviews.r7.name":"Руслан Т.","reviews.r7.date":"Қыркүйек 2025","reviews.r8.text":'"Тауға саяхатқа Prado тапсырыс бердім. Қуатты, проблема жоқ. Жігіттер тегін балалар орындығын берді — жағымды сюрприз."',"reviews.r8.name":"Мадина К.","reviews.r8.date":"Тамыз 2025",
     "contact.label":"Бізбен байланысыңыз","contact.title":"Байланыс","contact.desc":"Сұрақтарыңыз бар ма? Біз тәулік бойы байланыстамыз.",
-    "contact.phone":"Телефон","contact.address":"Мекенжай","contact.addressText":"Дінмұхамед Қонаев көш., 12/1<br>Көкtem кафесінің сол жағында<br>Есіл ауданы, Астана, Z05H9B0",
+    "contact.phone":"Телефон","contact.address":"Мекенжай","contact.addressText":"Қошқарбаев көш., 28, ВП-9<br>Астана",
     "contact.hours":"Жұмыс уақыты","contact.hoursText":"Дс – Жс: 24/7<br>Кеңсе: 09:00 – 20:00",
     "contact.2gis":"Бізді 2ГИС-тен табыңыз",
     "footer.copy":"&copy; 2026 Exclusive Arts Cars. Барлық құқықтар қорғалған.","footer.privacy":"Құпиялылық саясаты","footer.terms":"Қызмет көрсету шарттары",
@@ -2479,6 +2505,12 @@ function updatePriceTranslations() {
   translations.kz['select.car8'] = 'Zeekr 009 — ' + kzt(Z_NO) + '-дан / 10сағ';
   translations.kz['select.car8nd'] = 'Zeekr 009 — ' + kzt(Z_NO) + ' / 10сағ (жүргізушісіз)';
   translations.kz['select.car8wd'] = 'Zeekr 009 — ' + kzt(Z_WITH) + ' / 10сағ (жүргізушімен)';
+
+  // Home delivery price chip — converted per language
+  const DELIVERY = 10000;
+  translations.en['booking.delivery'] = 'Need home delivery of the car?<span class="price-chip">+' + usd(DELIVERY) + '</span>';
+  translations.ru['booking.delivery'] = 'Нужна доставка автомобиля по адресу?<span class="price-chip">+' + kzt(DELIVERY) + '</span>';
+  translations.kz['booking.delivery'] = 'Көлікті мекенжайға жеткізу қажет пе?<span class="price-chip">+' + kzt(DELIVERY) + '</span>';
 }
 
 function parseNBKXml(text) {
@@ -2599,6 +2631,22 @@ function setLanguage(lang) {
   }
   // Re-render price summary so its labels and currency follow the active language
   if (typeof updatePriceSummary === 'function') { try { updatePriceSummary(); } catch(e) {} }
+  // Re-render discount tip panel + badge so its text follows the active language
+  if (typeof updateDiscountTip === 'function' && typeof getSelectedBookingCarKey === 'function') {
+    try {
+      var carKey = getSelectedBookingCarKey();
+      if (carKey) {
+        var pickup = document.getElementById('bookPickup');
+        var ret = document.getElementById('bookReturn');
+        var d = 1;
+        if (pickup && ret && pickup.value && ret.value) {
+          var d1 = new Date(pickup.value), d2 = new Date(ret.value);
+          d = Math.max(1, Math.round((d2 - d1) / 86400000));
+        }
+        updateDiscountTip(carKey, d);
+      }
+    } catch(e) {}
+  }
 }
 
 document.querySelectorAll('.lang-btn').forEach(btn => {
@@ -2865,7 +2913,7 @@ function handleBooking(e) {
       }
       if (!carDisplayName) carDisplayName = car; // fallback
     }
-    var prices = calcBookingPrices(carKey, pickup, returnDate, document.getElementById('bookOutOfCity').checked);
+    var prices = calcBookingPrices(carKey, pickup, returnDate, document.getElementById('bookOutOfCity').checked, document.getElementById('bookDelivery') && document.getElementById('bookDelivery').checked);
     var outCityChecked = document.getElementById('bookOutOfCity').checked;
 
     var text = '🚗 Новая заявка с сайта EAcars\n\n';
@@ -2878,6 +2926,8 @@ function handleBooking(e) {
     text += '💵 Без скидки: ' + (prices.base || '—') + '\n';
     text += '💸 Со скидкой: ' + (prices.discount || '—') + '\n';
     text += '🛣️ Выезд за город: ' + (prices.outOfCity || 'N/A') + '\n';
+    var deliveryChecked = document.getElementById('bookDelivery') && document.getElementById('bookDelivery').checked;
+    text += '🚚 Доставка: ' + (deliveryChecked ? 'Да (10 000 ₸)' : 'Нет') + '\n';
     text += '✅ ИТОГО К ОПЛАТЕ: ' + (prices.total || '—') + '\n';
     text += '\n━━━ 🪪 Удостоверение личности ━━━\n';
     text += '🔢 ИИН: ' + (docData.iin || 'не распознано') + '\n';
@@ -2912,6 +2962,7 @@ function handleBooking(e) {
           priceBase: prices.base,
           priceDiscount: prices.discount,
           outOfCity: prices.outOfCity,
+          delivery: deliveryChecked ? 'Да (10 000 ₸)' : 'Нет',
           priceTotal: prices.total,
           idCardBase64: b64[0] || '',
           idCardName: fileId ? fileId.name : '',
@@ -3078,7 +3129,7 @@ function fmtMoney(n) {
 function fmtTengeRu(n) { return Number(n).toLocaleString('ru-RU').replace(/,/g, ' ') + ' ₸'; }
 
 // Расчёт всех сумм для заявки. Возвращает объект с готовыми текстовыми значениями для столбцов H/I/J/K
-function calcBookingPrices(carKey, pickupISO, returnISO, outOfCity) {
+function calcBookingPrices(carKey, pickupISO, returnISO, outOfCity, delivery) {
   var price = CAR_PRICE_TABLE[carKey];
   if (!price || !pickupISO || !returnISO) {
     return { base: '', discount: '', outOfCity: 'N/A', total: '' };
@@ -3110,11 +3161,14 @@ function calcBookingPrices(carKey, pickupISO, returnISO, outOfCity) {
     else           { outFee = 0;     outText = 'Бесплатно'; }
   }
 
+  var deliveryFee = delivery ? 10000 : 0;
+
   return {
     base: fmtTengeRu(baseTotal),
     discount: discText,
     outOfCity: outText,
-    total: fmtTengeRu(discTotal + outFee)
+    delivery: delivery ? '10 000 ₸' : 'N/A',
+    total: fmtTengeRu(discTotal + outFee + deliveryFee)
   };
 }
 function fmtTenge(n) { return fmtMoney(n); }
@@ -3133,6 +3187,53 @@ function closeDiscountInfo() {
   if (panel) panel.hidden = true;
   if (tip) tip.classList.remove('expanded');
 }
+var DISCOUNT_I18N = {
+  ru: {
+    zeekrND: 'Zeekr 009 (без водителя)', zeekrWD: 'Zeekr 009 (с водителем)',
+    titleSave: ' — как сэкономить', titleDays: ' — экономия по дням',
+    flatLabel: 'Фиксированный тариф (10 часов)',
+    flatCta: '<strong>Выезд за город:</strong> бесплатно при аренде от 2 сессий! Иначе — доплата 25 000 ₸.',
+    tier1: '1–2 суток', tier2: 'От 3 суток', tier3: 'От 10 суток',
+    now: 'сейчас', perDay: '/день',
+    daysWord: function(n){ var n10=n%10, n100=n%100; if(n10===1&&n100!==11) return 'сутки'; return 'суток'; },
+    cta1: function(needDays, perDayDelta, savedIfExtended, T){ return 'Возьмите ещё на <strong>' + needDays + ' ' + T.daysWord(needDays) + '</strong> — и цена за день упадёт на <strong>' + perDayDelta + '</strong>. Экономия от <strong>' + savedIfExtended + '</strong>. Плюс выезд за город станет бесплатным.'; },
+    cta2: function(needDays2, day10Price, savedIfExtended2, T){ return 'Ещё <strong>' + needDays2 + ' ' + T.daysWord(needDays2) + '</strong> — и тариф упадёт до <strong>' + day10Price + '/день</strong>. Дополнительная экономия от <strong>' + savedIfExtended2 + '</strong>.'; },
+    cta3: function(savings){ return 'У вас максимальная скидка. Вы экономите <strong>' + savings + '</strong> по сравнению с обычным тарифом.'; },
+    badge1: 'Хотите скидку? Возьмите от 3 суток',
+    badge2: 'Скидка уже работает — можно ещё больше',
+    badge3: 'У вас максимальная скидка'
+  },
+  en: {
+    zeekrND: 'Zeekr 009 (no driver)', zeekrWD: 'Zeekr 009 (with driver)',
+    titleSave: ' — how to save', titleDays: ' — daily savings',
+    flatLabel: 'Fixed rate (10 hours)',
+    flatCta: '<strong>Out-of-town trip:</strong> free with 2+ sessions! Otherwise — 25 000 ₸ surcharge.',
+    tier1: '1–2 days', tier2: 'From 3 days', tier3: 'From 10 days',
+    now: 'now', perDay: '/day',
+    daysWord: function(n){ return n === 1 ? 'day' : 'days'; },
+    cta1: function(needDays, perDayDelta, savedIfExtended, T){ return 'Add <strong>' + needDays + ' more ' + T.daysWord(needDays) + '</strong> — and the daily price drops by <strong>' + perDayDelta + '</strong>. Save at least <strong>' + savedIfExtended + '</strong>. Plus, out-of-town trips become free.'; },
+    cta2: function(needDays2, day10Price, savedIfExtended2, T){ return '<strong>' + needDays2 + ' more ' + T.daysWord(needDays2) + '</strong> — and the rate drops to <strong>' + day10Price + '/day</strong>. Extra savings from <strong>' + savedIfExtended2 + '</strong>.'; },
+    cta3: function(savings){ return 'You have the maximum discount. You save <strong>' + savings + '</strong> compared to the regular rate.'; },
+    badge1: 'Want a discount? Rent for 3+ days',
+    badge2: 'Discount applied — you can save even more',
+    badge3: 'You have the maximum discount'
+  },
+  kz: {
+    zeekrND: 'Zeekr 009 (жүргізушісіз)', zeekrWD: 'Zeekr 009 (жүргізушімен)',
+    titleSave: ' — қалай үнемдеуге болады', titleDays: ' — күндер бойынша үнемдеу',
+    flatLabel: 'Тіркелген тариф (10 сағат)',
+    flatCta: '<strong>Қала сыртына шығу:</strong> 2 сессиядан бастап жалдағанда тегін! Әйтпесе — 25 000 ₸ қосымша төлем.',
+    tier1: '1–2 күн', tier2: '3 күннен бастап', tier3: '10 күннен бастап',
+    now: 'қазір', perDay: '/күн',
+    daysWord: function(n){ return 'күн'; },
+    cta1: function(needDays, perDayDelta, savedIfExtended, T){ return 'Тағы <strong>' + needDays + ' күн</strong> алыңыз — күндік баға <strong>' + perDayDelta + '</strong>-ге төмендейді. Үнемдеу <strong>' + savedIfExtended + '</strong>-ден басталады. Оған қоса қала сыртына шығу тегін болады.'; },
+    cta2: function(needDays2, day10Price, savedIfExtended2, T){ return 'Тағы <strong>' + needDays2 + ' күн</strong> — тариф <strong>' + day10Price + '/күн</strong> деңгейіне дейін түседі. Қосымша үнемдеу <strong>' + savedIfExtended2 + '</strong>-ден.'; },
+    cta3: function(savings){ return 'Сізде ең жоғары жеңілдік. Сіз әдеттегі тарифпен салыстырғанда <strong>' + savings + '</strong> үнемдейсіз.'; },
+    badge1: 'Жеңілдік керек пе? 3 күннен бастап жалдаңыз',
+    badge2: 'Жеңілдік қолданылды — одан да көп үнемдеуге болады',
+    badge3: 'Сізде ең жоғары жеңілдік'
+  }
+};
 function updateDiscountTip(carKey, days) {
   var tip = document.getElementById('discountTip');
   var content = document.getElementById('discountTipContent');
@@ -3142,10 +3243,12 @@ function updateDiscountTip(carKey, days) {
   var p = CAR_PRICE_TABLE[carKey];
   if (!p) { tip.hidden = true; return; }
 
+  var T = DISCOUNT_I18N[currentLang] || DISCOUNT_I18N.ru;
+
   // Получим название машины
   var carName = '';
-  if (carKey === 'zeekr-nd') carName = 'Zeekr 009 (без водителя)';
-  else if (carKey === 'zeekr-wd') carName = 'Zeekr 009 (с водителем)';
+  if (carKey === 'zeekr-nd') carName = T.zeekrND;
+  else if (carKey === 'zeekr-wd') carName = T.zeekrWD;
   else { for (var i = 0; i < CARS.length; i++) if (CARS[i].id === carKey) { carName = CARS[i].name; break; } }
 
   var html = '';
@@ -3153,20 +3256,17 @@ function updateDiscountTip(carKey, days) {
   // SVG-иконки в виде line-art
   var SVG_BOLT  = '<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>';
   var SVG_PCT   = '<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>';
-  var SVG_PIN   = '<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>';
   var SVG_CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
   var SVG_TROPHY= '<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>';
 
   if (p.flat) {
-    // Zeekr — фиксированный тариф, нет дневных скидок, но есть бонус для выезда
-    html += '<h4 class="discount-tip-title">' + SVG_BOLT + ' ' + carName + ' — как сэкономить</h4>';
+    html += '<h4 class="discount-tip-title">' + SVG_BOLT + ' ' + carName + T.titleSave + '</h4>';
     html += '<div class="discount-tip-tiers">';
-    html += '<div class="discount-tip-tier active"><span class="discount-tip-tier-label">Фиксированный тариф (10 часов)</span><span class="discount-tip-tier-price">' + fmtTengeRu(p.flat) + '</span></div>';
+    html += '<div class="discount-tip-tier active"><span class="discount-tip-tier-label">' + T.flatLabel + '</span><span class="discount-tip-tier-price">' + fmtMoney(p.flat) + '</span></div>';
     html += '</div>';
-    html += '<div class="discount-tip-cta">' + SVG_CHECK + '<span><strong>Выезд за город:</strong> бесплатно при аренде от 2 сессий! Иначе — доплата 25 000 ₸.</span></div>';
+    html += '<div class="discount-tip-cta">' + SVG_CHECK + '<span>' + T.flatCta + '</span></div>';
   } else {
-    // Обычные машины — три тарифа
-    html += '<h4 class="discount-tip-title">' + SVG_PCT + ' ' + carName + ' — экономия по дням</h4>';
+    html += '<h4 class="discount-tip-title">' + SVG_PCT + ' ' + carName + T.titleDays + '</h4>';
     html += '<div class="discount-tip-tiers">';
 
     var tier1Active = days >= 1 && days <= 2;
@@ -3174,32 +3274,32 @@ function updateDiscountTip(carKey, days) {
     var tier3Active = days >= 10;
 
     html += '<div class="discount-tip-tier' + (tier1Active ? ' active' : '') + '">';
-    html += '<span class="discount-tip-tier-label">1–2 суток' + (tier1Active ? '<span class="discount-tip-tier-badge">сейчас</span>' : '') + '</span>';
-    html += '<span class="discount-tip-tier-price">' + fmtTengeRu(p.base) + '/день</span></div>';
+    html += '<span class="discount-tip-tier-label">' + T.tier1 + (tier1Active ? '<span class="discount-tip-tier-badge">' + T.now + '</span>' : '') + '</span>';
+    html += '<span class="discount-tip-tier-price">' + fmtMoney(p.base) + T.perDay + '</span></div>';
 
     html += '<div class="discount-tip-tier' + (tier2Active ? ' active' : '') + '">';
-    html += '<span class="discount-tip-tier-label">От 3 суток' + (tier2Active ? '<span class="discount-tip-tier-badge">сейчас</span>' : '') + '</span>';
-    html += '<span class="discount-tip-tier-price">' + fmtTengeRu(p.day3) + '/день</span></div>';
+    html += '<span class="discount-tip-tier-label">' + T.tier2 + (tier2Active ? '<span class="discount-tip-tier-badge">' + T.now + '</span>' : '') + '</span>';
+    html += '<span class="discount-tip-tier-price">' + fmtMoney(p.day3) + T.perDay + '</span></div>';
 
     html += '<div class="discount-tip-tier' + (tier3Active ? ' active' : '') + '">';
-    html += '<span class="discount-tip-tier-label">От 10 суток' + (tier3Active ? '<span class="discount-tip-tier-badge">сейчас</span>' : '') + '</span>';
-    html += '<span class="discount-tip-tier-price">' + fmtTengeRu(p.day10) + '/день</span></div>';
+    html += '<span class="discount-tip-tier-label">' + T.tier3 + (tier3Active ? '<span class="discount-tip-tier-badge">' + T.now + '</span>' : '') + '</span>';
+    html += '<span class="discount-tip-tier-price">' + fmtMoney(p.day10) + T.perDay + '</span></div>';
 
     html += '</div>';
 
     if (days < 3) {
       var needDays = 3 - days;
       var savedIfExtended = (p.base - p.day3) * 3;
-      html += '<div class="discount-tip-cta">' + SVG_CHECK + '<span>Возьмите ещё на <strong>' + needDays + ' ' + (needDays === 1 ? 'сутки' : 'суток') + '</strong> — и цена за день упадёт на <strong>' + fmtTengeRu(p.base - p.day3) + '</strong>. Экономия от <strong>' + fmtTengeRu(savedIfExtended) + '</strong>. Плюс выезд за город станет бесплатным.</span></div>';
-      if (badgeText) badgeText.textContent = 'Хотите скидку? Возьмите от 3 суток';
+      html += '<div class="discount-tip-cta">' + SVG_CHECK + '<span>' + T.cta1(needDays, fmtMoney(p.base - p.day3), fmtMoney(savedIfExtended), T) + '</span></div>';
+      if (badgeText) badgeText.textContent = T.badge1;
     } else if (days < 10) {
       var needDays2 = 10 - days;
       var savedIfExtended2 = (p.day3 - p.day10) * 10;
-      html += '<div class="discount-tip-cta">' + SVG_CHECK + '<span>Ещё <strong>' + needDays2 + ' ' + (needDays2 === 1 ? 'сутки' : 'суток') + '</strong> — и тариф упадёт до <strong>' + fmtTengeRu(p.day10) + '/день</strong>. Дополнительная экономия от <strong>' + fmtTengeRu(savedIfExtended2) + '</strong>.</span></div>';
-      if (badgeText) badgeText.textContent = 'Скидка уже работает — можно ещё больше';
+      html += '<div class="discount-tip-cta">' + SVG_CHECK + '<span>' + T.cta2(needDays2, fmtMoney(p.day10), fmtMoney(savedIfExtended2), T) + '</span></div>';
+      if (badgeText) badgeText.textContent = T.badge2;
     } else {
-      html += '<div class="discount-tip-cta">' + SVG_TROPHY + '<span>У вас максимальная скидка. Вы экономите <strong>' + fmtTengeRu((p.base - p.day10) * days) + '</strong> по сравнению с обычным тарифом.</span></div>';
-      if (badgeText) badgeText.textContent = 'У вас максимальная скидка';
+      html += '<div class="discount-tip-cta">' + SVG_TROPHY + '<span>' + T.cta3(fmtMoney((p.base - p.day10) * days)) + '</span></div>';
+      if (badgeText) badgeText.textContent = T.badge3;
     }
   }
 
@@ -3223,10 +3323,12 @@ function updatePriceSummary() {
   var discEl = document.getElementById('priceDiscount');
   var freeEl = document.getElementById('priceOutCityFree');
   var feeEl = document.getElementById('priceOutCityFee');
+  var deliveryEl = document.getElementById('priceDeliveryFee');
   var metaEl = document.getElementById('priceMeta');
   if (!box) return;
   if (freeEl) freeEl.hidden = true;
   if (feeEl) feeEl.hidden = true;
+  if (deliveryEl) deliveryEl.hidden = true;
   var pickup = document.getElementById('bookPickup').value;
   var ret = document.getElementById('bookReturn').value;
   var key = getSelectedBookingCarKey();
@@ -3253,6 +3355,11 @@ function updatePriceSummary() {
         if (feeEl) { feeEl.textContent = (dict['price.outCityFee'] || 'Доплата за выезд за город') + ': +' + fmtTenge(25000); feeEl.hidden = false; }
       }
     }
+    var deliveryCkZ = document.getElementById('bookDelivery');
+    if (deliveryCkZ && deliveryCkZ.checked) {
+      totalZ += 10000;
+      if (deliveryEl) { deliveryEl.textContent = (dict['price.delivery'] || 'Доставка по адресу') + ': +' + fmtTenge(10000); deliveryEl.hidden = false; }
+    }
     origEl.textContent = '';
     finalEl.textContent = fmtTenge(totalZ);
     discEl.hidden = true;
@@ -3277,6 +3384,11 @@ function updatePriceSummary() {
       if (feeEl) { feeEl.textContent = (dict['price.outCityFee'] || 'Доплата за выезд за город') + ': +' + fmtTenge(25000); feeEl.hidden = false; }
     }
   }
+  var deliveryCk = document.getElementById('bookDelivery');
+  if (deliveryCk && deliveryCk.checked) {
+    finalTotal += 10000;
+    if (deliveryEl) { deliveryEl.textContent = (dict['price.delivery'] || 'Доставка по адресу') + ': +' + fmtTenge(10000); deliveryEl.hidden = false; }
+  }
   finalEl.textContent = fmtTenge(finalTotal);
   if (tier) {
     origEl.textContent = fmtTenge(origTotal);
@@ -3291,7 +3403,7 @@ function updatePriceSummary() {
   metaEl.textContent = fmtTenge(rate) + (dict['price.perDay'] || ' / сут') + ' × ' + days + (dict['price.daysWord'] || ' дн.');
   box.hidden = false;
 }
-['bookPickup','bookReturn','carSelect','bookOutOfCity'].forEach(function(id){
+['bookPickup','bookReturn','carSelect','bookOutOfCity','bookDelivery'].forEach(function(id){
   var el = document.getElementById(id);
   if (el) el.addEventListener('change', updatePriceSummary);
 });
