@@ -2969,6 +2969,36 @@ function handleBooking(e) {
     });
   })
   .then(function(docData) {
+    // Проверка срока действия водительских прав
+    function parseDmy(s) {
+      var m = String(s || '').match(/^(\d{2})\.(\d{2})\.(\d{4})$/);
+      if (!m) return null;
+      var d = new Date(+m[3], +m[2] - 1, +m[1]);
+      return isNaN(d.getTime()) ? null : d;
+    }
+    var expDate = parseDmy(docData.licExpiryDate);
+    if (!expDate) {
+      var err = new Error('LIC_UNREADABLE');
+      err.licUnreadable = true;
+      throw err;
+    }
+    var returnD = returnDate ? new Date(returnDate) : new Date();
+    var today = new Date(); today.setHours(0,0,0,0);
+    if (expDate < today) {
+      var err2 = new Error('LIC_EXPIRED');
+      err2.licExpired = true;
+      err2.expiryDate = docData.licExpiryDate;
+      throw err2;
+    }
+    if (expDate < returnD) {
+      var err3 = new Error('LIC_EXPIRES_DURING_RENTAL');
+      err3.licExpiresDuringRental = true;
+      err3.expiryDate = docData.licExpiryDate;
+      throw err3;
+    }
+    return docData;
+  })
+  .then(function(docData) {
 
     var carKey = getSelectedBookingCarKey();
     var carDisplayName;
@@ -3069,6 +3099,15 @@ function handleBooking(e) {
     } else if (err && err.manyFines) {
       var manyFinesTexts = { en: 'Error — too many unpaid fines (' + err.fineCount + ')', ru: 'Ошибка — у вас слишком много штрафов (' + err.fineCount + ')', kz: 'Қате — айыппұл тым көп (' + err.fineCount + ')' };
       btn.textContent = manyFinesTexts[currentLang] || manyFinesTexts.ru;
+    } else if (err && err.licExpired) {
+      var licExpTexts = { en: 'Error — driver license expired (' + err.expiryDate + ')', ru: 'Ошибка — срок действия прав истёк (' + err.expiryDate + ')', kz: 'Қате — куәліктің мерзімі өтіп кеткен (' + err.expiryDate + ')' };
+      btn.textContent = licExpTexts[currentLang] || licExpTexts.ru;
+    } else if (err && err.licExpiresDuringRental) {
+      var licDurTexts = { en: 'Error — license expires before return (' + err.expiryDate + ')', ru: 'Ошибка — права истекают до возврата авто (' + err.expiryDate + ')', kz: 'Қате — куәлік қайтару күніне дейін аяқталады (' + err.expiryDate + ')' };
+      btn.textContent = licDurTexts[currentLang] || licDurTexts.ru;
+    } else if (err && err.licUnreadable) {
+      var licUnrTexts = { en: 'Error — could not read license expiry date', ru: 'Ошибка — не удалось распознать срок действия прав', kz: 'Қате — куәліктің мерзімі танылмады' };
+      btn.textContent = licUnrTexts[currentLang] || licUnrTexts.ru;
     } else {
       btn.textContent = 'Ошибка, попробуйте ещё раз';
     }
