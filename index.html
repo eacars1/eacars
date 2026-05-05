@@ -2754,40 +2754,78 @@ function fileToBase64(file) {
   });
 }
 
+// Сжимает изображение до max 1568px по длинной стороне и JPEG quality 0.85.
+// Возвращает { mediaType, base64 }. PDF и не-изображения возвращаются без изменений.
+function fileToCompressedBase64(file) {
+  return new Promise(function(resolve, reject) {
+    if (!file.type || !file.type.startsWith('image/')) {
+      fileToBase64(file).then(function(b64) {
+        resolve({ mediaType: file.type, base64: b64 });
+      }).catch(reject);
+      return;
+    }
+    var url = URL.createObjectURL(file);
+    var img = new Image();
+    img.onload = function() {
+      var maxSide = 1568;
+      var w = img.naturalWidth, h = img.naturalHeight;
+      var scale = Math.min(1, maxSide / Math.max(w, h));
+      var cw = Math.round(w * scale), ch = Math.round(h * scale);
+      var canvas = document.createElement('canvas');
+      canvas.width = cw; canvas.height = ch;
+      var ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, cw, ch);
+      URL.revokeObjectURL(url);
+      var dataUrl = canvas.toDataURL('image/jpeg', 0.85);
+      resolve({ mediaType: 'image/jpeg', base64: dataUrl.split(',')[1] });
+    };
+    img.onerror = function() {
+      URL.revokeObjectURL(url);
+      // Fallback — отправим как есть
+      fileToBase64(file).then(function(b64) {
+        resolve({ mediaType: file.type, base64: b64 });
+      }).catch(reject);
+    };
+    img.src = url;
+  });
+}
+
 // Claude AI Vision — распознавание документов
 // API key is stored securely on the server (Cloudflare environment variable)
 
 async function recognizeWithClaude(fileId, fileLic) {
   var content = [];
 
-  // Добавляем фото/PDF удостоверения
+  // Добавляем фото/PDF удостоверения (изображения сжимаются для экономии токенов)
   if (fileId) {
-    var base64Id = await fileToBase64(fileId);
     if (fileId.type === 'application/pdf') {
+      var pdfId = await fileToBase64(fileId);
       content.push({
         type: 'document',
-        source: { type: 'base64', media_type: 'application/pdf', data: base64Id }
+        source: { type: 'base64', media_type: 'application/pdf', data: pdfId }
       });
     } else if (fileId.type.startsWith('image/')) {
+      var imgId = await fileToCompressedBase64(fileId);
       content.push({
         type: 'image',
-        source: { type: 'base64', media_type: fileId.type, data: base64Id }
+        source: { type: 'base64', media_type: imgId.mediaType, data: imgId.base64 }
       });
     }
   }
 
   // Добавляем фото/PDF водительских прав
   if (fileLic) {
-    var base64Lic = await fileToBase64(fileLic);
     if (fileLic.type === 'application/pdf') {
+      var pdfLic = await fileToBase64(fileLic);
       content.push({
         type: 'document',
-        source: { type: 'base64', media_type: 'application/pdf', data: base64Lic }
+        source: { type: 'base64', media_type: 'application/pdf', data: pdfLic }
       });
     } else if (fileLic.type.startsWith('image/')) {
+      var imgLic = await fileToCompressedBase64(fileLic);
       content.push({
         type: 'image',
-        source: { type: 'base64', media_type: fileLic.type, data: base64Lic }
+        source: { type: 'base64', media_type: imgLic.mediaType, data: imgLic.base64 }
       });
     }
   }
@@ -2804,8 +2842,7 @@ async function recognizeWithClaude(fileId, fileLic) {
       'Второе изображение — водительское удостоверение. Извлеки:\n' +
       '5. Дата выдачи водительских прав (в формате ДД.ММ.ГГГГ)\n' +
       '6. Действительно до (в формате ДД.ММ.ГГГГ)\n' +
-      '7. Номер ВУ (номер водительского удостоверения)\n' +
-      '8. Разрешённые категории. ВАЖНО: возвращай категории СТРОГО через запятую с пробелом, как отдельные буквы/обозначения. Например: "A, B, C" или "B, C, D" или "B1, C1". Никогда не склеивай категории в одно слово (НЕ "BC", НЕ "AB", НЕ "ABC"). Если на правах указано несколько категорий — каждую через запятую.\n\n' +
+      '7. Разрешённые категории. ВАЖНО: возвращай категории СТРОГО через запятую с пробелом, как отдельные буквы/обозначения. Например: "A, B, C" или "B, C, D" или "B1, C1". Никогда не склеивай категории в одно слово (НЕ "BC", НЕ "AB", НЕ "ABC"). Если на правах указано несколько категорий — каждую через запятую.\n\n' +
       'Ответь ТОЛЬКО в формате JSON без markdown и без дополнительного текста:\n' +
       '{\n' +
       '  "iin": "...",\n' +
@@ -2814,7 +2851,6 @@ async function recognizeWithClaude(fileId, fileLic) {
       '  "idNumber": "...",\n' +
       '  "licIssueDate": "...",\n' +
       '  "licExpiryDate": "...",\n' +
-      '  "licNumber": "...",\n' +
       '  "categories": "..."\n' +
       '}\n\n' +
       'Если какое-то поле не удалось прочитать, поставь значение "не распознано". Не добавляй никаких пояснений — только JSON.'
@@ -2853,7 +2889,6 @@ async function recognizeWithClaude(fileId, fileLic) {
       idNumber: 'не распознано',
       licIssueDate: 'не распознано',
       licExpiryDate: 'не распознано',
-      licNumber: 'не распознано',
       categories: 'не распознано'
     };
   }
@@ -3042,7 +3077,6 @@ function handleBooking(e) {
     text += '🆔 Номер УДЛ: ' + (docData.idNumber || 'не распознано') + '\n';
     text += '📆 Дата выдачи УДЛ: ' + (docData.idIssueDate || 'не распознано') + '\n';
     text += '\n━━━ 🚗 Водительские права ━━━\n';
-    text += '🔢 Номер ВУ: ' + (docData.licNumber || 'не распознано') + '\n';
     text += '🏷 Категории: ' + (docData.categories || 'не распознано') + '\n';
     text += '📆 Дата выдачи ВУ: ' + (docData.licIssueDate || 'не распознано') + '\n';
     text += '📆 Действительно до: ' + (docData.licExpiryDate || 'не распознано') + '\n';
