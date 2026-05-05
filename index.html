@@ -3040,6 +3040,26 @@ function handleBooking(e) {
       err4.categories = docData.categories || 'не распознано';
       throw err4;
     }
+    // Проверка стажа вождения (минимум 3 года с даты выдачи ВУ)
+    var issueDate = parseDmy(docData.licIssueDate);
+    if (!issueDate) {
+      var err5 = new Error('LIC_ISSUE_UNREADABLE');
+      err5.licIssueUnreadable = true;
+      throw err5;
+    }
+    var threeYearsAgo = new Date();
+    threeYearsAgo.setFullYear(threeYearsAgo.getFullYear() - 3);
+    threeYearsAgo.setHours(0,0,0,0);
+    if (issueDate > threeYearsAgo) {
+      var ms = today - issueDate;
+      var years = Math.floor(ms / (365.25 * 24 * 3600 * 1000));
+      var months = Math.floor((ms % (365.25 * 24 * 3600 * 1000)) / (30.44 * 24 * 3600 * 1000));
+      var err6 = new Error('NOT_ENOUGH_EXPERIENCE');
+      err6.notEnoughExperience = true;
+      err6.years = years;
+      err6.months = months;
+      throw err6;
+    }
     return docData;
   })
   .then(function(docData) {
@@ -3148,6 +3168,13 @@ function handleBooking(e) {
     } else if (err && err.licExpiresDuringRental) {
       var licDurTexts = { en: 'Error — license expires before return (' + err.expiryDate + ')', ru: 'Ошибка — права истекают до возврата авто (' + err.expiryDate + ')', kz: 'Қате — куәлік қайтару күніне дейін аяқталады (' + err.expiryDate + ')' };
       btn.textContent = licDurTexts[currentLang] || licDurTexts.ru;
+    } else if (err && err.notEnoughExperience) {
+      var expStr = err.years + ' г. ' + err.months + ' мес.';
+      var expTexts = { en: 'Error — minimum 3 years driving experience required (yours: ' + expStr + ')', ru: 'Ошибка — нужен стаж от 3 лет (у вас: ' + expStr + ')', kz: 'Қате — кемінде 3 жыл өтіл қажет (сізде: ' + expStr + ')' };
+      btn.textContent = expTexts[currentLang] || expTexts.ru;
+    } else if (err && err.licIssueUnreadable) {
+      var issTexts = { en: 'Error — could not read license issue date', ru: 'Ошибка — не удалось распознать дату выдачи прав', kz: 'Қате — куәлік берілген күні танылмады' };
+      btn.textContent = issTexts[currentLang] || issTexts.ru;
     } else if (err && err.noCategoryB) {
       var noBTexts = { en: 'Error — category B is required (yours: ' + err.categories + ')', ru: 'Ошибка — нужна категория B (у вас: ' + err.categories + ')', kz: 'Қате — B санаты қажет (сізде: ' + err.categories + ')' };
       btn.textContent = noBTexts[currentLang] || noBTexts.ru;
