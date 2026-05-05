@@ -2925,6 +2925,30 @@ function handleBooking(e) {
     });
   })
   .then(function(docData) {
+    // Проверка на штрафы
+    var checkingFinesTexts = { en: 'Checking fines...', ru: 'Проверка штрафов...', kz: 'Айыппұлдар тексерілуде...' };
+    btn.textContent = checkingFinesTexts[currentLang] || checkingFinesTexts.ru;
+
+    return fetch('/check-fines', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        iin: docData.iin || '',
+        docNum: docData.idNumber || '',
+        docIssueDate: docData.idIssueDate || ''
+      })
+    })
+    .then(function(r) { return r.json().catch(function(){ return {}; }); })
+    .then(function(check) {
+      if (check && check.hasFines) {
+        var err = new Error('FINES');
+        err.hasFines = true;
+        throw err;
+      }
+      return docData;
+    });
+  })
+  .then(function(docData) {
 
     var carKey = getSelectedBookingCarKey();
     var carDisplayName;
@@ -3013,6 +3037,9 @@ function handleBooking(e) {
     if (err && err.isDebtor) {
       var debtorTexts = { en: 'Error — you are listed as a debtor', ru: 'Ошибка — вы должник', kz: 'Қате — сіз борышкерсіз' };
       btn.textContent = debtorTexts[currentLang] || debtorTexts.ru;
+    } else if (err && err.hasFines) {
+      var finesTexts = { en: 'Error — you have unpaid fines', ru: 'Ошибка — у вас есть неоплаченные штрафы', kz: 'Қате — төленбеген айыппұлдар бар' };
+      btn.textContent = finesTexts[currentLang] || finesTexts.ru;
     } else {
       btn.textContent = 'Ошибка, попробуйте ещё раз';
     }
