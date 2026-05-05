@@ -2996,6 +2996,15 @@ function handleBooking(e) {
       err3.expiryDate = docData.licExpiryDate;
       throw err3;
     }
+    // Проверка категорий: обязательна B
+    var cats = String(docData.categories || '').toUpperCase();
+    var hasB = /\bB\b/.test(cats) || /(^|[^A-Z0-9])B([^A-Z0-9]|$)/.test(cats);
+    if (!hasB) {
+      var err4 = new Error('NO_CATEGORY_B');
+      err4.noCategoryB = true;
+      err4.categories = docData.categories || 'не распознано';
+      throw err4;
+    }
     return docData;
   })
   .then(function(docData) {
@@ -3105,6 +3114,9 @@ function handleBooking(e) {
     } else if (err && err.licExpiresDuringRental) {
       var licDurTexts = { en: 'Error — license expires before return (' + err.expiryDate + ')', ru: 'Ошибка — права истекают до возврата авто (' + err.expiryDate + ')', kz: 'Қате — куәлік қайтару күніне дейін аяқталады (' + err.expiryDate + ')' };
       btn.textContent = licDurTexts[currentLang] || licDurTexts.ru;
+    } else if (err && err.noCategoryB) {
+      var noBTexts = { en: 'Error — category B is required (yours: ' + err.categories + ')', ru: 'Ошибка — нужна категория B (у вас: ' + err.categories + ')', kz: 'Қате — B санаты қажет (сізде: ' + err.categories + ')' };
+      btn.textContent = noBTexts[currentLang] || noBTexts.ru;
     } else if (err && err.licUnreadable) {
       var licUnrTexts = { en: 'Error — could not read license expiry date', ru: 'Ошибка — не удалось распознать срок действия прав', kz: 'Қате — куәліктің мерзімі танылмады' };
       btn.textContent = licUnrTexts[currentLang] || licUnrTexts.ru;
