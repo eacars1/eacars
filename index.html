@@ -2073,14 +2073,13 @@ body.intro-playing .nav { opacity: 0 !important; pointer-events: none; }
     <button class="exp-modal-btn" onclick="closeDocErrorModal()" data-i18n="expModal.ok">Понятно</button>
   </div>
 </div>
-<div class="exp-modal-overlay" id="expModal" onclick="if(event.target===this)closeExpModal()">
+<div class="exp-modal-overlay" id="expModal">
   <div class="exp-modal" role="dialog" aria-modal="true">
-    <button class="exp-modal-close" onclick="closeExpModal()" aria-label="Close">&times;</button>
     <div class="exp-modal-icon">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
     </div>
-    <h3 data-i18n="expModal.title">Внимание</h3>
-    <p data-i18n="expModal.text">Аренда автомобилей доступна только водителям со стажем вождения от 3 лет. Стаж <strong>строго проверяется по документам</strong> при выдаче автомобиля. Пожалуйста, убедитесь, что у вас достаточный стаж, перед оформлением заявки.</p>
+    <h3 data-i18n="expModal.title" style="color:#fef3c7;text-shadow:0 0 18px rgba(252,211,77,0.55),0 0 40px rgba(252,211,77,0.25);">Внимание</h3>
+    <p data-i18n="expModal.text" style="color:#d4d4d8;">Аренда автомобилей доступна только водителям со стажем вождения от 3 лет. Стаж <strong>строго проверяется по документам</strong> при выдаче автомобиля. Пожалуйста, убедитесь, что у вас достаточный стаж, перед оформлением заявки.</p>
     <button class="exp-modal-btn" onclick="closeExpModal()" data-i18n="expModal.ok">Понятно</button>
   </div>
 </div>
