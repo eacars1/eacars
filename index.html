@@ -2063,14 +2063,13 @@ body.intro-playing .nav { opacity: 0 !important; pointer-events: none; }
     <button class="exp-modal-btn" onclick="closeOutCityModal()" data-i18n="expModal.ok">Понятно</button>
   </div>
 </div>
-<div class="exp-modal-overlay" id="docErrorModal" onclick="if(event.target===this)closeDocErrorModal()">
+<div class="exp-modal-overlay" id="docErrorModal">
   <div class="exp-modal" role="dialog" aria-modal="true">
-    <button class="exp-modal-close" onclick="closeDocErrorModal()" aria-label="Close">&times;</button>
     <div class="exp-modal-icon">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
     </div>
     <h3 data-i18n="docErrorModal.title">Не удалось распознать документы</h3>
-    <p data-i18n="docErrorModal.text">ИИ не смог прочитать данные с загруженных файлов. Возможные причины: загружен <strong>не тот документ</strong>, фото <strong>размыто</strong> или <strong>обрезано</strong>. Пожалуйста, загрузите чёткие фото удостоверения личности и водительских прав и попробуйте снова.</p>
+    <p data-i18n="docErrorModal.text" style="color:#d4d4d8;">ИИ не смог прочитать данные с загруженных файлов. Возможные причины: загружен <strong>не тот документ</strong>, фото <strong>размыто</strong> или <strong>обрезано</strong>. Пожалуйста, загрузите чёткие фото удостоверения личности и водительских прав и попробуйте снова.</p>
     <button class="exp-modal-btn" onclick="closeDocErrorModal()" data-i18n="expModal.ok">Понятно</button>
   </div>
 </div>
@@ -2731,7 +2730,7 @@ function closeExpModal() {
 }
 function openDocErrorModal() { document.getElementById('docErrorModal').classList.add('active'); }
 function closeDocErrorModal() { document.getElementById('docErrorModal').classList.remove('active'); }
-document.addEventListener('keydown', function(e){ if(e.key==='Escape') { closeExpModal(); closeOutCityModal(); closeDocErrorModal(); } });
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') { closeExpModal(); closeOutCityModal(); } });
 // Show modal when booking section first becomes visible (scroll-triggered, e.g. nav click)
 window.addEventListener('load', function(){
   const bookingEl = document.getElementById('booking');
