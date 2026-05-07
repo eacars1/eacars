@@ -838,7 +838,7 @@ body::before {
 .check-row input[type="checkbox"]:checked + .check-box::after { transform: rotate(-45deg) translate(1px,-1px) scale(1); }
 .check-row .check-text { font-size: 0.92rem; color: var(--text-primary); line-height: 1.35; }
 .form-group input:focus, .form-group select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(27,67,50,0.15); }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; column-gap: 16px; row-gap: 0; }
 
 .file-upload { position: relative; }
 .file-upload input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; z-index: 2; }
@@ -1218,7 +1218,6 @@ a.share-link-text:hover { color: #f5e7b8; background: rgba(212,168,71,0.08); tex
   .contact-grid { grid-template-columns: 1fr; }
   .catalog-header { flex-direction: column; align-items: flex-start; gap: 20px; }
   .form-row { grid-template-columns: 1fr; }
-  .form-row > .form-group { margin-bottom: 0; }
   .hero h1 { font-size: 2.4rem; }
   .booking-form-card { padding: 28px; }
   .footer-inner { flex-direction: column; gap: 16px; text-align: center; }
@@ -2807,17 +2806,32 @@ function scrollReviews(dir) {
 (function(){
   var track = document.getElementById('reviewsTrack');
   if (!track || !('IntersectionObserver' in window)) return;
-  var fired = false;
+  var hintTimer = null, userScrolled = false, isVisible = false;
+  function playHint(){
+    if (userScrolled || !isVisible) return;
+    track.classList.remove('swipe-hint');
+    void track.offsetWidth;
+    track.classList.add('swipe-hint');
+    setTimeout(function(){ track.classList.remove('swipe-hint'); }, 1700);
+  }
+  function startLoop(){
+    if (hintTimer || userScrolled) return;
+    setTimeout(playHint, 300);
+    hintTimer = setInterval(playHint, 2000);
+  }
+  function stopLoop(){
+    if (hintTimer) { clearInterval(hintTimer); hintTimer = null; }
+    track.classList.remove('swipe-hint');
+  }
+  track.addEventListener('scroll', function(){
+    if (userScrolled) return;
+    userScrolled = true;
+    stopLoop();
+  }, { passive: true });
   var io = new IntersectionObserver(function(entries){
     entries.forEach(function(e){
-      if (e.isIntersecting && !fired) {
-        fired = true;
-        setTimeout(function(){
-          track.classList.add('swipe-hint');
-          setTimeout(function(){ track.classList.remove('swipe-hint'); }, 1700);
-        }, 300);
-        io.disconnect();
-      }
+      isVisible = e.isIntersecting;
+      if (isVisible) startLoop(); else stopLoop();
     });
   }, { threshold: 0.35 });
   io.observe(track);
