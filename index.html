@@ -865,10 +865,10 @@ body::before {
 .price-summary-orig { font-size: 1.05rem; color: var(--text-muted); text-decoration: line-through; text-decoration-thickness: 2px; text-decoration-color: rgba(239,68,68,0.7); }
 .price-summary-orig:empty { display: none; }
 .price-summary-final { font-family: var(--font-display); font-size: 1.85rem; font-weight: 800; color: var(--text-primary); letter-spacing: -0.5px; }
-.price-summary-discount { display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; padding: 7px 14px; background: var(--accent); border: 1px solid var(--accent); border-radius: 100px; font-size: 0.82rem; font-weight: 600; color: #FFFFFF; box-shadow: 0 2px 8px rgba(27,67,50,0.25); }
+.price-summary-discount { display: flex; width: fit-content; align-items: center; gap: 6px; margin-top: 10px; padding: 7px 14px; background: var(--accent); border: 1px solid var(--accent); border-radius: 100px; font-size: 0.82rem; font-weight: 600; color: #FFFFFF; box-shadow: 0 2px 8px rgba(27,67,50,0.25); }
 .price-summary-discount[hidden] { display: none !important; }
 .price-summary[hidden] { display: none !important; }
-.price-summary-fee { display: inline-flex; align-items: center; gap: 9px; margin-top: 10px; padding: 7px 16px 7px 8px; background: #2a1f17; border: 1px solid #4a3a2a; border-radius: 100px; font-size: 0.86rem; font-weight: 600; color: #faf3e3; box-shadow: 0 2px 8px rgba(0,0,0,0.25); }
+.price-summary-fee { display: flex; width: fit-content; align-items: center; gap: 9px; margin-top: 10px; padding: 7px 16px 7px 8px; background: #2a1f17; border: 1px solid #4a3a2a; border-radius: 100px; font-size: 0.86rem; font-weight: 600; color: #faf3e3; box-shadow: 0 2px 8px rgba(0,0,0,0.25); }
 .price-summary-fee::before { content: '+'; display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; background: var(--accent); color: #1a120b; font-weight: 800; font-size: 0.95rem; line-height: 1; }
 .price-summary-fee[hidden] { display: none !important; }
 .price-outcity-free { margin-left: 0; }
@@ -2261,7 +2261,7 @@ body.intro-playing .nav { opacity: 0 !important; pointer-events: none; }
             <div class="price-summary-discount" id="priceDiscount" hidden></div>
             <div class="price-summary-discount price-outcity-free" id="priceOutCityFree" hidden></div>
             <div class="price-summary-fee" id="priceOutCityFee" hidden></div>
-            <div class="price-summary-fee" id="priceDeliveryFee" hidden></div>
+            <div class="price-summary-discount" id="priceDeliveryFee" hidden></div>
             <div class="price-summary-meta" id="priceMeta"></div>
           </div>
           <div class="discount-tip" id="discountTip" hidden>
