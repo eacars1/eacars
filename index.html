@@ -210,9 +210,9 @@ body::before {
 /* HERO */
 .hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; padding: 140px 0 100px; }
 .hero-bg { position: absolute; inset: 0; z-index: 0; }
-.hero-bg::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 70% 40%, rgba(201,169,110,0.06), transparent 70%), radial-gradient(ellipse 60% 80% at 20% 80%, rgba(201,169,110,0.03), transparent 60%), linear-gradient(180deg, #121613 0%, rgba(18,22,19,0.92) 100%); z-index: 1; }
+.hero-bg::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 70% 40%, rgba(201,169,110,0.08), transparent 70%), linear-gradient(180deg, rgba(18,22,19,0.55) 0%, rgba(18,22,19,0.75) 100%); z-index: 2; pointer-events: none; }
 .hero-bg-image { position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1600&q=80') center/cover no-repeat; opacity: 0.25; filter: saturate(0.5) brightness(0.8); }
-.hero-bg-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center center; aspect-ratio: 16 / 9; opacity: 0.45; filter: saturate(0.7) brightness(0.75); pointer-events: none; }
+.hero-bg-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center center; z-index: 1; pointer-events: none; }
 .hero-grid-overlay { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 80px 80px; z-index: 2; }
 
 /* Floating decorative orbs */
