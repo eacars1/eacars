@@ -242,10 +242,11 @@ body::before {
   animation: drift 18s ease-in-out infinite 3s;
 }
 .hero-content { position: relative; z-index: 3; max-width: 700px; color: #FAF9F7; }
-.hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px; background: rgba(201,169,110,0.15); border: 1px solid rgba(201,169,110,0.3); border-radius: 100px; font-size: 0.82rem; font-weight: 600; color: #3A6B52; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 28px; animation: fadeUp 0.8s var(--ease) both; position: relative; overflow: hidden; }
+.hero-content::before { content: ''; position: absolute; inset: -40px -60px; background: radial-gradient(ellipse 70% 80% at 30% 50%, rgba(10,14,12,0.7), rgba(10,14,12,0.4) 45%, transparent 75%); filter: blur(20px); z-index: -1; pointer-events: none; }
+.hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px; background: rgba(15,20,17,0.55); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(217,189,135,0.45); border-radius: 100px; font-size: 0.82rem; font-weight: 600; color: #E8D5A6; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 28px; animation: fadeUp 0.8s var(--ease) both; position: relative; overflow: hidden; box-shadow: 0 4px 18px rgba(0,0,0,0.35); }
 .hero-badge::before { content: ''; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; position: relative; flex-shrink: 0; box-shadow: 0 0 8px var(--accent), 0 0 20px rgba(201,169,110,0.3); }
 .hero-badge::after { content: ''; position: absolute; top: 0; left: -100%; width: 60%; height: 100%; background: linear-gradient(90deg, transparent, rgba(217,189,135,0.2), transparent); animation: glow-line 4s ease-in-out infinite; }
-.hero-notice { display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px; margin: 4px 0 28px; background: rgba(220,38,38,0.12); border: 1px solid rgba(239,68,68,0.45); border-radius: 12px; font-size: 0.9rem; font-weight: 500; color: #fecaca; animation: fadeUp 0.8s var(--ease) 0.5s both; box-shadow: 0 4px 14px rgba(220,38,38,0.18); }
+.hero-notice { display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px; margin: 4px 0 28px; background: rgba(15,20,17,0.6); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(239,68,68,0.55); border-radius: 12px; font-size: 0.9rem; font-weight: 500; color: #fecaca; animation: fadeUp 0.8s var(--ease) 0.5s both; box-shadow: 0 4px 18px rgba(0,0,0,0.4), 0 0 0 1px rgba(239,68,68,0.15) inset; text-shadow: 0 1px 4px rgba(0,0,0,0.6); }
 .hero-notice svg { width: 18px; height: 18px; flex-shrink: 0; color: #f87171; }
 .exp-modal-overlay { position: fixed; inset: 0; background: rgba(15,12,10,0.72); backdrop-filter: blur(6px); z-index: 9999; display: none; align-items: center; justify-content: center; padding: 20px; animation: fadeIn 0.25s ease; }
 .exp-modal-overlay.active { display: flex; }
@@ -271,10 +272,10 @@ body::before {
 .btn-outcity-info svg { flex-shrink: 0; opacity: 0.95; }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes modalIn { from { opacity: 0; transform: translateY(20px) scale(0.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
-.hero h1 { font-family: var(--font-display); font-size: clamp(2.8rem, 6vw, 4.5rem); font-weight: 800; line-height: 1.06; letter-spacing: -1.5px; color: #FAF9F7; margin-bottom: 24px; animation: fadeUp 0.8s var(--ease) 0.15s both; }
-.hero h1 em { font-style: normal; color: #3A6B52; position: relative; }
+.hero h1 { font-family: var(--font-display); font-size: clamp(2.8rem, 6vw, 4.5rem); font-weight: 800; line-height: 1.06; letter-spacing: -1.5px; color: #FFFFFF; margin-bottom: 24px; animation: fadeUp 0.8s var(--ease) 0.15s both; text-shadow: 0 2px 14px rgba(0,0,0,0.65), 0 1px 3px rgba(0,0,0,0.5); }
+.hero h1 em { font-style: normal; color: #E8D5A6; position: relative; text-shadow: 0 2px 14px rgba(0,0,0,0.7), 0 0 28px rgba(217,189,135,0.35); }
 .hero h1 em::after { content: ''; position: absolute; bottom: 4px; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent-hover), rgba(217,189,135,0.5), var(--accent-hover)); background-size: 200% 100%; border-radius: 2px; animation: shimmer 3s linear infinite; }
-.hero-sub { font-size: 1.15rem; color: rgba(250,249,247,0.7); line-height: 1.7; max-width: 520px; margin-bottom: 40px; animation: fadeUp 0.8s var(--ease) 0.3s both; }
+.hero-sub { font-size: 1.15rem; color: rgba(255,255,255,0.92); line-height: 1.7; max-width: 520px; margin-bottom: 40px; animation: fadeUp 0.8s var(--ease) 0.3s both; text-shadow: 0 1px 8px rgba(0,0,0,0.6); }
 .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; animation: fadeUp 0.8s var(--ease) 0.45s both; }
 
 /* Scroll indicator */
@@ -1562,7 +1563,7 @@ body.intro-playing .nav { opacity: 0 !important; pointer-events: none; }
 <!-- HERO -->
 <section class="hero" id="hero">
   <div class="hero-bg">
-    <video class="hero-bg-video" src="img/hero-bg.mp4" autoplay muted loop playsinline preload="auto" onloadedmetadata="this.playbackRate=0.6"></video>
+    <video class="hero-bg-video" src="img/hero-bg.mp4" autoplay muted loop playsinline preload="auto"></video>
     <div class="hero-grid-overlay"></div>
     <div class="hero-orb hero-orb-1"></div>
     <div class="hero-orb hero-orb-2"></div>
