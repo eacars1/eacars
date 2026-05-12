@@ -18,7 +18,7 @@
 <link rel="canonical" href="https://eacars.pages.dev">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <!-- Claude AI Vision API for document recognition -->
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root {
   --accent: #1B4332;
@@ -212,7 +212,8 @@ body::before {
 .hero-bg { position: absolute; inset: 0; z-index: 0; }
 .hero-bg::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 70% 40%, rgba(201,169,110,0.08), transparent 70%), linear-gradient(180deg, rgba(18,22,19,0.55) 0%, rgba(18,22,19,0.75) 100%); z-index: 2; pointer-events: none; }
 .hero-bg-image { position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1600&q=80') center/cover no-repeat; opacity: 0.25; filter: saturate(0.5) brightness(0.8); }
-.hero-bg-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center center; z-index: 1; pointer-events: none; }
+.hero-bg-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center center; z-index: 1; pointer-events: none; will-change: transform; transform: translateZ(0); backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+@media (max-width: 768px), (prefers-reduced-motion: reduce) { .hero-bg-video { will-change: auto; } }
 .hero-grid-overlay { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 80px 80px; z-index: 2; }
 
 /* Floating decorative orbs */
@@ -273,6 +274,7 @@ body::before {
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes modalIn { from { opacity: 0; transform: translateY(20px) scale(0.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
 .hero h1 { font-family: var(--font-display); font-size: clamp(2.8rem, 6vw, 4.5rem); font-weight: 800; line-height: 1.06; letter-spacing: -1.5px; color: #FFFFFF; margin-bottom: 24px; animation: fadeUp 0.8s var(--ease) 0.15s both; text-shadow: 0 2px 14px rgba(0,0,0,0.65), 0 1px 3px rgba(0,0,0,0.5); }
+html[lang="kk"] .hero h1 { font-family: 'Montserrat', sans-serif; letter-spacing: -1px; }
 .hero h1 em { font-style: normal; color: #E8D5A6; position: relative; text-shadow: 0 2px 14px rgba(0,0,0,0.7), 0 0 28px rgba(217,189,135,0.35); }
 .hero h1 em::after { content: ''; position: absolute; bottom: 4px; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent-hover), rgba(217,189,135,0.5), var(--accent-hover)); background-size: 200% 100%; border-radius: 2px; animation: shimmer 3s linear infinite; }
 .hero-sub { font-size: 1.15rem; color: rgba(255,255,255,0.92); line-height: 1.7; max-width: 520px; margin-bottom: 18px; animation: fadeUp 0.8s var(--ease) 0.3s both; text-shadow: 0 1px 8px rgba(0,0,0,0.6); }
@@ -1567,7 +1569,7 @@ body.intro-playing .nav { opacity: 0 !important; pointer-events: none; }
 <!-- HERO -->
 <section class="hero" id="hero">
   <div class="hero-bg">
-    <video class="hero-bg-video" src="img/hero-bg.mp4" autoplay muted loop playsinline preload="auto"></video>
+    <video class="hero-bg-video" src="img/hero-bg.mp4" autoplay muted loop playsinline webkit-playsinline preload="metadata" disablepictureinpicture disableremoteplayback aria-hidden="true" tabindex="-1" poster="img/dc1.jpeg"></video>
     <div class="hero-grid-overlay"></div>
     <div class="hero-orb hero-orb-1"></div>
     <div class="hero-orb hero-orb-2"></div>
@@ -4020,23 +4022,62 @@ renderCalendars(window.selectedCar);
 // ============================================
 // HERO PARALLAX + SCROLL EFFECTS
 // ============================================
-const heroBg = document.querySelector('.hero-bg-video') || document.querySelector('.hero-bg-image');
+const heroVideo = document.querySelector('.hero-bg-video');
+const heroBg = heroVideo || document.querySelector('.hero-bg-image');
 const scrollInd = document.querySelector('.scroll-indicator');
 const heroSection = document.querySelector('.hero');
 
+// Hero video: bullet-proof infinite loop + perf guards
+if (heroVideo) {
+  const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  const saveData = conn && (conn.saveData || /2g/i.test(conn.effectiveType || ''));
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (saveData || reduceMotion) {
+    // Drop video entirely — show static gradient/image background instead
+    heroVideo.removeAttribute('autoplay');
+    heroVideo.pause();
+    heroVideo.removeAttribute('src');
+    heroVideo.load();
+    heroVideo.style.display = 'none';
+  } else {
+    // Safety net: some Android/iOS browsers still hiccup on loop attribute
+    heroVideo.addEventListener('ended', () => {
+      heroVideo.currentTime = 0;
+      heroVideo.play().catch(() => {});
+    });
+    // Autoplay can be blocked until user gesture — retry on first interaction
+    const tryPlay = () => heroVideo.play().catch(() => {});
+    tryPlay();
+    ['touchstart', 'click', 'scroll'].forEach(ev =>
+      window.addEventListener(ev, tryPlay, { once: true, passive: true })
+    );
+    // Pause when tab is hidden — saves battery, keeps loop in sync
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) heroVideo.pause();
+      else tryPlay();
+    });
+  }
+}
+
+// Parallax + scroll-indicator — throttled with rAF, disabled on mobile/reduce-motion
+const enableParallax = window.matchMedia('(min-width: 769px)').matches
+  && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let scrollTicking = false;
 window.addEventListener('scroll', () => {
-  const y = window.scrollY;
-  const heroH = heroSection ? heroSection.offsetHeight : 800;
-
-  // Parallax on hero background
-  if (heroBg && y < heroH) {
-    heroBg.style.transform = 'translateY(' + (y * 0.3) + 'px)';
-  }
-
-  // Fade out scroll indicator
-  if (scrollInd) {
-    scrollInd.style.opacity = Math.max(0, 1 - y / 200);
-  }
+  if (scrollTicking) return;
+  scrollTicking = true;
+  requestAnimationFrame(() => {
+    const y = window.scrollY;
+    const heroH = heroSection ? heroSection.offsetHeight : 800;
+    if (enableParallax && heroBg && y < heroH) {
+      heroBg.style.transform = 'translate3d(0,' + (y * 0.3) + 'px,0)';
+    }
+    if (scrollInd) {
+      scrollInd.style.opacity = Math.max(0, 1 - y / 200);
+    }
+    scrollTicking = false;
+  });
 }, { passive: true });
 
 // ============================================
