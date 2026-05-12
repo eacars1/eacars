@@ -266,6 +266,18 @@ body::before {
 .info-modal .exp-modal-btn { background: linear-gradient(135deg, #15803d 0%, #16a34a 50%, #22c55e 100%); box-shadow: 0 4px 14px rgba(22,163,74,0.35), inset 0 1px 0 rgba(255,255,255,0.15); }
 .info-modal .exp-modal-btn:hover { box-shadow: 0 8px 22px rgba(22,163,74,0.5), inset 0 1px 0 rgba(255,255,255,0.18); }
 .outcity-icon { background: rgba(34,197,94,0.18) !important; color: #4ade80 !important; border: 1px solid rgba(74,222,128,0.4) !important; }
+.cit-modal { border: 1px solid rgba(201,169,110,0.45) !important; }
+.cit-icon { background: rgba(201,169,110,0.18) !important; color: #e8d5a6 !important; border: 1px solid rgba(217,189,135,0.45) !important; }
+.cit-btn-row { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+.cit-btn-row .exp-modal-btn { width: 100%; padding: 13px 24px; }
+.cit-btn-secondary { background: transparent !important; color: #e8d5a6 !important; border: 1px solid rgba(217,189,135,0.45) !important; box-shadow: none !important; }
+.cit-btn-secondary:hover { background: rgba(217,189,135,0.08) !important; box-shadow: none !important; }
+.cit-name-input { width: 100%; padding: 14px 16px; background: rgba(255,255,255,0.04); border: 1.5px solid rgba(217,189,135,0.35); border-radius: 10px; color: #fff; font-family: var(--font-body); font-size: 0.95rem; font-weight: 500; outline: none; margin-bottom: 14px; transition: border 0.2s, box-shadow 0.2s; }
+.cit-name-input:focus { border-color: rgba(217,189,135,0.7); box-shadow: 0 0 0 3px rgba(217,189,135,0.15); }
+.cit-name-input::placeholder { color: rgba(232,213,166,0.5); }
+.cit-name-error { color: #f87171; font-size: 0.82rem; margin: -8px 0 12px; display: none; text-align: left; }
+.cit-step { display: none; }
+.cit-step.active { display: block; }
 .catalog-right { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
 .catalog-info-row { display: flex; justify-content: flex-end; }
 .btn-outcity-info { display: inline-flex; align-items: center; gap: 10px; padding: 11px 20px; background: linear-gradient(135deg, #14532d 0%, #166534 50%, #15803d 100%); color: #fff; border: 1px solid rgba(34,197,94,0.35); border-radius: 100px; font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: all 0.25s var(--ease); box-shadow: 0 4px 14px rgba(20,83,45,0.35), inset 0 1px 0 rgba(255,255,255,0.12); font-family: inherit; }
@@ -2169,6 +2181,38 @@ body.intro-playing .nav { opacity: 0 !important; pointer-events: none; }
   </div>
 </div>
 
+<!-- CITIZENSHIP MODAL: asks whether the applicant is a citizen of Kazakhstan -->
+<div class="exp-modal-overlay" id="citizenshipModal" onclick="if(event.target===this)closeCitizenshipModal()">
+  <div class="exp-modal cit-modal" role="dialog" aria-modal="true">
+    <button class="exp-modal-close" onclick="closeCitizenshipModal()" aria-label="Close">&times;</button>
+    <div class="exp-modal-icon cit-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+    </div>
+
+    <!-- STEP 1: ask the question -->
+    <div class="cit-step cit-step-1 active" id="citStep1">
+      <h3 data-i18n="citModal.title">Подтвердите гражданство</h3>
+      <p data-i18n="citModal.text">Являетесь ли вы гражданином Республики Казахстан?</p>
+      <div class="cit-btn-row">
+        <button class="exp-modal-btn" type="button" onclick="citizenshipAnswer(false)" data-i18n="citModal.yes">Да, гражданин РК</button>
+        <button class="exp-modal-btn cit-btn-secondary" type="button" onclick="citizenshipShowNameStep()" data-i18n="citModal.no">Нет, я иностранец</button>
+      </div>
+    </div>
+
+    <!-- STEP 2: ask the foreigner for their full name -->
+    <div class="cit-step cit-step-2" id="citStep2">
+      <h3 data-i18n="citModal.nameTitle">Введите ФИО</h3>
+      <p data-i18n="citModal.nameText">Укажите полное ФИО, как указано в вашем паспорте.</p>
+      <input type="text" class="cit-name-input" id="citForeignName" placeholder="Иван Иванов / Ivan Ivanov" autocomplete="name" data-i18n-placeholder="citModal.namePlaceholder" onkeydown="if(event.key==='Enter'){event.preventDefault();citizenshipSubmitForeignName();}">
+      <div class="cit-name-error" id="citNameError" data-i18n="citModal.nameError">Пожалуйста, укажите ФИО полностью.</div>
+      <div class="cit-btn-row">
+        <button class="exp-modal-btn" type="button" onclick="citizenshipSubmitForeignName()" data-i18n="citModal.send">Отправить заявку</button>
+        <button class="exp-modal-btn cit-btn-secondary" type="button" onclick="citizenshipBackToStep1()" data-i18n="citModal.back">Назад</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="exp-modal-overlay" id="docErrorModal">
   <div class="exp-modal" role="dialog" aria-modal="true">
     <div class="exp-modal-icon">
@@ -2385,7 +2429,7 @@ body.intro-playing .nav { opacity: 0 !important; pointer-events: none; }
 const translations = {
   en: {
     "nav.cars":"Cars","nav.availability":"Availability","nav.why":"Why Us","nav.how":"How It Works","nav.reviews":"Reviews","nav.contact":"Contact","nav.book":"Book Now",
-    "hero.badge":"Available 24/7 · Instant Booking","hero.title":'Premium Car Rental<br>in <em>Astana</em>',"hero.sub":"Transparent pricing, fast pickup in 15 minutes, and a fleet of inspected, premium vehicles — your journey starts here.","hero.viewCars":"View Cars","hero.bookNow":"Book Now","hero.checkAvail":"Check Availability","hero.notice":"Rentals only for drivers with 3+ years of experience","expModal.title":"Notice","expModal.text":"Car rentals are available only to drivers with at least 3 years of driving experience. Experience is <strong>strictly verified against documents</strong> at the time of vehicle handover. Please make sure you meet this requirement before submitting a request.","expModal.ok":"Got it","docErrorModal.title":"Documents could not be recognized","docErrorModal.text":"AI was unable to read data from the uploaded files. Possible reasons: <strong>wrong document</strong>, photo is <strong>blurry</strong> or <strong>cropped</strong>. Please upload clear photos of your ID and driver license and try again.",
+    "hero.badge":"Available 24/7 · Instant Booking","hero.title":'Premium Car Rental<br>in <em>Astana</em>',"hero.sub":"Transparent pricing, fast pickup in 15 minutes, and a fleet of inspected, premium vehicles — your journey starts here.","hero.viewCars":"View Cars","hero.bookNow":"Book Now","hero.checkAvail":"Check Availability","hero.notice":"Rentals only for drivers with 3+ years of experience","expModal.title":"Notice","expModal.text":"Car rentals are available only to drivers with at least 3 years of driving experience. Experience is <strong>strictly verified against documents</strong> at the time of vehicle handover. Please make sure you meet this requirement before submitting a request.","expModal.ok":"Got it","docErrorModal.title":"Documents could not be recognized","docErrorModal.text":"AI was unable to read data from the uploaded files. Possible reasons: <strong>wrong document</strong>, photo is <strong>blurry</strong> or <strong>cropped</strong>. Please upload clear photos of your ID and driver license and try again.","citModal.title":"Confirm citizenship","citModal.text":"Are you a citizen of the Republic of Kazakhstan?","citModal.yes":"Yes, I'm a citizen of RK","citModal.no":"No, I'm a foreign citizen","citModal.nameTitle":"Enter your full name","citModal.nameText":"Please enter your full name exactly as it appears in your passport.","citModal.namePlaceholder":"e.g. John Smith","citModal.nameError":"Please enter your full name.","citModal.send":"Send request","citModal.back":"Back",
     "trust.clients":"Happy Clients","trust.rating":"Average Rating","trust.support":"Customer Support","trust.cars":"Cars Available",
     "why.label":"Why Choose Us","why.title":"Built Around Your Convenience","why.desc":"Everything a modern renter needs — from fair pricing to rapid delivery.",
     "why.card1.title":"Uniqueness","why.card1.desc":"With our cars you'll stand out from the crowd and feel truly special.",
@@ -2438,7 +2482,7 @@ const translations = {
   },
   ru: {
     "nav.cars":"Автомобили","nav.availability":"Наличие","nav.why":"Преимущества","nav.how":"Как это работает","nav.reviews":"Отзывы","nav.contact":"Контакты","nav.book":"Забронировать",
-    "hero.badge":"Доступно 24/7 · Мгновенное бронирование","hero.notice":"Аренда только водителям со стажем от 3 лет","expModal.title":"Внимание","expModal.text":"Аренда автомобилей доступна только водителям со стажем вождения от 3 лет. Стаж <strong>строго проверяется по документам</strong> при выдаче автомобиля. Пожалуйста, убедитесь, что у вас достаточный стаж, перед оформлением заявки.","expModal.ok":"Понятно","docErrorModal.title":"Не удалось распознать документы","docErrorModal.text":"ИИ не смог прочитать данные с загруженных файлов. Возможные причины: загружен <strong>не тот документ</strong>, фото <strong>размыто</strong> или <strong>обрезано</strong>. Пожалуйста, загрузите чёткие фото удостоверения личности и водительских прав и попробуйте снова.","hero.title":'Премиум аренда авто<br>в <em>Астане</em>',"hero.sub":"Прозрачные цены, подача за 15 минут и парк проверенных премиальных автомобилей — ваше путешествие начинается здесь.","hero.viewCars":"Смотреть авто","hero.bookNow":"Забронировать","hero.checkAvail":"Проверить наличие",
+    "hero.badge":"Доступно 24/7 · Мгновенное бронирование","hero.notice":"Аренда только водителям со стажем от 3 лет","expModal.title":"Внимание","expModal.text":"Аренда автомобилей доступна только водителям со стажем вождения от 3 лет. Стаж <strong>строго проверяется по документам</strong> при выдаче автомобиля. Пожалуйста, убедитесь, что у вас достаточный стаж, перед оформлением заявки.","expModal.ok":"Понятно","docErrorModal.title":"Не удалось распознать документы","docErrorModal.text":"ИИ не смог прочитать данные с загруженных файлов. Возможные причины: загружен <strong>не тот документ</strong>, фото <strong>размыто</strong> или <strong>обрезано</strong>. Пожалуйста, загрузите чёткие фото удостоверения личности и водительских прав и попробуйте снова.","citModal.title":"Подтвердите гражданство","citModal.text":"Являетесь ли вы гражданином Республики Казахстан?","citModal.yes":"Да, гражданин РК","citModal.no":"Нет, я иностранец","citModal.nameTitle":"Введите ФИО","citModal.nameText":"Укажите полное ФИО, как указано в вашем паспорте.","citModal.namePlaceholder":"например: Иван Иванов","citModal.nameError":"Пожалуйста, укажите ФИО полностью.","citModal.send":"Отправить заявку","citModal.back":"Назад","hero.title":'Премиум аренда авто<br>в <em>Астане</em>',"hero.sub":"Прозрачные цены, подача за 15 минут и парк проверенных премиальных автомобилей — ваше путешествие начинается здесь.","hero.viewCars":"Смотреть авто","hero.bookNow":"Забронировать","hero.checkAvail":"Проверить наличие",
     "trust.clients":"Довольных клиентов","trust.rating":"Средний рейтинг","trust.support":"Поддержка клиентов","trust.cars":"Авто в наличии",
     "why.label":"Почему мы","why.title":"Создано для вашего удобства","why.desc":"Всё, что нужно современному арендатору — от честных цен до быстрой подачи.",
     "why.card1.title":"Уникальность","why.card1.desc":"С нашими автомобилями вы выделитесь из серой массы и почувствуете себя особенным.",
@@ -2491,7 +2535,7 @@ const translations = {
   },
   kz: {
     "nav.cars":"Көліктер","nav.availability":"Қолжетімділік","nav.why":"Артықшылықтар","nav.how":"Қалай жұмыс істейді","nav.reviews":"Пікірлер","nav.contact":"Байланыс","nav.book":"Брондау",
-    "hero.badge":"24/7 қолжетімді · Лезде брондау","hero.notice":"Көлік тек 3 жылдан астам жүргізу өтілі бар жүргізушілерге беріледі","expModal.title":"Назар аударыңыз","expModal.text":"Көлік жалдау тек жүргізу өтілі 3 жылдан асатын жүргізушілерге қолжетімді. Өтіл көлікті беру кезінде <strong>құжаттар бойынша қатаң тексеріледі</strong>. Өтінім жасамас бұрын өтіліңіздің жеткілікті екеніне көз жеткізіңіз.","expModal.ok":"Түсінікті","docErrorModal.title":"Құжаттарды тану мүмкін болмады","docErrorModal.text":"ЖИ жүктелген файлдардан деректерді оқи алмады. Мүмкін себептер: <strong>қате құжат</strong> жүктелген, фото <strong>анық емес</strong> немесе <strong>қиылған</strong>. Жеке куәлік пен жүргізуші куәлігінің анық фотосын жүктеп, қайта көріңіз.","hero.title":'Премиум көлік жалдау<br><em>Астанада</em>',"hero.sub":"Ашық баға, 15 минутта жеткізу және тексерілген премиум көліктер паркі — сіздің сапарыңыз осы жерден басталады.","hero.viewCars":"Көліктерді көру","hero.bookNow":"Брондау","hero.checkAvail":"Қолжетімділікті тексеру",
+    "hero.badge":"24/7 қолжетімді · Лезде брондау","hero.notice":"Көлік тек 3 жылдан астам жүргізу өтілі бар жүргізушілерге беріледі","expModal.title":"Назар аударыңыз","expModal.text":"Көлік жалдау тек жүргізу өтілі 3 жылдан асатын жүргізушілерге қолжетімді. Өтіл көлікті беру кезінде <strong>құжаттар бойынша қатаң тексеріледі</strong>. Өтінім жасамас бұрын өтіліңіздің жеткілікті екеніне көз жеткізіңіз.","expModal.ok":"Түсінікті","docErrorModal.title":"Құжаттарды тану мүмкін болмады","docErrorModal.text":"ЖИ жүктелген файлдардан деректерді оқи алмады. Мүмкін себептер: <strong>қате құжат</strong> жүктелген, фото <strong>анық емес</strong> немесе <strong>қиылған</strong>. Жеке куәлік пен жүргізуші куәлігінің анық фотосын жүктеп, қайта көріңіз.","citModal.title":"Азаматтығыңызды растаңыз","citModal.text":"Сіз Қазақстан Республикасының азаматысыз ба?","citModal.yes":"Иә, ҚР азаматымын","citModal.no":"Жоқ, мен шетел азаматымын","citModal.nameTitle":"Тегі мен атыңызды енгізіңіз","citModal.nameText":"Толық ТАӘ-ні төлқұжатыңыздағыдай етіп жазыңыз.","citModal.namePlaceholder":"мысалы: Иван Иванов","citModal.nameError":"Толық ТАӘ-ні енгізіңіз.","citModal.send":"Өтінімді жіберу","citModal.back":"Артқа","hero.title":'Премиум көлік жалдау<br><em>Астанада</em>',"hero.sub":"Ашық баға, 15 минутта жеткізу және тексерілген премиум көліктер паркі — сіздің сапарыңыз осы жерден басталады.","hero.viewCars":"Көліктерді көру","hero.bookNow":"Брондау","hero.checkAvail":"Қолжетімділікті тексеру",
     "trust.clients":"Қанағаттанған клиенттер","trust.rating":"Орташа рейтинг","trust.support":"Клиенттерді қолдау","trust.cars":"Қолжетімді көліктер",
     "why.label":"Неге біз","why.title":"Сіздің ыңғайлылығыңыз үшін жасалған","why.desc":"Заманауи жалдаушыға қажеттінің бәрі — әділ бағадан бастап жылдам жеткізуге дейін.",
     "why.card1.title":"Ерекшелік","why.card1.desc":"Біздің көліктермен сіз көпшіліктен ерекшеленіп, өзіңізді ерекше сезінесіз.",
@@ -3069,6 +3113,66 @@ async function recognizeWithClaude(fileId, fileLic) {
   }
 }
 
+// ============================================
+// CITIZENSHIP MODAL — first step of booking submission
+// Asks whether the applicant is a citizen of Kazakhstan.
+// Citizens go through full document checks; foreigners only need a name.
+// ============================================
+var _pendingBookingForm = null;
+
+function openCitizenshipModal() {
+  document.getElementById('citStep1').classList.add('active');
+  document.getElementById('citStep2').classList.remove('active');
+  var nameInput = document.getElementById('citForeignName');
+  if (nameInput) nameInput.value = '';
+  var nameErr = document.getElementById('citNameError');
+  if (nameErr) nameErr.style.display = 'none';
+  document.getElementById('citizenshipModal').classList.add('active');
+}
+function closeCitizenshipModal() {
+  document.getElementById('citizenshipModal').classList.remove('active');
+  _pendingBookingForm = null;
+}
+function citizenshipShowNameStep() {
+  document.getElementById('citStep1').classList.remove('active');
+  document.getElementById('citStep2').classList.add('active');
+  setTimeout(function() {
+    var el = document.getElementById('citForeignName');
+    if (el) el.focus();
+  }, 50);
+}
+function citizenshipBackToStep1() {
+  document.getElementById('citStep2').classList.remove('active');
+  document.getElementById('citStep1').classList.add('active');
+}
+function citizenshipAnswer(isForeigner) {
+  if (isForeigner) {
+    citizenshipShowNameStep();
+    return;
+  }
+  var form = _pendingBookingForm;
+  document.getElementById('citizenshipModal').classList.remove('active');
+  _pendingBookingForm = null;
+  if (form) processBookingSubmission(form, false, '');
+}
+function citizenshipSubmitForeignName() {
+  var input = document.getElementById('citForeignName');
+  var err = document.getElementById('citNameError');
+  var name = (input.value || '').trim();
+  // Require at least two whitespace-separated tokens, each 2+ chars
+  var parts = name.split(/\s+/).filter(function(p) { return p.length >= 2; });
+  if (parts.length < 2) {
+    err.style.display = 'block';
+    input.focus();
+    return;
+  }
+  err.style.display = 'none';
+  var form = _pendingBookingForm;
+  document.getElementById('citizenshipModal').classList.remove('active');
+  _pendingBookingForm = null;
+  if (form) processBookingSubmission(form, true, name);
+}
+
 function handleBooking(e) {
   e.preventDefault();
   var form = e.target;
@@ -3082,6 +3186,12 @@ function handleBooking(e) {
   }
   consentErr.style.display = 'none';
 
+  // Ask citizenship first; the rest of the flow is triggered from the modal callbacks
+  _pendingBookingForm = form;
+  openCitizenshipModal();
+}
+
+function processBookingSubmission(form, isForeigner, foreignerFullName) {
   var phone = document.getElementById('bookPhone').value.trim();
   var car = document.getElementById('carSelect').value.trim();
   var pickup = document.getElementById('bookPickup').value;
@@ -3096,7 +3206,9 @@ function handleBooking(e) {
   var origText = btn.textContent;
   btn.disabled = true;
 
-  var processingTexts = { en: 'AI is reading documents...', ru: 'ИИ распознаёт документы...', kz: 'ЖИ құжаттарды оқуда...' };
+  var processingTexts = isForeigner
+    ? { en: 'Sending request...', ru: 'Отправка заявки...', kz: 'Өтінім жіберілуде...' }
+    : { en: 'AI is reading documents...', ru: 'ИИ распознаёт документы...', kz: 'ЖИ құжаттарды оқуда...' };
   btn.textContent = processingTexts[currentLang] || processingTexts.ru;
 
   var base = '/telegram';
@@ -3116,19 +3228,25 @@ function handleBooking(e) {
   var debtWarning = null;
   var finesWarning = null;
 
-  // Запускаем распознавание через Claude AI
-  recognizeWithClaude(fileId, fileLic)
+  // Для иностранца пропускаем все проверки (распознавание/долги/штрафы/срок прав/стаж).
+  // Формируем минимальный docData с введённым вручную ФИО.
+  var pipelineStart = isForeigner
+    ? Promise.resolve({ foreigner: true, fullName: foreignerFullName })
+    : recognizeWithClaude(fileId, fileLic)
+        .then(function(docData) {
+          // Проверяем, что ИИ распознал критичные поля
+          function bad(v) { return !v || String(v).toLowerCase().indexOf('не распознано') !== -1; }
+          if (bad(docData.iin) || bad(docData.fullName) || bad(docData.idIssueDate) || bad(docData.idNumber) || bad(docData.licIssueDate) || bad(docData.licExpiryDate) || bad(docData.categories)) {
+            var err0 = new Error('DOC_NOT_RECOGNIZED');
+            err0.docNotRecognized = true;
+            throw err0;
+          }
+          return docData;
+        });
+
+  pipelineStart
   .then(function(docData) {
-    // Проверяем, что ИИ распознал критичные поля
-    function bad(v) { return !v || String(v).toLowerCase().indexOf('не распознано') !== -1; }
-    if (bad(docData.iin) || bad(docData.fullName) || bad(docData.idIssueDate) || bad(docData.idNumber) || bad(docData.licIssueDate) || bad(docData.licExpiryDate) || bad(docData.categories)) {
-      var err0 = new Error('DOC_NOT_RECOGNIZED');
-      err0.docNotRecognized = true;
-      throw err0;
-    }
-    return docData;
-  })
-  .then(function(docData) {
+    if (docData && docData.foreigner) return docData; // foreigners skip debt check
     // Проверка по реестру должников
     var checkingTexts = { en: 'Checking debt registry...', ru: 'Проверка по реестру должников...', kz: 'Борыштар тізілімі тексерілуде...' };
     btn.textContent = checkingTexts[currentLang] || checkingTexts.ru;
@@ -3159,6 +3277,7 @@ function handleBooking(e) {
     });
   })
   .then(function(docData) {
+    if (docData && docData.foreigner) return docData; // foreigners skip fines check
     // Проверка на штрафы
     var checkingFinesTexts = { en: 'Checking fines...', ru: 'Проверка штрафов...', kz: 'Айыппұлдар тексерілуде...' };
     btn.textContent = checkingFinesTexts[currentLang] || checkingFinesTexts.ru;
@@ -3189,6 +3308,7 @@ function handleBooking(e) {
     });
   })
   .then(function(docData) {
+    if (docData && docData.foreigner) return docData; // foreigners skip license validation
     // Проверка срока действия водительских прав
     function parseDmy(s) {
       var m = String(s || '').match(/^(\d{2})\.(\d{2})\.(\d{4})$/);
@@ -3263,33 +3383,55 @@ function handleBooking(e) {
     var prices = calcBookingPrices(carKey, pickup, returnDate, document.getElementById('bookOutOfCity').checked, document.getElementById('bookDelivery') && document.getElementById('bookDelivery').checked);
     var outCityChecked = document.getElementById('bookOutOfCity').checked;
 
-    var text = '🚗 Новая заявка с сайта EAcars\n\n';
-    text += '📱 Телефон: ' + phone + '\n';
-    text += '🚘 Авто: ' + carDisplayName + '\n';
-    text += '📅 Получение: ' + pickupFmt + ' в 14:00\n';
-    text += '📅 Возврат:    ' + returnFmt + ' в 14:00\n';
-    text += '🛣️ Поездка за город: ' + (outCityChecked ? 'Да' : 'Нет') + '\n';
-    text += '\n━━━ 💰 Стоимость ━━━\n';
-    text += '💵 Без скидки: ' + (prices.base || '—') + '\n';
-    text += '💸 Со скидкой: ' + (prices.discount || '—') + '\n';
-    text += '🛣️ Выезд за город: ' + (prices.outOfCity || 'N/A') + '\n';
     var deliveryChecked = document.getElementById('bookDelivery') && document.getElementById('bookDelivery').checked;
-    text += '🚚 Доставка: ' + (deliveryChecked ? 'Да (10 000 ₸)' : 'Нет') + '\n';
-    text += '✅ ИТОГО К ОПЛАТЕ: ' + (prices.total || '—') + '\n';
-    text += '\n━━━ 🪪 Удостоверение личности ━━━\n';
-    text += '🔢 ИИН: ' + (docData.iin || 'не распознано') + '\n';
-    text += '👤 ФИО: ' + (docData.fullName || 'не распознано') + '\n';
-    text += '🆔 Номер УДЛ: ' + (docData.idNumber || 'не распознано') + '\n';
-    text += '📆 Дата выдачи УДЛ: ' + (docData.idIssueDate || 'не распознано') + '\n';
-    text += '\n━━━ 🚗 Водительские права ━━━\n';
-    text += '🏷 Категории: ' + (docData.categories || 'не распознано') + '\n';
-    text += '📆 Дата выдачи ВУ: ' + (docData.licIssueDate || 'не распознано') + '\n';
-    text += '📆 Действительно до: ' + (docData.licExpiryDate || 'не распознано') + '\n';
+    var text;
 
-    if (debtWarning || finesWarning) {
-      text += '\n━━━ ⚠️ Предупреждения ━━━\n';
-      if (debtWarning)  text += debtWarning + '\n';
-      if (finesWarning) text += finesWarning + '\n';
+    if (docData && docData.foreigner) {
+      // Иностранец — без проверок, документы будут в Google Drive (см. таблицу).
+      text  = '🌍 НОВАЯ ЗАЯВКА ОТ ИНОСТРАНЦА\n';
+      text += '⚠️ Автоматические проверки НЕ проводились (документы не из РК).\n\n';
+      text += '👤 ФИО (со слов клиента): ' + (docData.fullName || '—') + '\n';
+      text += '📱 Телефон: ' + phone + '\n';
+      text += '🚘 Авто: ' + carDisplayName + '\n';
+      text += '📅 Получение: ' + pickupFmt + ' в 14:00\n';
+      text += '📅 Возврат:    ' + returnFmt + ' в 14:00\n';
+      text += '🛣️ Поездка за город: ' + (outCityChecked ? 'Да' : 'Нет') + '\n';
+      text += '\n━━━ 💰 Стоимость ━━━\n';
+      text += '💵 Без скидки: ' + (prices.base || '—') + '\n';
+      text += '💸 Со скидкой: ' + (prices.discount || '—') + '\n';
+      text += '🛣️ Выезд за город: ' + (prices.outOfCity || 'N/A') + '\n';
+      text += '🚚 Доставка: ' + (deliveryChecked ? 'Да (10 000 ₸)' : 'Нет') + '\n';
+      text += '✅ ИТОГО К ОПЛАТЕ: ' + (prices.total || '—') + '\n';
+      text += '\n📎 Документы клиента сохранены в Google Drive (см. Excel-таблицу).\n';
+      text += '☎️ Рекомендуется лично проверить документы при выдаче авто.';
+    } else {
+      text  = '🚗 Новая заявка с сайта EAcars\n\n';
+      text += '📱 Телефон: ' + phone + '\n';
+      text += '🚘 Авто: ' + carDisplayName + '\n';
+      text += '📅 Получение: ' + pickupFmt + ' в 14:00\n';
+      text += '📅 Возврат:    ' + returnFmt + ' в 14:00\n';
+      text += '🛣️ Поездка за город: ' + (outCityChecked ? 'Да' : 'Нет') + '\n';
+      text += '\n━━━ 💰 Стоимость ━━━\n';
+      text += '💵 Без скидки: ' + (prices.base || '—') + '\n';
+      text += '💸 Со скидкой: ' + (prices.discount || '—') + '\n';
+      text += '🛣️ Выезд за город: ' + (prices.outOfCity || 'N/A') + '\n';
+      text += '🚚 Доставка: ' + (deliveryChecked ? 'Да (10 000 ₸)' : 'Нет') + '\n';
+      text += '✅ ИТОГО К ОПЛАТЕ: ' + (prices.total || '—') + '\n';
+      text += '\n━━━ 🪪 Удостоверение личности ━━━\n';
+      text += '🔢 ИИН: ' + (docData.iin || 'не распознано') + '\n';
+      text += '👤 ФИО: ' + (docData.fullName || 'не распознано') + '\n';
+      text += '🆔 Номер УДЛ: ' + (docData.idNumber || 'не распознано') + '\n';
+      text += '📆 Дата выдачи УДЛ: ' + (docData.idIssueDate || 'не распознано') + '\n';
+      text += '\n━━━ 🚗 Водительские права ━━━\n';
+      text += '🏷 Категории: ' + (docData.categories || 'не распознано') + '\n';
+      text += '📆 Дата выдачи ВУ: ' + (docData.licIssueDate || 'не распознано') + '\n';
+      text += '📆 Действительно до: ' + (docData.licExpiryDate || 'не распознано') + '\n';
+
+      if (debtWarning || finesWarning) {
+        text += '\n━━━ ⚠️ Предупреждения ━━━\n';
+        if (debtWarning)  text += debtWarning + '\n';
+        if (finesWarning) text += finesWarning + '\n';
+      }
     }
 
     var sendingTexts = { en: 'Please wait...', ru: 'Пожалуйста, подождите...', kz: 'Күте тұрыңыз...' };
@@ -3334,7 +3476,10 @@ function handleBooking(e) {
     document.getElementById('idArea').classList.remove('has-file');
     document.getElementById('licArea').classList.remove('has-file');
     form.querySelectorAll('.file-upload-name').forEach(function(el) { el.remove(); });
-    setTimeout(function() { btn.style.background = ''; btn.disabled = false; setLanguage(currentLang); form.reset(); consent.checked = false; }, 4000);
+    setTimeout(function() {
+      btn.style.background = ''; btn.disabled = false; setLanguage(currentLang); form.reset();
+      var c = document.getElementById('consentCheck'); if (c) c.checked = false;
+    }, 4000);
   })
   .catch(function(err) {
     console.error(err);
