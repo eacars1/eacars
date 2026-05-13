@@ -266,16 +266,20 @@ body::before {
 .info-modal .exp-modal-btn { background: linear-gradient(135deg, #15803d 0%, #16a34a 50%, #22c55e 100%); box-shadow: 0 4px 14px rgba(22,163,74,0.35), inset 0 1px 0 rgba(255,255,255,0.15); }
 .info-modal .exp-modal-btn:hover { box-shadow: 0 8px 22px rgba(22,163,74,0.5), inset 0 1px 0 rgba(255,255,255,0.18); }
 .outcity-icon { background: rgba(34,197,94,0.18) !important; color: #4ade80 !important; border: 1px solid rgba(74,222,128,0.4) !important; }
-.cit-modal { border: 1px solid rgba(201,169,110,0.45) !important; }
-.cit-icon { background: rgba(201,169,110,0.18) !important; color: #e8d5a6 !important; border: 1px solid rgba(217,189,135,0.45) !important; }
+.cit-modal { background: var(--bg-secondary) !important; border: 2.5px solid rgba(27,67,50,0.75) !important; box-shadow: 0 30px 80px rgba(0,0,0,0.55), 0 0 8px rgba(27,67,50,0.6), 0 0 20px rgba(27,67,50,0.35), 0 0 50px rgba(27,67,50,0.15) !important; }
+.cit-modal h3 { color: var(--text-primary) !important; }
+.cit-modal p { color: var(--text-secondary) !important; }
+.cit-modal .exp-modal-close { color: var(--text-secondary) !important; }
+.cit-modal .exp-modal-close:hover { background: rgba(26,24,22,0.06) !important; color: var(--text-primary) !important; }
+.cit-icon { background: var(--accent) !important; border-color: var(--accent) !important; color: #fff !important; }
 .cit-btn-row { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
 .cit-btn-row .exp-modal-btn { width: 100%; padding: 13px 24px; }
-.cit-btn-secondary { background: transparent !important; color: #e8d5a6 !important; border: 1px solid rgba(217,189,135,0.45) !important; box-shadow: none !important; }
-.cit-btn-secondary:hover { background: rgba(217,189,135,0.08) !important; box-shadow: none !important; }
-.cit-name-input { width: 100%; padding: 14px 16px; background: rgba(255,255,255,0.04); border: 1.5px solid rgba(217,189,135,0.35); border-radius: 10px; color: #fff; font-family: var(--font-body); font-size: 0.95rem; font-weight: 500; outline: none; margin-bottom: 14px; transition: border 0.2s, box-shadow 0.2s; }
-.cit-name-input:focus { border-color: rgba(217,189,135,0.7); box-shadow: 0 0 0 3px rgba(217,189,135,0.15); }
-.cit-name-input::placeholder { color: rgba(232,213,166,0.5); }
-.cit-name-error { color: #f87171; font-size: 0.82rem; margin: -8px 0 12px; display: none; text-align: left; }
+.cit-btn-secondary { background: transparent !important; color: var(--text-primary) !important; border: 1.5px solid rgba(26,24,22,0.15) !important; box-shadow: none !important; }
+.cit-btn-secondary:hover { background: rgba(26,24,22,0.04) !important; box-shadow: none !important; }
+.cit-name-input { width: 100%; padding: 14px 16px; background: rgba(27,67,50,0.04); border: 1.5px solid rgba(26,24,22,0.10); border-radius: 10px; color: var(--text-primary); font-family: var(--font-body); font-size: 0.95rem; font-weight: 500; outline: none; margin-bottom: 14px; transition: border 0.2s, box-shadow 0.2s; }
+.cit-name-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(27,67,50,0.15); }
+.cit-name-input::placeholder { color: var(--text-secondary); opacity: 0.7; }
+.cit-name-error { color: #dc2626; font-size: 0.82rem; margin: -8px 0 12px; display: none; text-align: left; }
 .cit-step { display: none; }
 .cit-step.active { display: block; }
 .catalog-right { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
@@ -857,13 +861,13 @@ html[lang="kk"] .hero h1 { font-family: 'Montserrat', sans-serif; letter-spacing
 .form-group input:focus, .form-group select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(27,67,50,0.15); }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; column-gap: 16px; row-gap: 0; }
 
-.file-upload { position: relative; display: block; width: 100%; min-width: 0; height: 76px; }
+.file-upload { position: relative; display: block; width: 100%; min-width: 0; height: 90px; }
 .file-upload input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; z-index: 2; }
-.file-upload-area { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: rgba(27,67,50,0.04); border: 1.5px dashed rgba(27,67,50,0.28); border-radius: 10px; transition: border 0.3s, box-shadow 0.3s; cursor: pointer; width: 100%; height: 76px; min-height: 76px; max-height: 76px; box-sizing: border-box; overflow: hidden; }
+.file-upload-area { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: rgba(27,67,50,0.04); border: 1.5px dashed rgba(27,67,50,0.28); border-radius: 10px; transition: border 0.3s, box-shadow 0.3s; cursor: pointer; width: 100%; height: 90px; min-height: 90px; max-height: 90px; box-sizing: border-box; overflow: hidden; }
 /* When a file is attached, replace the "Фото или PDF" hint with the filename so the card height stays identical to the empty state. */
 .file-upload-area.has-file .file-upload-text > span { display: none; }
 .form-row > .form-group { display: flex; flex-direction: column; }
-.form-row > .form-group > .file-upload { flex: 0 0 76px; margin-top: auto; }
+.form-row > .form-group > .file-upload { flex: 0 0 90px; margin-top: auto; }
 .file-upload:hover .file-upload-area { border-color: var(--accent); }
 .file-upload-area.has-file { border-style: solid; border-color: #50C878; background: rgba(80,200,120,0.05); }
 .file-upload-icon { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; background: rgba(201,169,110,0.1); border-radius: 8px; color: var(--accent); flex-shrink: 0; }
@@ -2510,7 +2514,7 @@ const translations = {
     "how.step3.title":"Подтвердите детали","how.step3.desc":"Мы подтвердим наличие, уточним цену и подготовим автомобиль.",
     "how.step4.title":"Получите авто","how.step4.desc":"Заберите в офисе или закажите доставку — и вы готовы к поездке.",
     "booking.formTitle":"Заказать автомобиль","booking.formDesc":"Заполните форму, и мы свяжемся с вами в течение нескольких минут.",
-    "booking.phone":"Номер телефона","booking.selectCar":"Выберите авто","booking.chooseCar":"Выберите автомобиль","booking.idCard":"Удостоверение личности","booking.license":"Водительские права","booking.idUpload":"Загрузите удостоверение","booking.licUpload":"Загрузите водительские права","booking.fileHint":"Фото или PDF","booking.consent":"Я согласен(-на) на обработку моих персональных данных в целях данной заявки на аренду","booking.consentError":"Необходимо дать согласие",
+    "booking.phone":"Номер телефона","booking.selectCar":"Выберите авто","booking.chooseCar":"Выберите автомобиль","booking.idCard":"Удостоверение личности","booking.license":"Водительские права","booking.idUpload":"Загрузите удостоверение","booking.licUpload":"Загрузите водительские<br>права","booking.fileHint":"Фото или PDF","booking.consent":"Я согласен(-на) на обработку моих персональных данных в целях данной заявки на аренду","booking.consentError":"Необходимо дать согласие",
     "booking.availTip":"Перед выбором дат — проверьте наличие свободных дней","booking.availBtn":"Проверить наличие →","booking.pickup":"Дата получения (в 14:00)","booking.return":"Дата возврата (в 14:00)","booking.timeRule":"Машина выдаётся в <strong>14:00</strong> в день получения и должна быть возвращена в <strong>14:00</strong> в день возврата.","booking.outOfCity":"Вы арендуете для поездки за город (Выезд в Боровое)?","booking.delivery":"Нужна доставка автомобиля по адресу?<span class=\"price-chip\">+10 000 ₸</span>","booking.submit":"Отправить заявку","booking.or":"или","booking.whatsapp":"Забронировать в WhatsApp","price.total":"Общая сумма","price.perDay":" / сут","price.daysWord":" дн.","price.discount3":"Скидка за аренду от 3 дней","price.discount10":"Скидка за аренду от 10 дней","price.metaFlat":"Тариф: {f} × {d} сессий по 10ч","price.outCityFree":"Бесплатный выезд за город (от 2 суток)","price.outCityFee":"Доплата за выезд за город","price.delivery":"Доставка по адресу",
     "booking.quickLabel":"Быстрое бронирование","booking.infoTitle":"Получите авто за минуты","booking.infoDesc":"Мы отвечаем на каждый запрос в течение 5 минут в рабочее время. Без длинных договоров — просто быстрое подтверждение, и вы готовы к поездке.",
     "booking.perk1":"Без залога для большинства авто","booking.perk2":"Бесплатная доставка по городу","booking.perk3":"Гибкие сроки аренды (от 1 дня до 1 года)","booking.perk4":"Полная страховка включена","booking.perk5":"Круглосуточная помощь на дороге",
@@ -2563,7 +2567,7 @@ const translations = {
     "how.step3.title":"Мәліметтерді растаңыз","how.step3.desc":"Біз қолжетімділікті растаймыз, бағаны нақтылаймыз және көлікті дайындаймыз.",
     "how.step4.title":"Көлікті алыңыз","how.step4.desc":"Кеңседен алыңыз немесе жеткізуге тапсырыс беріңіз — бәрі дайын.",
     "booking.formTitle":"Көлікке тапсырыс беру","booking.formDesc":"Форманы толтырыңыз, біз сізге бірнеше минут ішінде жауап береміз.",
-    "booking.phone":"Телефон нөмірі","booking.selectCar":"Көлікті таңдаңыз","booking.chooseCar":"Көлікті таңдаңыз","booking.idCard":"Жеке куәлік","booking.license":"Жүргізуші куәлігі","booking.idUpload":"Жеке куәлікті жүктеңіз","booking.licUpload":"Жүргізуші куәлігін жүктеңіз","booking.fileHint":"Фото немесе PDF","booking.consent":"Мен осы жалдау өтінімі мақсатында жеке деректерімді өңдеуге келісемін","booking.consentError":"Келісім беру қажет",
+    "booking.phone":"Телефон нөмірі","booking.selectCar":"Көлікті таңдаңыз","booking.chooseCar":"Көлікті таңдаңыз","booking.idCard":"Жеке куәлік","booking.license":"Жүргізуші куәлігі","booking.idUpload":"Жеке куәлікті жүктеңіз","booking.licUpload":"Жүргізуші куәлігін<br>жүктеңіз","booking.fileHint":"Фото немесе PDF","booking.consent":"Мен осы жалдау өтінімі мақсатында жеке деректерімді өңдеуге келісемін","booking.consentError":"Келісім беру қажет",
     "booking.availTip":"Күн таңдамас бұрын — бос күндерді тексеріңіз","booking.availBtn":"Қолжетімділікті көру →","booking.pickup":"Алу күні (14:00-де)","booking.return":"Қайтару күні (14:00-де)","booking.timeRule":"Көлік алу күні <strong>14:00</strong>-де беріледі және қайтару күні <strong>14:00</strong>-ге дейін қайтарылуы тиіс.","booking.outOfCity":"Қала сыртына шығу үшін жалдайсыз ба (Бурабайға сапар)?","booking.delivery":"Көлікті мекенжайға жеткізу қажет пе?<span class=\"price-chip\">+10 000 ₸</span>","booking.submit":"Өтініш жіберу","booking.or":"немесе","booking.whatsapp":"WhatsApp арқылы брондау","price.total":"Жалпы сома","price.perDay":" / тәул","price.daysWord":" күн","price.discount3":"3 күннен бастап жеңілдік","price.discount10":"10 күннен бастап жеңілдік","price.metaFlat":"Тариф: {f} × {d} сессия (10 сағ)","price.outCityFree":"Қала сыртына тегін шығу (2 күннен бастап)","price.outCityFee":"Қала сыртына шығу үшін қосымша төлем","price.delivery":"Мекенжайға жеткізу",
     "booking.quickLabel":"Жылдам брондау","booking.infoTitle":"Көлікті минуттарда алыңыз","booking.infoDesc":"Біз жұмыс уақытында әр өтінішке 5 минут ішінде жауап береміз. Ұзақ келісімшарттар жоқ — тек жылдам растау, және сіз жолға дайынсыз.",
     "booking.perk1":"Көптеген көліктер үшін кепілдік салым қажет емес","booking.perk2":"Қала бойынша тегін жеткізу","booking.perk3":"Икемді жалдау мерзімдері (1 күннен 1 жылға дейін)","booking.perk4":"Толық сақтандыру қосылған","booking.perk5":"24/7 жол бойындағы көмек",
