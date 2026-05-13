@@ -863,15 +863,15 @@ html[lang="kk"] .hero h1 { font-family: 'Montserrat', sans-serif; letter-spacing
 /* When a file is attached, replace the "Фото или PDF" hint with the filename so the card height stays identical to the empty state. */
 .file-upload-area.has-file .file-upload-text > span { display: none; }
 .form-row > .form-group { display: flex; flex-direction: column; }
-.form-row > .form-group > .file-upload { flex: 0 0 76px; }
+.form-row > .form-group > .file-upload { flex: 0 0 76px; margin-top: auto; }
 .file-upload:hover .file-upload-area { border-color: var(--accent); }
 .file-upload-area.has-file { border-style: solid; border-color: #50C878; background: rgba(80,200,120,0.05); }
 .file-upload-icon { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; background: rgba(201,169,110,0.1); border-radius: 8px; color: var(--accent); flex-shrink: 0; }
 .file-upload-icon svg { width: 18px; height: 18px; }
 .file-upload-text { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4; min-width: 0; flex: 1 1 0; width: 0; overflow: hidden; }
-.file-upload-text > span { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; min-width: 0; }
-.file-upload-text strong { display: block; color: var(--text-primary); font-weight: 600; font-size: 0.88rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; min-width: 0; }
-.file-upload-name { display: block; font-size: 0.8rem; color: #50C878; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; min-width: 0; }
+.file-upload-text > span { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; min-width: 0; }
+.file-upload-text strong { display: block; color: var(--text-primary); font-weight: 600; font-size: 0.88rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; min-width: 0; }
+.file-upload-name { display: block; font-size: 0.8rem; color: #50C878; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; min-width: 0; }
 
 .consent-group { display: flex; align-items: flex-start; gap: 10px; margin: 20px 0 8px; }
 .consent-group input[type="checkbox"] { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--accent); cursor: pointer; flex-shrink: 0; }
