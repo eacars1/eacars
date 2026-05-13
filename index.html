@@ -1231,6 +1231,8 @@ a.share-link-text:hover { color: #f5e7b8; background: rgba(212,168,71,0.08); tex
 
 @media (max-width: 768px) {
   :root { --section-pad: 80px; }
+  .nav { padding: calc(8px + env(safe-area-inset-top)) 0 8px; }
+  .nav.scrolled { padding: calc(6px + env(safe-area-inset-top)) 0 6px; }
   .nav-links { display: none; }
   .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(18,22,19,0.98); backdrop-filter: blur(20px); padding: 24px; gap: 20px; border-bottom: 1px solid rgba(201,169,110,0.15); }
   .mobile-toggle { display: block; }
@@ -1627,7 +1629,7 @@ body.intro-playing .nav { opacity: 0 !important; pointer-events: none; }
       </div>
       <div class="trust-item">
         <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-        <div class="trust-number">4.8</div>
+        <div class="trust-number">4.9</div>
         <div class="trust-label" data-i18n="trust.rating">Средний рейтинг</div>
       </div>
       <div class="trust-item">
