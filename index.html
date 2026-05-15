@@ -2669,6 +2669,13 @@ function updatePriceTranslations() {
   translations.kz['select.car8nd'] = 'Zeekr 009 — ' + kzt(Z_NO) + ' / 10сағ (жүргізушісіз)';
   translations.kz['select.car8wd'] = 'Zeekr 009 — ' + kzt(Z_WITH) + ' / 10сағ (жүргізушімен)';
 
+  // Zeekr card price display + note (converted per language)
+  translations.en['price.car8'] = usd(Z_WITH) + ' <small>/ 10h</small>';
+  translations.en['car8.priceNote'] = 'with driver · 10h = 1 day';
+  translations.ru['price.car8'] = kzt(Z_WITH) + ' <small>/ 10ч</small>';
+  translations.ru['car8.priceNote'] = 'с водителем · 10 часов = 1 день';
+  translations.kz['price.car8'] = kzt(Z_WITH) + ' <small>/ 10сағ</small>';
+  translations.kz['car8.priceNote'] = 'жүргізушімен · 10 сағат = 1 күн';
   // Home delivery price chip — converted per language
   const DELIVERY = 10000;
   translations.en['booking.delivery'] = 'Need home delivery of the car?<span class="price-chip">+' + usd(DELIVERY) + '</span>';
