@@ -1945,17 +1945,9 @@ body.intro-playing .nav { opacity: 0 !important; pointer-events: none; }
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
             <span data-i18n="car8.usage">Аренда по городу и за городом</span>
           </div>
-          <div class="car-footer car-footer-dual">
-            <div class="car-price-dual full">
-              <div class="price-row">
-                <div class="price-row-text"><span class="amt" data-i18n="car8.noDriverAmt">80 000 ₸</span><span class="meta" data-i18n="car8.priceNoDriver">/ 10ч · без водителя</span></div>
-                <button class="btn-rent btn-rent-mini" onclick="scrollToBooking('zeekr-nd')" data-i18n="btn.rent">Арендовать</button>
-              </div>
-              <div class="price-row with-driver">
-                <div class="price-row-text"><span class="amt" data-i18n="car8.withDriverAmt">110 000 ₸</span><span class="meta" data-i18n="car8.priceWithDriver">/ 10ч · с водителем</span></div>
-                <button class="btn-rent btn-rent-mini" onclick="scrollToBooking('zeekr-wd')" data-i18n="btn.rent">Арендовать</button>
-              </div>
-            </div>
+          <div class="car-footer">
+            <div class="car-price" data-i18n="price.car8">110 000 ₸ <small>/ 10ч · с водителем</small></div>
+            <button class="btn-rent" onclick="scrollToBooking('zeekr-wd')" data-i18n="btn.rent">Арендовать</button>
           </div>
           <button class="btn-car-info" onclick="toggleCarInfo(this)">
             <span data-i18n="car8.infoBtn">Дополнительная информация</span>
@@ -1968,7 +1960,6 @@ body.intro-playing .nav { opacity: 0 !important; pointer-events: none; }
             <div class="info-note" data-i18n="car8.hourly"><strong>25 000 ₸ / час</strong>. Минимальный выезд по часовому тарифу — 2 часа.</div>
             <div class="info-block-title" data-i18n="car8.titleOther">Другие услуги</div>
             <div class="info-price-row"><span data-i18n="car8.transfer">Трансфер</span><span data-i18n="car8.transferAmt">30 000 ₸</span></div>
-            <div class="info-price-row"><span data-i18n="car8.noDriver">Аренда без водителя</span><span data-i18n="car8.noDriverServiceAmt">80 000 ₸</span></div>
             <div class="info-price-row info-deposit"><span data-i18n="car8.deposit">Депозит (возвратный)</span><span data-i18n="car8.depositAmt">60 000 ₸</span></div>
             <div class="info-price-note" data-i18n="car8.depositNote">Депозит возвращается через 7 дней после проверки на штрафы.</div>
           </div>
@@ -2262,7 +2253,6 @@ body.intro-playing .nav { opacity: 0 !important; pointer-events: none; }
               <option data-i18n="select.car5">BMW i4 — 60 000 ₸/день</option>
               <option data-i18n="select.car6">Tank 500 — 70 000 ₸/день</option>
               <option data-i18n="select.car7">Toyota Prado — 70 000 ₸/день</option>
-              <option value="zeekr-nd" data-i18n="select.car8nd">Zeekr 009 — 80 000 ₸ / 10ч (без водителя)</option>
               <option value="zeekr-wd" data-i18n="select.car8wd">Zeekr 009 — 110 000 ₸ / 10ч (с водителем)</option>
             </select>
           </div>
@@ -3380,8 +3370,7 @@ function processBookingSubmission(form, isForeigner, foreignerFullName) {
 
     var carKey = getSelectedBookingCarKey();
     var carDisplayName;
-    if (carKey === 'zeekr-nd')      carDisplayName = 'Zeekr 009 (без водителя)';
-    else if (carKey === 'zeekr-wd') carDisplayName = 'Zeekr 009 (с водителем)';
+    if (carKey === 'zeekr-wd') carDisplayName = 'Zeekr 009 (с водителем)';
     else {
       carDisplayName = '';
       for (var ci = 0; ci < CARS.length; ci++) {
@@ -3599,7 +3588,7 @@ function carIdFromBookingSelect() {
   var select = document.getElementById('carSelect');
   if (!select || !select.value && select.selectedIndex <= 0) return null;
   var val = select.value;
-  if (val === 'zeekr-nd' || val === 'zeekr-wd') return 'CAR008';
+  if (val === 'zeekr-wd') return 'CAR008';
   var text = select.options[select.selectedIndex].text || '';
   for (var i = 0; i < CARS.length; i++) {
     if (text.indexOf(CARS[i].name + ' —') === 0) return CARS[i].id;
@@ -3659,7 +3648,6 @@ const CAR_PRICE_TABLE = {
   'CAR005': { base: 60000, day3: 55000, day10: 50000 },
   'CAR006': { base: 70000, day3: 65000, day10: 60000 },
   'CAR007': { base: 70000, day3: 65000, day10: 60000 },
-  'zeekr-nd': { flat: 80000, label: '/ 10ч' },
   'zeekr-wd': { flat: 110000, label: '/ 10ч' }
 };
 function fmtMoney(n) {
@@ -3790,8 +3778,7 @@ function updateDiscountTip(carKey, days) {
 
   // Получим название машины
   var carName = '';
-  if (carKey === 'zeekr-nd') carName = T.zeekrND;
-  else if (carKey === 'zeekr-wd') carName = T.zeekrWD;
+  if (carKey === 'zeekr-wd') carName = T.zeekrWD;
   else { for (var i = 0; i < CARS.length; i++) if (CARS[i].id === carKey) { carName = CARS[i].name; break; } }
 
   var html = '';
@@ -3852,7 +3839,7 @@ function updateDiscountTip(carKey, days) {
 function getSelectedBookingCarKey() {
   var select = document.getElementById('carSelect');
   if (!select) return null;
-  if (select.value === 'zeekr-nd' || select.value === 'zeekr-wd') return select.value;
+  if (select.value === 'zeekr-wd') return select.value;
   var txt = select.options[select.selectedIndex] ? select.options[select.selectedIndex].text : '';
   for (var i = 0; i < CARS.length; i++) {
     if (txt.indexOf(CARS[i].name + ' —') === 0 && CARS[i].id !== 'CAR008') return CARS[i].id;
@@ -3959,9 +3946,9 @@ function syncBookingCarFromAvail() {
   // Special case: Zeekr 009 has two options (with/without driver) — keep current selection if user
   // already chose one of them; otherwise default to no-driver (zeekr-nd).
   if (carObj.id === 'CAR008') {
-    if (select.value === 'zeekr-nd' || select.value === 'zeekr-wd') return;
+    if (select.value === 'zeekr-wd') return;
     for (var i = 0; i < select.options.length; i++) {
-      if (select.options[i].value === 'zeekr-nd') { select.selectedIndex = i; break; }
+      if (select.options[i].value === 'zeekr-wd') { select.selectedIndex = i; break; }
     }
     return;
   }
