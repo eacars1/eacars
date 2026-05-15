@@ -2267,10 +2267,11 @@ body.intro-playing .nav { opacity: 0 !important; pointer-events: none; }
             </div>
           </div>
           <div class="form-row">
-            <div class="form-group"><label data-i18n="booking.pickup">Дата получения (в 14:00)</label><input type="date" id="bookPickup" required></div>
-            <div class="form-group"><label data-i18n="booking.return">Дата возврата (в 14:00)</label><input type="date" id="bookReturn" required></div>
+            <div class="form-group"><label id="labelPickup" data-i18n="booking.pickup">Дата получения (в 14:00)</label><input type="date" id="bookPickup" required></div>
+            <div class="form-group"><label id="labelReturn" data-i18n="booking.return">Дата возврата (в 14:00)</label><input type="date" id="bookReturn" required></div>
           </div>
-          <div style="margin:-8px 0 14px;padding:10px 14px;background:rgba(201,169,110,0.08);border-left:3px solid var(--accent);border-radius:6px;font-size:0.85rem;color:var(--text-secondary);line-height:1.5;display:flex;align-items:center;gap:10px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;color:var(--accent);"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-i18n="booking.timeRule">Машина выдаётся в <strong>14:00</strong> в день получения и должна быть возвращена в <strong>14:00</strong> в день возврата.</span></div>
+          <div id="stdTimeRule" style="margin:-8px 0 14px;padding:10px 14px;background:rgba(201,169,110,0.08);border-left:3px solid var(--accent);border-radius:6px;font-size:0.85rem;color:var(--text-secondary);line-height:1.5;display:flex;align-items:center;gap:10px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;color:var(--accent);"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-i18n="booking.timeRule">Машина выдаётся в <strong>14:00</strong> в день получения и должна быть возвращена в <strong>14:00</strong> в день возврата.</span></div>
+          <div id="zeekrTimeRule" style="display:none;margin:-8px 0 14px;padding:10px 14px;background:rgba(27,67,50,0.07);border-left:3px solid var(--accent);border-radius:6px;font-size:0.85rem;color:var(--text-secondary);line-height:1.5;align-items:center;gap:10px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;color:var(--accent);"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-i18n="booking.timeRuleZeekr">Zeekr 009 выдаётся в <strong>10:00</strong>, возврат до <strong>22:00</strong> (10-часовая сессия). Каждый час сверх лимита — <strong>10 000 ₸</strong>.</span></div>
           <div class="form-group form-checkbox">
             <label class="check-row">
               <input type="checkbox" id="bookOutOfCity">
@@ -2455,7 +2456,7 @@ const translations = {
     "how.step4.title":"Get the Car","how.step4.desc":"Pick up at our office or request delivery — and you're all set.",
     "booking.formTitle":"Request a Car","booking.formDesc":"Fill in the form and we'll get back to you within minutes.",
     "booking.phone":"Phone Number","booking.selectCar":"Select a Car","booking.chooseCar":"Choose a car","booking.idCard":"ID Card","booking.license":"Driver's License","booking.idUpload":"Upload ID card","booking.licUpload":"Upload driver's license","booking.fileHint":"Photo or PDF","booking.consent":"I consent to the processing of my personal data for the purpose of this rental request","booking.consentError":"You must agree to continue",
-    "booking.availTip":"Before choosing dates — check which days are available","booking.availBtn":"View Availability →","booking.pickup":"Pickup Date (at 14:00)","booking.return":"Return Date (at 14:00)","booking.timeRule":"The car is handed over at <strong>14:00</strong> on the pickup date and must be returned by <strong>14:00</strong> on the return date.","booking.outOfCity":"Are you renting for an out-of-town trip (to Borovoe)?","booking.delivery":"Need home delivery of the car?<span class=\"price-chip\">+10 000 ₸</span>","booking.submit":"Send Request","booking.or":"or","booking.whatsapp":"Book via WhatsApp","price.total":"Total amount","price.perDay":" / day","price.daysWord":" days","price.discount3":"3+ days discount","price.discount10":"10+ days discount","price.metaFlat":"Rate: {f} × {d} sessions of 10h","price.outCityFree":"Free out-of-town trip (2+ days)","price.outCityFee":"Out-of-town surcharge","price.delivery":"Home delivery",
+    "booking.availTip":"Before choosing dates — check which days are available","booking.availBtn":"View Availability →","booking.pickup":"Pickup Date (at 14:00)","booking.return":"Return Date (at 14:00)","booking.pickupZeekr":"Pickup Date (from 10:00)","booking.returnZeekr":"Return Date (by 22:00)","booking.timeRule":"The car is handed over at <strong>14:00</strong> on the pickup date and must be returned by <strong>14:00</strong> on the return date.","booking.timeRuleZeekr":"Zeekr 009 is available from <strong>10:00</strong>, return by <strong>22:00</strong> (10-hour session). Each extra hour — <strong>10 000 ₸</strong>.","booking.outOfCity":"Are you renting for an out-of-town trip (to Borovoe)?","booking.delivery":"Need home delivery of the car?<span class=\"price-chip\">+10 000 ₸</span>","booking.submit":"Send Request","booking.or":"or","booking.whatsapp":"Book via WhatsApp","price.total":"Total amount","price.perDay":" / day","price.daysWord":" days","price.discount3":"3+ days discount","price.discount10":"10+ days discount","price.metaFlat":"Rate: {f} × {d} sessions of 10h","price.outCityFree":"Free out-of-town trip (2+ days)","price.outCityFee":"Out-of-town surcharge","price.delivery":"Home delivery",
     "booking.quickLabel":"Quick Booking","booking.infoTitle":"Get Your Car in Minutes","booking.infoDesc":"We respond to every request within 5 minutes during operating hours. No lengthy contracts — just a quick confirmation and you're ready to drive.",
     "booking.perk1":"No deposit required for most cars","booking.perk2":"Free delivery within the city","booking.perk3":"Flexible rental periods (1 day to 1 year)","booking.perk4":"Full insurance included","booking.perk5":"24/7 roadside assistance",
     "reviews.label":"Testimonials","reviews.title":"What Our Clients Say",
@@ -2508,7 +2509,7 @@ const translations = {
     "how.step4.title":"Получите авто","how.step4.desc":"Заберите в офисе или закажите доставку — и вы готовы к поездке.",
     "booking.formTitle":"Заказать автомобиль","booking.formDesc":"Заполните форму, и мы свяжемся с вами в течение нескольких минут.",
     "booking.phone":"Номер телефона","booking.selectCar":"Выберите авто","booking.chooseCar":"Выберите автомобиль","booking.idCard":"Удостоверение личности","booking.license":"Водительские права","booking.idUpload":"Загрузите удостоверение","booking.licUpload":"Загрузите водительские<br>права","booking.fileHint":"Фото или PDF","booking.consent":"Я согласен(-на) на обработку моих персональных данных в целях данной заявки на аренду","booking.consentError":"Необходимо дать согласие",
-    "booking.availTip":"Перед выбором дат — проверьте наличие свободных дней","booking.availBtn":"Проверить наличие →","booking.pickup":"Дата получения (в 14:00)","booking.return":"Дата возврата (в 14:00)","booking.timeRule":"Машина выдаётся в <strong>14:00</strong> в день получения и должна быть возвращена в <strong>14:00</strong> в день возврата.","booking.outOfCity":"Вы арендуете для поездки за город (Выезд в Боровое)?","booking.delivery":"Нужна доставка автомобиля по адресу?<span class=\"price-chip\">+10 000 ₸</span>","booking.submit":"Отправить заявку","booking.or":"или","booking.whatsapp":"Забронировать в WhatsApp","price.total":"Общая сумма","price.perDay":" / сут","price.daysWord":" дн.","price.discount3":"Скидка за аренду от 3 дней","price.discount10":"Скидка за аренду от 10 дней","price.metaFlat":"Тариф: {f} × {d} сессий по 10ч","price.outCityFree":"Бесплатный выезд за город (от 2 суток)","price.outCityFee":"Доплата за выезд за город","price.delivery":"Доставка по адресу",
+    "booking.availTip":"Перед выбором дат — проверьте наличие свободных дней","booking.availBtn":"Проверить наличие →","booking.pickup":"Дата получения (в 14:00)","booking.return":"Дата возврата (в 14:00)","booking.pickupZeekr":"Дата получения (с 10:00)","booking.returnZeekr":"Дата возврата (до 22:00)","booking.timeRule":"Машина выдаётся в <strong>14:00</strong> в день получения и должна быть возвращена в <strong>14:00</strong> в день возврата.","booking.timeRuleZeekr":"Zeekr 009 выдаётся в <strong>10:00</strong>, возврат до <strong>22:00</strong> (10-часовая сессия). Каждый час сверх лимита — <strong>10 000 ₸</strong>.","booking.outOfCity":"Вы арендуете для поездки за город (Выезд в Боровое)?","booking.delivery":"Нужна доставка автомобиля по адресу?<span class=\"price-chip\">+10 000 ₸</span>","booking.submit":"Отправить заявку","booking.or":"или","booking.whatsapp":"Забронировать в WhatsApp","price.total":"Общая сумма","price.perDay":" / сут","price.daysWord":" дн.","price.discount3":"Скидка за аренду от 3 дней","price.discount10":"Скидка за аренду от 10 дней","price.metaFlat":"Тариф: {f} × {d} сессий по 10ч","price.outCityFree":"Бесплатный выезд за город (от 2 суток)","price.outCityFee":"Доплата за выезд за город","price.delivery":"Доставка по адресу",
     "booking.quickLabel":"Быстрое бронирование","booking.infoTitle":"Получите авто за минуты","booking.infoDesc":"Мы отвечаем на каждый запрос в течение 5 минут в рабочее время. Без длинных договоров — просто быстрое подтверждение, и вы готовы к поездке.",
     "booking.perk1":"Без залога для большинства авто","booking.perk2":"Бесплатная доставка по городу","booking.perk3":"Гибкие сроки аренды (от 1 дня до 1 года)","booking.perk4":"Полная страховка включена","booking.perk5":"Круглосуточная помощь на дороге",
     "reviews.label":"Отзывы","reviews.title":"Что говорят наши клиенты",
@@ -2561,7 +2562,7 @@ const translations = {
     "how.step4.title":"Көлікті алыңыз","how.step4.desc":"Кеңседен алыңыз немесе жеткізуге тапсырыс беріңіз — бәрі дайын.",
     "booking.formTitle":"Көлікке тапсырыс беру","booking.formDesc":"Форманы толтырыңыз, біз сізге бірнеше минут ішінде жауап береміз.",
     "booking.phone":"Телефон нөмірі","booking.selectCar":"Көлікті таңдаңыз","booking.chooseCar":"Көлікті таңдаңыз","booking.idCard":"Жеке куәлік","booking.license":"Жүргізуші куәлігі","booking.idUpload":"Жеке куәлікті жүктеңіз","booking.licUpload":"Жүргізуші куәлігін<br>жүктеңіз","booking.fileHint":"Фото немесе PDF","booking.consent":"Мен осы жалдау өтінімі мақсатында жеке деректерімді өңдеуге келісемін","booking.consentError":"Келісім беру қажет",
-    "booking.availTip":"Күн таңдамас бұрын — бос күндерді тексеріңіз","booking.availBtn":"Қолжетімділікті көру →","booking.pickup":"Алу күні (14:00-де)","booking.return":"Қайтару күні (14:00-де)","booking.timeRule":"Көлік алу күні <strong>14:00</strong>-де беріледі және қайтару күні <strong>14:00</strong>-ге дейін қайтарылуы тиіс.","booking.outOfCity":"Қала сыртына шығу үшін жалдайсыз ба (Бурабайға сапар)?","booking.delivery":"Көлікті мекенжайға жеткізу қажет пе?<span class=\"price-chip\">+10 000 ₸</span>","booking.submit":"Өтініш жіберу","booking.or":"немесе","booking.whatsapp":"WhatsApp арқылы брондау","price.total":"Жалпы сома","price.perDay":" / тәул","price.daysWord":" күн","price.discount3":"3 күннен бастап жеңілдік","price.discount10":"10 күннен бастап жеңілдік","price.metaFlat":"Тариф: {f} × {d} сессия (10 сағ)","price.outCityFree":"Қала сыртына тегін шығу (2 күннен бастап)","price.outCityFee":"Қала сыртына шығу үшін қосымша төлем","price.delivery":"Мекенжайға жеткізу",
+    "booking.availTip":"Күн таңдамас бұрын — бос күндерді тексеріңіз","booking.availBtn":"Қолжетімділікті көру →","booking.pickup":"Алу күні (14:00-де)","booking.return":"Қайтару күні (14:00-де)","booking.pickupZeekr":"Алу күні (10:00-дан)","booking.returnZeekr":"Қайтару күні (22:00-ге дейін)","booking.timeRule":"Көлік алу күні <strong>14:00</strong>-де беріледі және қайтару күні <strong>14:00</strong>-ге дейін қайтарылуы тиіс.","booking.timeRuleZeekr":"Zeekr 009 <strong>10:00</strong>-де беріледі, <strong>22:00</strong>-ге дейін қайтарылады (10 сағаттық сессия). Лимиттен асқан әр сағат — <strong>10 000 ₸</strong>.","booking.outOfCity":"Қала сыртына шығу үшін жалдайсыз ба (Бурабайға сапар)?","booking.delivery":"Көлікті мекенжайға жеткізу қажет пе?<span class=\"price-chip\">+10 000 ₸</span>","booking.submit":"Өтініш жіберу","booking.or":"немесе","booking.whatsapp":"WhatsApp арқылы брондау","price.total":"Жалпы сома","price.perDay":" / тәул","price.daysWord":" күн","price.discount3":"3 күннен бастап жеңілдік","price.discount10":"10 күннен бастап жеңілдік","price.metaFlat":"Тариф: {f} × {d} сессия (10 сағ)","price.outCityFree":"Қала сыртына тегін шығу (2 күннен бастап)","price.outCityFee":"Қала сыртына шығу үшін қосымша төлем","price.delivery":"Мекенжайға жеткізу",
     "booking.quickLabel":"Жылдам брондау","booking.infoTitle":"Көлікті минуттарда алыңыз","booking.infoDesc":"Біз жұмыс уақытында әр өтінішке 5 минут ішінде жауап береміз. Ұзақ келісімшарттар жоқ — тек жылдам растау, және сіз жолға дайынсыз.",
     "booking.perk1":"Көптеген көліктер үшін кепілдік салым қажет емес","booking.perk2":"Қала бойынша тегін жеткізу","booking.perk3":"Икемді жалдау мерзімдері (1 күннен 1 жылға дейін)","booking.perk4":"Толық сақтандыру қосылған","booking.perk5":"24/7 жол бойындағы көмек",
     "reviews.label":"Пікірлер","reviews.title":"Клиенттеріміз не айтады",
@@ -2817,6 +2818,8 @@ function setLanguage(lang) {
       }
     } catch(e) {}
   }
+  // Re-apply Zeekr-specific form labels and time rule block after language switch
+  if (typeof adaptFormForCar === 'function') { try { adaptFormForCar(); } catch(e) {} }
 }
 
 document.querySelectorAll('.lang-btn').forEach(btn => {
@@ -2902,6 +2905,7 @@ function scrollToBooking(carName) {
   for (let opt of select.options) { if (opt.value && opt.value === carName) { opt.selected = true; matched = true; break; } }
   if (!matched) { for (let opt of select.options) { if (opt.text.includes(carName)) { opt.selected = true; break; } } }
   document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+  if (typeof adaptFormForCar === 'function') adaptFormForCar();
   showExpModal();
 }
 function showExpModal() {
@@ -3390,6 +3394,9 @@ function processBookingSubmission(form, isForeigner, foreignerFullName) {
     var outCityChecked = document.getElementById('bookOutOfCity').checked;
 
     var deliveryChecked = document.getElementById('bookDelivery') && document.getElementById('bookDelivery').checked;
+    var isZeekrBook = (carKey === 'zeekr-wd');
+    var pickupTime = isZeekrBook ? 'с 10:00' : 'в 14:00';
+    var returnTime = isZeekrBook ? 'до 22:00' : 'в 14:00';
     var text;
 
     if (docData && docData.foreigner) {
@@ -3399,8 +3406,8 @@ function processBookingSubmission(form, isForeigner, foreignerFullName) {
       text += '👤 ФИО (со слов клиента): ' + (docData.fullName || '—') + '\n';
       text += '📱 Телефон: ' + phone + '\n';
       text += '🚘 Авто: ' + carDisplayName + '\n';
-      text += '📅 Получение: ' + pickupFmt + ' в 14:00\n';
-      text += '📅 Возврат:    ' + returnFmt + ' в 14:00\n';
+      text += '📅 Получение: ' + pickupFmt + ' ' + pickupTime + '\n';
+      text += '📅 Возврат:    ' + returnFmt + ' ' + returnTime + '\n';
       text += '🛣️ Поездка за город: ' + (outCityChecked ? 'Да' : 'Нет') + '\n';
       text += '\n━━━ 💰 Стоимость ━━━\n';
       text += '💵 Без скидки: ' + (prices.base || '—') + '\n';
@@ -3414,8 +3421,8 @@ function processBookingSubmission(form, isForeigner, foreignerFullName) {
       text  = '🚗 Новая заявка с сайта EAcars\n\n';
       text += '📱 Телефон: ' + phone + '\n';
       text += '🚘 Авто: ' + carDisplayName + '\n';
-      text += '📅 Получение: ' + pickupFmt + ' в 14:00\n';
-      text += '📅 Возврат:    ' + returnFmt + ' в 14:00\n';
+      text += '📅 Получение: ' + pickupFmt + ' ' + pickupTime + '\n';
+      text += '📅 Возврат:    ' + returnFmt + ' ' + returnTime + '\n';
       text += '🛣️ Поездка за город: ' + (outCityChecked ? 'Да' : 'Нет') + '\n';
       text += '\n━━━ 💰 Стоимость ━━━\n';
       text += '💵 Без скидки: ' + (prices.base || '—') + '\n';
@@ -3854,6 +3861,24 @@ function getSelectedBookingCarKey() {
   }
   return null;
 }
+function adaptFormForCar() {
+  var key = getSelectedBookingCarKey();
+  var isZeekr = (key === 'zeekr-wd');
+  var dict = (typeof translations !== 'undefined' && typeof currentLang !== 'undefined') ? (translations[currentLang] || {}) : {};
+  var lp = document.getElementById('labelPickup');
+  var lr = document.getElementById('labelReturn');
+  if (lp) lp.innerHTML = isZeekr ? (dict['booking.pickupZeekr'] || 'Дата получения (с 10:00)') : (dict['booking.pickup'] || 'Дата получения (в 14:00)');
+  if (lr) lr.innerHTML = isZeekr ? (dict['booking.returnZeekr'] || 'Дата возврата (до 22:00)') : (dict['booking.return'] || 'Дата возврата (в 14:00)');
+  var std = document.getElementById('stdTimeRule');
+  var zkr = document.getElementById('zeekrTimeRule');
+  if (std) std.style.display = isZeekr ? 'none' : 'flex';
+  if (zkr) zkr.style.display = isZeekr ? 'flex' : 'none';
+}
+(function() {
+  var sel = document.getElementById('carSelect');
+  if (sel) sel.addEventListener('change', adaptFormForCar);
+  try { adaptFormForCar(); } catch(e) {}
+})();
 function updatePriceSummary() {
   var box = document.getElementById('priceSummary');
   var origEl = document.getElementById('priceOrig');
