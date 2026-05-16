@@ -1326,23 +1326,40 @@ a.share-link-text:hover { color: #f5e7b8; background: rgba(212,168,71,0.08); tex
 
 /* Calendar selection mode */
 .avail-sel-hint {
-  display: none;
-  background: rgba(201,169,110,0.08);
-  border: 1px solid rgba(201,169,110,0.35);
+  display: block;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  padding: 0 20px;
+  margin-bottom: 0;
+  border: 0px solid rgba(201,169,110,0.35);
   border-radius: 12px;
-  padding: 14px 20px;
-  margin-bottom: 20px;
   text-align: center;
   color: var(--accent);
   font-size: 0.93rem;
   font-weight: 500;
-  animation: fadeIn 0.3s ease;
+  background: rgba(201,169,110,0.08);
+  transition: max-height 0.3s var(--ease), opacity 0.25s ease, padding 0.3s var(--ease), margin-bottom 0.3s var(--ease), border-width 0.3s;
 }
-.avail-sel-hint.visible { display: block; }
-.avail-day.sel-start, .avail-day.sel-end, .avail-day.sel-range {
+.avail-sel-hint.visible {
+  max-height: 100px;
+  opacity: 1;
+  padding: 14px 20px;
+  margin-bottom: 20px;
+  border-width: 1px;
+}
+/* Start / end days: solid accent fill so they're clearly visible */
+.avail-day.sel-start, .avail-day.sel-end {
+  background: var(--accent) !important;
+  color: #fff !important;
+  border-color: var(--accent) !important;
+  font-weight: 700;
+}
+/* Range between start and end: light tint */
+.avail-day.sel-range {
   background: rgba(27,67,50,0.12) !important;
   color: var(--accent) !important;
-  border-color: rgba(27,67,50,0.25) !important;
+  border-color: rgba(27,67,50,0.2) !important;
 }
 /* ============================================
    3D COIN INTRO
@@ -4281,9 +4298,10 @@ function renderCalendars(carId) {
       else cls += ' free';
       if (isToday) cls += ' today';
 
+      var dmyToISO = function(s) { if (!s) return null; var p = s.split('.'); return (p.length === 3) ? p[2]+'-'+p[1]+'-'+p[0] : s; };
       var activeSelection = !!(window.calendarPickStart || window.calendarPickEnd);
-      var displayStart = window.calendarPickStart || (!activeSelection && document.getElementById('bookPickup') && document.getElementById('bookPickup').value) || null;
-      var displayEnd   = window.calendarPickEnd   || (!activeSelection && document.getElementById('bookReturn')  && document.getElementById('bookReturn').value)  || null;
+      var displayStart = window.calendarPickStart || (!activeSelection && dmyToISO(document.getElementById('bookPickup') && document.getElementById('bookPickup').value)) || null;
+      var displayEnd   = window.calendarPickEnd   || (!activeSelection && dmyToISO(document.getElementById('bookReturn')  && document.getElementById('bookReturn').value))  || null;
 
       let onclick = '';
       if (window.calendarSelectionMode && !isPast && !isBooked) {
