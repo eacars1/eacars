@@ -4106,7 +4106,7 @@ async function loadFromGoogleSheets() {
     for (const row of json) {
       const vals = Object.values(row);
       const carId = (vals[0] || '').toString().trim();
-      const status = (vals[6] || '').toString().trim().toLowerCase();
+      const status = (vals[7] || '').toString().trim().toLowerCase();
 
       const isBlocking = status.includes('подтвержд') || status.includes('ожидан') ||
                          status === 'confirmed' || status === 'pending';
