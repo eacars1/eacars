@@ -2975,7 +2975,7 @@ function copyShareLink(btn, sourceId) {
     var label = btn.querySelector('span');
     var original = label ? label.textContent : '';
     btn.classList.add('copied');
-    if (label) label.textContent = (window.LANG === 'en' ? 'Copied!' : window.LANG === 'kz' ? 'Көшірілді!' : 'Скопировано!');
+    if (label) label.textContent = (currentLang === 'en' ? 'Copied!' : currentLang === 'kz' ? 'Көшірілді!' : 'Скопировано!');
     setTimeout(function(){ btn.classList.remove('copied'); if (label) label.textContent = original; }, 1600);
   };
   if (navigator.clipboard && navigator.clipboard.writeText) {
