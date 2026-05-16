@@ -2268,8 +2268,8 @@ body.intro-playing .nav { opacity: 0 !important; pointer-events: none; }
             </div>
           </div>
           <div class="form-row">
-            <div class="form-group"><label id="labelPickup" data-i18n="booking.pickup">Дата получения (в 14:00)</label><input type="date" id="bookPickup" required readonly style="cursor:pointer;" onclick="openCalendarForSelection()"></div>
-            <div class="form-group"><label id="labelReturn" data-i18n="booking.return">Дата возврата (в 14:00)</label><input type="date" id="bookReturn" required readonly style="cursor:pointer;" onclick="openCalendarForSelection()"></div>
+            <div class="form-group"><label id="labelPickup" data-i18n="booking.pickup">Дата получения (в 14:00)</label><input type="text" id="bookPickup" required readonly style="cursor:default;pointer-events:none;background:var(--input-bg,#f5f5f5);" placeholder="—"></div>
+            <div class="form-group"><label id="labelReturn" data-i18n="booking.return">Дата возврата (в 14:00)</label><input type="text" id="bookReturn" required readonly style="cursor:default;pointer-events:none;background:var(--input-bg,#f5f5f5);" placeholder="—"></div>
           </div>
           <div id="stdTimeRule" style="margin:-8px 0 14px;padding:10px 14px;background:rgba(201,169,110,0.08);border-left:3px solid var(--accent);border-radius:6px;font-size:0.85rem;color:var(--text-secondary);line-height:1.5;display:flex;align-items:center;gap:10px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;color:var(--accent);"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-i18n="booking.timeRule">Машина выдаётся в <strong>14:00</strong> в день получения и должна быть возвращена в <strong>14:00</strong> в день возврата.</span></div>
 
@@ -2814,7 +2814,7 @@ function setLanguage(lang) {
         var ret = document.getElementById('bookReturn');
         var d = 1;
         if (pickup && ret && pickup.value && ret.value) {
-          var d1 = new Date(pickup.value), d2 = new Date(ret.value);
+          var d1 = parseDateAny(pickup.value), d2 = parseDateAny(ret.value);
           d = Math.max(1, Math.round((d2 - d1) / 86400000));
         }
         updateDiscountTip(carKey, d);
@@ -3689,8 +3689,9 @@ function selectCalendarDate(dateKey) {
     setTimeout(function() {
       var pickup = document.getElementById('bookPickup');
       var ret = document.getElementById('bookReturn');
-      if (pickup) pickup.value = window.calendarPickStart;
-      if (ret) ret.value = window.calendarPickEnd;
+      var isoToDisplay = function(iso) { var p = iso.split('-'); return p[2] + '.' + p[1] + '.' + p[0]; };
+      if (pickup) pickup.value = isoToDisplay(window.calendarPickStart);
+      if (ret) ret.value = isoToDisplay(window.calendarPickEnd);
       // Auto-fill the car in booking form based on currently selected calendar tab
       syncBookingCarFromAvail();
       if (typeof adaptFormForCar === 'function') adaptFormForCar();
@@ -3723,12 +3724,18 @@ function fmtMoney(n) {
 function fmtTengeRu(n) { return Number(n).toLocaleString('ru-RU').replace(/,/g, ' ') + ' ₸'; }
 
 // Расчёт всех сумм для заявки. Возвращает объект с готовыми текстовыми значениями для столбцов H/I/J/K
+function parseDateAny(s) {
+  if (!s) return new Date(NaN);
+  var p = s.split('.');
+  if (p.length === 3) return new Date(+p[2], +p[1]-1, +p[0]); // DD.MM.YYYY
+  return new Date(s); // ISO or other
+}
 function calcBookingPrices(carKey, pickupISO, returnISO, outOfCity, delivery) {
   var price = CAR_PRICE_TABLE[carKey];
   if (!price || !pickupISO || !returnISO) {
     return { base: '', discount: '', outOfCity: 'N/A', total: '' };
   }
-  var d1 = new Date(pickupISO), d2 = new Date(returnISO);
+  var d1 = parseDateAny(pickupISO), d2 = parseDateAny(returnISO);
   var days = (price.flat)
     ? Math.max(1, Math.round((d2 - d1) / 86400000) + 1)
     : Math.max(1, Math.round((d2 - d1) / 86400000));
@@ -3949,7 +3956,7 @@ function updatePriceSummary() {
   var key = getSelectedBookingCarKey();
   var tipBox = document.getElementById('discountTip');
   if (!key || !pickup || !ret) { box.hidden = true; if (tipBox) tipBox.hidden = true; return; }
-  var d1 = new Date(pickup), d2 = new Date(ret);
+  var d1 = parseDateAny(pickup), d2 = parseDateAny(ret);
   // Для Zeekr: 10:00-22:00, одна дата = 1 сессия; для остальных: 14:00→14:00, следующий день = 1 сутки
   var isZeekrKey = (key === 'zeekr-wd');
   var days = isZeekrKey
